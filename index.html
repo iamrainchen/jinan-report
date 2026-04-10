@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>會員紅綠燈分析 - 金安 2026-02</title>
+<title>會員紅綠燈分析 - 金安 2026-03</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -31,6 +31,13 @@ h1{font-size:20px;font-weight:500;margin-bottom:4px}
 .tag{display:inline-block;padding:2px 8px;border-radius:8px;font-size:11px;margin-top:6px}
 .tg{background:#EAF3DE;color:#3B6D11}
 .tr{background:#FAECE7;color:#993C1D}
+.marquee-wrap{background:#1E2761;border-radius:10px;padding:0 1rem;margin-bottom:1.5rem;overflow:hidden;height:42px;display:flex;align-items:center}
+.marquee-inner{display:flex;align-items:center;white-space:nowrap;animation:marquee 18s linear infinite}
+.marquee-inner:hover{animation-play-state:paused}
+@keyframes marquee{0%{transform:translateX(0%)}100%{transform:translateX(-50%)}}
+.marquee-text{font-size:14px;font-weight:500;color:#fff;letter-spacing:.5px}
+.marquee-highlight{color:#FFD700;font-weight:700}
+.marquee-sep{color:#CADCFC;margin:0 2rem}
 .divider{height:.5px;background:#ddd;margin:1.5rem 0}
 .sr{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:1.5rem}
 .sc{background:#fff;border-radius:10px;padding:12px;text-align:center;border:.5px solid #e0e0e0}
@@ -76,25 +83,40 @@ h1{font-size:20px;font-weight:500;margin-bottom:4px}
 </head>
 <body>
 <h1>會員紅綠燈分析 — 金安</h1>
-<div class="sub">2025-09-01 ~ 2026-02-28（6個月）｜綠燈目標：70分｜共47位會員</div>
+<div class="sub">2025-10-01 ~ 2026-03-31（6個月）｜綠燈目標：70分｜共45位會員</div>
+
+<div style="background:#FDF6E3;border-radius:10px;padding:14px 1.25rem;margin-bottom:10px;text-align:center;border:1px solid #E8C96B;">
+  <div style="font-size:11px;color:#9A7B2E;letter-spacing:2px;margin-bottom:6px">🏆 分會終極目標</div>
+  <div style="font-size:18px;font-weight:700;color:#7A5C00;letter-spacing:1px">每一個人，每一個月，帶一個來賓！</div>
+  <div style="font-size:16px;font-weight:500;color:#9A7B2E;margin-top:4px">金安榮返白金！</div>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-text">🔔 本月最接近綠燈：<span class="marquee-highlight">廖羿為、許宏暐、黃奕甫</span> 三位會員只差 <span class="marquee-highlight">5分</span> 就能升綠燈，是本月最容易突破的目標！請大家為彼此加油！💪</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-text">🔔 本月最接近綠燈：<span class="marquee-highlight">廖羿為、許宏暐、黃奕甫</span> 三位會員只差 <span class="marquee-highlight">5分</span> 就能升綠燈，是本月最容易突破的目標！請大家為彼此加油！💪</span>
+    <span class="marquee-sep">✦</span>
+  </div>
+</div>
 
 <div class="sec">分會整體統計</div>
 <div class="sum-row">
-  <div class="sum-card"><div class="sum-n" style="color:#3B6D11">16</div><div class="sum-l">🟢 綠燈</div><div class="sum-p" style="color:#3B6D11">34%</div></div>
-  <div class="sum-card"><div class="sum-n" style="color:#854F0B">14</div><div class="sum-l">🟡 黃燈</div><div class="sum-p" style="color:#854F0B">30%</div></div>
-  <div class="sum-card"><div class="sum-n" style="color:#993C1D">13</div><div class="sum-l">🔴 紅燈</div><div class="sum-p" style="color:#993C1D">28%</div></div>
-  <div class="sum-card"><div class="sum-n" style="color:#333">4</div><div class="sum-l">⚫ 黑燈</div><div class="sum-p" style="color:#333">8%</div></div>
+  <div class="sum-card"><div class="sum-n" style="color:#3B6D11">14</div><div class="sum-l">🟢 綠燈</div><div class="sum-p" style="color:#3B6D11">31%</div></div>
+  <div class="sum-card"><div class="sum-n" style="color:#854F0B">13</div><div class="sum-l">🟡 黃燈</div><div class="sum-p" style="color:#854F0B">29%</div></div>
+  <div class="sum-card"><div class="sum-n" style="color:#993C1D">15</div><div class="sum-l">🔴 紅燈</div><div class="sum-p" style="color:#993C1D">33%</div></div>
+  <div class="sum-card"><div class="sum-n" style="color:#333">3</div><div class="sum-l">⚫ 黑燈</div><div class="sum-p" style="color:#333">7%</div></div>
 </div>
 
 <div class="cg">
   <div class="cc">
-    <h3>燈號佔比（47位會員）</h3>
+    <h3>燈號佔比（45位會員）</h3>
     <div style="position:relative;height:200px"><canvas id="dc"></canvas></div>
     <div class="leg">
-      <span><span class="ld" style="background:#639922"></span>綠燈 34%</span>
-      <span><span class="ld" style="background:#EF9F27"></span>黃燈 30%</span>
-      <span><span class="ld" style="background:#E24B4A"></span>紅燈 28%</span>
-      <span><span class="ld" style="background:#555"></span>黑燈 8%</span>
+      <span><span class="ld" style="background:#639922"></span>綠燈 31%</span>
+      <span><span class="ld" style="background:#EF9F27"></span>黃燈 29%</span>
+      <span><span class="ld" style="background:#E24B4A"></span>紅燈 33%</span>
+      <span><span class="ld" style="background:#555"></span>黑燈 7%</span>
     </div>
   </div>
   <div class="cc">
@@ -104,91 +126,95 @@ h1{font-size:20px;font-weight:500;margin-bottom:4px}
 </div>
 
 <div class="ig">
-  <div class="ic"><div class="il">🏆 分會最優項目</div><div class="iv" style="color:#3B6D11">一對一會面</div><div class="id">平均達成率 <strong>85%</strong><br>33位會員已達滿分，僅2位得0分</div><span class="tag tg">全分會表現最佳</span></div>
-  <div class="ic"><div class="il">🥈 第二優項目</div><div class="iv" style="color:#3B6D11">出席 / 缺席</div><div class="id">平均達成率 <strong>82%</strong><br>26位會員已達滿分，僅4位得0分</div><span class="tag tg">整體表現良好</span></div>
-  <div class="ic"><div class="il">⚠️ 分會最弱項目</div><div class="iv" style="color:#993C1D">來賓帶入</div><div class="id">平均達成率僅 <strong>4%</strong><br>44位會員得0分，<strong>無一人達滿分</strong></div><span class="tag tr">最大集體弱點</span></div>
-  <div class="ic"><div class="il">📉 第二弱項目</div><div class="iv" style="color:#993C1D">交易價值</div><div class="id">平均達成率 <strong>26%</strong><br>28位會員得0分，僅6位達滿分</div><span class="tag tr">需重點關注</span></div>
+  <div class="ic"><div class="il">🏆 分會最優項目</div><div class="iv" style="color:#3B6D11">一對一會面</div><div class="id">平均達成率 <strong>81%</strong><br>28位會員已達滿分，僅2位得0分</div><span class="tag tg">全分會表現最佳</span></div>
+  <div class="ic"><div class="il">🥈 第二優項目</div><div class="iv" style="color:#3B6D11">出席 / 缺席</div><div class="id">平均達成率 <strong>82%</strong><br>22位會員已達滿分，僅1位得0分</div><span class="tag tg">整體表現良好</span></div>
+  <div class="ic"><div class="il">⚠️ 分會最弱項目</div><div class="iv" style="color:#993C1D">來賓帶入</div><div class="id">平均達成率僅 <strong>9%</strong><br>39位會員得0分，<strong>無一人達滿分</strong></div><span class="tag tr">最大集體弱點</span></div>
+  <div class="ic"><div class="il">📉 第二弱項目</div><div class="iv" style="color:#993C1D">交易價值</div><div class="id">平均達成率 <strong>24%</strong><br>28位會員得0分，僅6位達滿分</div><span class="tag tr">需重點關注</span></div>
 </div>
 
+<div class="cc" style="margin-bottom:16px">
+    <h3>分會綠燈率趨勢（2月 → 3月）</h3>
+    <div style="position:relative;height:200px"><canvas id="tc"></canvas></div>
+  </div>
+
 <div class="divider"></div>
-<div class="sec">全體會員分析（47位）</div>
+<div class="sec">全體會員分析（45位）</div>
 
 <div class="sr">
-  <div class="sc"><div class="sn" style="color:#3B6D11">16</div><div class="sl">🟢 綠燈</div></div>
-  <div class="sc"><div class="sn" style="color:#854F0B">14</div><div class="sl">🟡 黃燈</div></div>
-  <div class="sc"><div class="sn" style="color:#993C1D">13</div><div class="sl">🔴 紅燈</div></div>
-  <div class="sc"><div class="sn" style="color:#333">4</div><div class="sl">⚫ 黑燈</div></div>
-  <div class="sc"><div class="sn">47</div><div class="sl">總會員</div></div>
+  <div class="sc"><div class="sn" style="color:#3B6D11">14</div><div class="sl">🟢 綠燈</div></div>
+  <div class="sc"><div class="sn" style="color:#854F0B">13</div><div class="sl">🟡 黃燈</div></div>
+  <div class="sc"><div class="sn" style="color:#993C1D">15</div><div class="sl">🔴 紅燈</div></div>
+  <div class="sc"><div class="sn" style="color:#333">3</div><div class="sl">⚫ 黑燈</div></div>
+  <div class="sc"><div class="sn">45</div><div class="sl">總會員</div></div>
 </div>
 
 <div class="ctrl">
-  <button class="fb active" id="btn-all" onclick="sf('all')">全部 (47)</button>
-  <button class="fb" id="btn-green" onclick="sf('green')">🟢 綠燈 (16)</button>
-  <button class="fb" id="btn-yellow" onclick="sf('yellow')">🟡 黃燈 (14)</button>
-  <button class="fb" id="btn-red" onclick="sf('red')">🔴 紅燈 (13)</button>
-  <button class="fb" id="btn-black" onclick="sf('black')">⚫ 黑燈 (4)</button>
+  <button class="fb active" id="btn-all" onclick="sf('all')">全部 (45)</button>
+  <button class="fb" id="btn-green" onclick="sf('green')">🟢 綠燈 (14)</button>
+  <button class="fb" id="btn-yellow" onclick="sf('yellow')">🟡 黃燈 (13)</button>
+  <button class="fb" id="btn-red" onclick="sf('red')">🔴 紅燈 (15)</button>
+  <button class="fb" id="btn-black" onclick="sf('black')">⚫ 黑燈 (3)</button>
   <button class="eb" onclick="ta()">全部展開 / 收合</button>
 </div>
 <input class="si" type="text" placeholder="搜尋會員姓名..." oninput="ds(this.value)"/>
 <div id="list"></div>
 
 <script>
-new Chart(document.getElementById('dc'),{type:'doughnut',data:{labels:['綠燈','黃燈','紅燈','黑燈'],datasets:[{data:[16,14,13,4],backgroundColor:['#639922','#EF9F27','#E24B4A','#555555'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.label+': '+c.raw+'人';}}}}}});
-new Chart(document.getElementById('bc'),{type:'bar',data:{labels:['一對一','出席/缺席','分會教育','每周引荐','交易價值','來賓'],datasets:[{data:[85,82,62,55,26,4],backgroundColor:['#639922','#639922','#EF9F27','#EF9F27','#D85A30','#E24B4A'],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+'%';}}}},scales:{x:{min:0,max:100,ticks:{callback:function(v){return v+'%';},font:{size:11}},grid:{color:'#f0f0f0'}},y:{ticks:{font:{size:11}},grid:{display:false}}}}});
+new Chart(document.getElementById('dc'),{type:'doughnut',data:{labels:['綠燈','黃燈','紅燈','黑燈'],datasets:[{data:[14,13,15,3],backgroundColor:['#639922','#EF9F27','#E24B4A','#555555'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.label+': '+c.raw+'人';}}}}}});
+new Chart(document.getElementById('tc'),{type:'line',data:{labels:['2月','3月'],datasets:[{label:'🟢 綠燈率',data:[34,31],borderColor:'#639922',backgroundColor:'rgba(99,153,34,0.1)',borderWidth:2.5,pointRadius:6,pointBackgroundColor:'#639922',tension:0.3,fill:true},{label:'🟡 黃燈率',data:[30,29],borderColor:'#EF9F27',backgroundColor:'rgba(239,159,39,0.08)',borderWidth:2,pointRadius:5,pointBackgroundColor:'#EF9F27',tension:0.3,fill:true},{label:'🔴 紅燈率',data:[28,33],borderColor:'#E24B4A',backgroundColor:'rgba(226,75,74,0.08)',borderWidth:2,pointRadius:5,pointBackgroundColor:'#E24B4A',tension:0.3,fill:true},{label:'⚫ 黑燈率',data:[8,7],borderColor:'#555',backgroundColor:'rgba(85,85,85,0.08)',borderWidth:2,pointRadius:5,pointBackgroundColor:'#555',tension:0.3,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:12,font:{size:11},padding:12}},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+'%';}}}},scales:{y:{min:0,max:50,ticks:{callback:function(v){return v+'%';},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:12}},grid:{display:false}}}}});
+new Chart(document.getElementById('bc'),{type:'bar',data:{labels:['出席/缺席','一對一','分會教育','每周引荐','來賓','交易價值'],datasets:[{data:[82,81,66,50,9,24],backgroundColor:['#639922','#639922','#EF9F27','#EF9F27','#E24B4A','#D85A30'],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+'%';}}}},scales:{x:{min:0,max:100,ticks:{callback:function(v){return v+'%';},font:{size:11}},grid:{color:'#f0f0f0'}},y:{ticks:{font:{size:11}},grid:{display:false}}}}});
 
 var ae=false,cf='all',cs2='';
 var M=[
   // 綠燈
-  {name:'蕭淑蓉',light:'green',score:85,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:15,max:15,tip:''}],actions:['表現優異！來賓帶入仍有提升空間']},
+  {name:'洪岳裕',light:'green',score:85,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:10,max:15,tip:'可再增加來賓至每4周≥2位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:5,max:15,tip:'交易價值仍有10分空間'}],actions:['表現優異！持續增加來賓帶入','提升交易價值可再得+10分']},
+  {name:'蕭淑蓉',light:'green',score:85,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:15,max:20,tip:'引荐可再提升至滿分，可補+5分'},{name:'來賓',cur:10,max:15,tip:'可再增加來賓至每4周≥2位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:10,max:15,tip:'交易價值仍有5分空間'}],actions:['表現優異！引荐再提升可補+5分','持續增加來賓帶入']},
   {name:'李佳家',light:'green',score:80,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:10,max:15,tip:'可再增加來賓至每4周≥2位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'交易價值仍有15分空間'}],actions:['表現良好！提升交易價值可再得15分','持續增加來賓帶入']},
-  {name:'胡哲維',light:'green',score:80,need:0,cats:[{name:'出席/缺席',cur:15,max:20,tip:'有缺席記錄，零缺席可補+5分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:15,max:15,tip:''}],actions:['表現良好！避免缺席可再補+5分','來賓帶入仍有提升空間']},
-  {name:'張嘉倩',light:'green',score:80,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:15,max:20,tip:'引荐可再提升至滿分，可補+5分'},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:15,max:15,tip:''}],actions:['表現良好！引荐頻率再提升可補+5分','來賓帶入仍有提升空間']},
-  {name:'高翊峯',light:'green',score:75,need:0,cats:[{name:'出席/缺席',cur:15,max:20,tip:'有缺席記錄，零缺席可補+5分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:10,max:15,tip:'可再增加來賓至每4周≥2位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'交易價值仍有15分空間'}],actions:['已達綠燈！避免缺席可補+5分','提升交易價值可再得15分']},
+  {name:'高翊峯',light:'green',score:80,need:0,cats:[{name:'出席/缺席',cur:10,max:20,tip:'有缺席記錄，改善可補+10分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:10,max:15,tip:'可再增加來賓至每4周≥2位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:10,max:15,tip:'交易價值仍有5分空間'}],actions:['表現良好！改善出席可補+10分','持續增加來賓帶入']},
+  {name:'陳宥寧',light:'green',score:80,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:15,max:20,tip:'引荐可再提升至滿分，可補+5分'},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:15,max:15,tip:''}],actions:['表現良好！引荐再提升可補+5分','來賓帶入仍有提升空間']},
+  {name:'張嘉倩',light:'green',score:80,need:0,cats:[{name:'出席/缺席',cur:15,max:20,tip:'有缺席記錄，零缺席可補+5分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:15,max:15,tip:''}],actions:['表現良好！避免缺席可補+5分','來賓帶入仍有提升空間']},
   {name:'朱世祺',light:'green',score:75,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'教育次數不足，再參加可補+10分'},{name:'交易價值',cur:15,max:15,tip:''}],actions:['已達綠燈！增加分會教育可補+10分','來賓帶入仍有提升空間']},
-  {name:'林澐薪',light:'green',score:75,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:5,max:15,tip:'交易價值仍有10分空間'}],actions:['已達綠燈！提升交易價值可再得+10分','來賓帶入仍有提升空間']},
-  {name:'陳宥寧',light:'green',score:75,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:15,max:20,tip:'引荐可再提升至滿分，可補+5分'},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:10,max:15,tip:'交易價值仍有5分空間'}],actions:['已達綠燈！引荐再提升可補+5分','提升交易價值可再得+5分']},
-  {name:'邱雅鈴',light:'green',score:75,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:15,max:20,tip:'引荐可再提升至滿分，可補+5分'},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:10,max:15,tip:'一對一仍有5分空間'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:15,max:15,tip:''}],actions:['已達綠燈！引荐+一對一各可補+5分','來賓帶入仍有提升空間']},
+  {name:'吳宗恆',light:'green',score:75,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:5,max:15,tip:'交易價值仍有10分空間'}],actions:['已達綠燈！提升交易價值可再得+10分','來賓帶入仍有提升空間']},
+  {name:'胡哲維',light:'green',score:75,need:0,cats:[{name:'出席/缺席',cur:15,max:20,tip:'有缺席記錄，零缺席可補+5分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:10,max:15,tip:'一對一仍有5分空間'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:15,max:15,tip:''}],actions:['已達綠燈！避免缺席+增一對一可各補+5分','來賓帶入仍有提升空間']},
   {name:'陳芊妤',light:'green',score:75,need:0,cats:[{name:'出席/缺席',cur:15,max:20,tip:'有缺席記錄，零缺席可補+5分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:10,max:15,tip:'交易價值仍有5分空間'}],actions:['已達綠燈！避免缺席可補+5分','提升交易價值可再得+5分']},
-  {name:'廖羿為',light:'green',score:70,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:10,max:20,tip:'引荐頻率不足，提升可補+10分'},{name:'來賓',cur:10,max:15,tip:'可再增加來賓至每4周≥2位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'交易價值仍有15分空間'}],actions:['剛達綠燈！引荐提升可補+10分','提升交易價值可再得15分']},
-  {name:'洪岳裕',light:'green',score:70,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'交易價值仍有15分空間'}],actions:['剛達綠燈！提升交易價值可再得15分','來賓帶入仍有提升空間']},
   {name:'劉芯怡',light:'green',score:70,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'交易價值仍有15分空間'}],actions:['剛達綠燈！提升交易價值可再得15分','來賓帶入仍有提升空間']},
-  {name:'吳宗恆',light:'green',score:70,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'教育次數不足，再參加可補+10分'},{name:'交易價值',cur:10,max:15,tip:'交易價值仍有5分空間'}],actions:['剛達綠燈！增加分會教育可補+10分','提升交易價值可再得+5分']},
-  {name:'黃奕甫',light:'green',score:70,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'交易價值仍有15分空間'}],actions:['剛達綠燈！提升交易價值可再得15分','來賓帶入仍有提升空間']},
-  {name:'林楷鈞',light:'green',score:70,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'教育次數不足，再參加可補+10分'},{name:'交易價值',cur:10,max:15,tip:'交易價值仍有5分空間'}],actions:['剛達綠燈！增加分會教育可補+10分','提升交易價值可再得+5分']},
+  {name:'林澐薪',light:'green',score:70,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'交易價值仍有15分空間'}],actions:['剛達綠燈！提升交易價值可再得15分','來賓帶入仍有提升空間']},
+  {name:'邱雅鈴',light:'green',score:70,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:10,max:20,tip:'引荐頻率不足，提升可補+10分'},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:10,max:15,tip:'一對一仍有5分空間'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:15,max:15,tip:''}],actions:['剛達綠燈！引荐提升可補+10分','增加來賓帶入＋一對一']},
+  {name:'林楷鈞',light:'green',score:70,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'尚未達標，可再提升'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'教育次數不足，再參加可補+10分'},{name:'交易價值',cur:10,max:15,tip:'交易價值仍有5分空間'}],actions:['剛達綠燈！增加分會教育可補+10分','來賓帶入仍有提升空間']},
   // 黃燈
-  {name:'趙翊帆',light:'yellow',score:60,need:10,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:10,max:20,tip:'現1.08/周 需≥1.5/周，再給出11個'},{name:'來賓',cur:0,max:15,tip:'共4位，每4周需≥2位，再帶9位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$46,056 需≥$2,000,000'}],actions:['增加引荐至1.5個/周（補11個可+10分）','每4周至少帶2位來賓','提升交易價值至200萬以上']},
-  {name:'王博翰',light:'yellow',score:60,need:10,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:15,max:20,tip:'現1.25/周 需≥1.5/周，再給出5個'},{name:'來賓',cur:0,max:15,tip:'共3位，每4周需≥2位，再帶6位'},{name:'一對一',cur:10,max:15,tip:'現1.25/周 需>2/周，再做13次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$3,350 需≥$2,000,000（差距最大）'}],actions:['增加每周引荐至1.5+個','每4周至少帶2位來賓','大幅提升交易價值（目前僅$3,350）']},
-  {name:'許宏暐',light:'yellow',score:60,need:10,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:5,max:20,tip:'現0.96/周 需≥1.5/周，再給出14個'},{name:'來賓',cur:15,max:15,tip:''},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:0,max:15,tip:''}],actions:['最快：再參加3次分會教育(+10分)','增加引荐頻率至≥1.5/周']},
-  {name:'陳炯霖',light:'yellow',score:60,need:10,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'共1位，每4周需≥2位，再帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現2次 需≥6次，再參加4次'},{name:'交易價值',cur:0,max:15,tip:'$90,286 需≥$2,000,000'}],actions:['最快：再參加4次分會教育即+10分達綠燈','增加來賓帶入','提升交易價值']},
-  {name:'李赫茗',light:'yellow',score:55,need:15,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:15,max:20,tip:'現1.33/周 需≥1.5/周，再給出5個'},{name:'來賓',cur:15,max:15,tip:''},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:0,max:15,tip:'$201,432 需≥$2,000,000'}],actions:['最快：再3次教育(+10)+增引荐至1.5/周(+5)=+15分達70分','交易價值提升幅度較大']},
-  {name:'邱瑞瑋',light:'yellow',score:55,need:15,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:15,max:20,tip:'現1.38/周 需≥1.5/周，再給出4個'},{name:'來賓',cur:0,max:15,tip:'共1位，每4周需≥2位，再帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:0,max:15,tip:'$66,560 需≥$2,000,000'}],actions:['最快：增引荐補4個(+5)+再3次教育(+10)=達70分','增加來賓帶入']},
-  {name:'何英銘',light:'yellow',score:55,need:15,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:15,max:20,tip:'現1.38/周 需≥1.5/周，再給出4個'},{name:'來賓',cur:0,max:15,tip:'共1位，每4周需≥2位，再帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:10,max:15,tip:'$801,311 需≥$2,000,000'}],actions:['積極參加分會教育（目前0次，6次可+15分）','增引荐率至1.5/周(+5分)','避免再缺席(+5分)']},
-  {name:'謝佳恩',light:'yellow',score:55,need:15,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:10,max:15,tip:'現1.42/周 需>2/周，再做15次'},{name:'分會教育',cur:5,max:15,tip:'現2次 需≥6次，再參加4次'},{name:'交易價值',cur:0,max:15,tip:'$271,930 需≥$2,000,000'}],actions:['最快：再4次教育(+10)+增一對一>2/周(+5)=達70分','帶入來賓是長期投資']},
-  {name:'洪佑宜',light:'yellow',score:55,need:15,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:5,max:20,tip:'現0.79/周 需≥1.5/周，再給出18個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:10,max:15,tip:'$609,441 需≥$2,000,000'}],actions:['大幅提升引荐頻率（現0.79→需1.5/周，再18個可+15分）','帶入來賓（目前0位）','避免缺席(+5分)']},
-  {name:'呂杰翰',light:'yellow',score:50,need:20,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:0,max:20,tip:'現0.62/周 需≥1.5/周，再給出22個'},{name:'來賓',cur:15,max:15,tip:''},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$33,462 需≥$2,000,000'}],actions:['關鍵：大幅增加引荐，再22個可+20分直達綠燈','提升交易價值']},
-  {name:'邱致憲',light:'yellow',score:50,need:20,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'共1位，每4周需≥2位，再帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$253,684 需≥$2,000,000'}],actions:['最快：參加6次分會教育(+15)+避免缺席(+5)=+20分達綠燈','增加來賓帶入']},
-  {name:'張睿样',light:'yellow',score:50,need:20,cats:[{name:'出席/缺席',cur:0,max:20,tip:'缺席3次，需降至零缺席可補+20分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'共1位，每4周需≥2位，再帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:10,max:15,tip:'現5次 需≥6次，再參加1次'},{name:'交易價值',cur:10,max:15,tip:'$518,226 需≥$2,000,000'}],actions:['關鍵：缺席從3次降至0次可補+20分，直接達到綠燈','改善出席率是最快的突破口']},
-  {name:'劉鎧霆',light:'yellow',score:50,need:20,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.21/周 需≥1.5/周，再給出32個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:10,max:15,tip:'$506,500 需≥$2,000,000'}],actions:['大幅提升引荐頻率（目前0.21/周，差距最大）','帶入來賓（目前0位）','避免再缺席']},
-  {name:'王復疆',light:'yellow',score:50,need:20,cats:[{name:'出席/缺席',cur:0,max:20,tip:'缺席3次，需降至零缺席可補+20分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現2次 需≥6次，再參加4次'},{name:'交易價值',cur:10,max:15,tip:'$1,739,700 需≥$2,000,000，差額$260,300'}],actions:['關鍵：缺席從3次降至0次可補+20分，直達綠燈','交易價值只差$260,300（最容易達標）','增加來賓帶入']},
-  // 紅燈（原橘燈，30-45分）
-  {name:'殷如蒔',light:'red',score:45,need:25,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:0,max:20,tip:'現0.71/周 需≥1.5/周，再給出20個'},{name:'來賓',cur:15,max:15,tip:''},{name:'一對一',cur:10,max:15,tip:'現1.21/周 需>2/周，再做20次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$16,120 需≥$2,000,000'}],actions:['大幅提升引荐頻率（再20個可+20分，最有效）','同時增加一對一至>2/周（再20次+5分）']},
-  {name:'許哲文',light:'red',score:45,need:25,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:5,max:20,tip:'現0.79/周 需≥1.5/周，再給出18個'},{name:'來賓',cur:0,max:15,tip:'共3位，每4周需≥2位，再帶10位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:10,max:15,tip:'現4次 需≥6次，再參加2次'},{name:'交易價值',cur:0,max:15,tip:'$65,000 需≥$2,000,000'}],actions:['最快：再2次教育(+5)+避免缺席(+5)+增引荐至1.5/周(+15)=+25分','增加來賓帶入']},
-  {name:'賴佩伶',light:'red',score:45,need:25,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:5,max:20,tip:'現0.83/周 需≥1.5/周，再給出17個'},{name:'來賓',cur:15,max:15,tip:''},{name:'一對一',cur:10,max:15,tip:'現1.67/周 需>2/周，再做9次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$327,145 需≥$2,000,000'}],actions:['大幅提升引荐頻率（再17個可+15分）','增加一對一至>2/周（再9次+5分）','避免缺席（+5分）']},
-  {name:'練羿岑',light:'red',score:45,need:25,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.54/周 需≥1.5/周，再給出24個'},{name:'來賓',cur:15,max:15,tip:''},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$41,500 需≥$2,000,000'}],actions:['關鍵：引荐頻率太低（0.54/周），再24個可+20分','避免缺席+5分，兩者合計+25分達70分']},
-  {name:'林文偉',light:'red',score:45,need:25,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:5,max:20,tip:'現0.83/周 需≥1.5/周，再給出17個'},{name:'來賓',cur:0,max:15,tip:'共1位，每4周需≥2位，再帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:10,max:15,tip:'$681,958 需≥$2,000,000'}],actions:['最快：參加6次教育(+15)+增引荐至1.5/周(+15)，擇一或同時進行','增加來賓帶入']},
-  {name:'許永嘉',light:'red',score:45,need:25,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:0,max:20,tip:'現0.62/周 需≥1.5/周，再給出22個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:5,max:15,tip:'現1.29/周 需>2/周，再做18次'},{name:'分會教育',cur:5,max:15,tip:'現5次 需≥6次，再參加1次'},{name:'交易價值',cur:10,max:15,tip:'$745,415 需≥$2,000,000'}],actions:['最快：再1次教育(+5)+大幅增引荐至1.5/周(+20)=+25分達70分','增加一對一頻率','帶入來賓']},
-  {name:'彭欣如',light:'red',score:40,need:30,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:5,max:20,tip:'現0.75/周 需≥1.5/周，再給出16個'},{name:'來賓',cur:15,max:15,tip:''},{name:'一對一',cur:10,max:15,tip:'現1.05/周 需>2/周，再做20次'},{name:'分會教育',cur:10,max:15,tip:'現5次 需≥6次，再參加1次'},{name:'交易價值',cur:0,max:15,tip:'$64,578 需≥$2,000,000'}],actions:['最快：再1次教育(+5)+增引荐(+15)+增一對一(+5)+避免缺席(+5)=+30分','交易價值提升難度較高']},
-  {name:'劉耿逢',light:'red',score:40,need:30,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.62/周 需≥1.5/周，再給出22個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:5,max:15,tip:'現1.12/周 需>2/周，再做22次'},{name:'分會教育',cur:5,max:15,tip:'現4次 需≥6次，再參加2次'},{name:'交易價值',cur:10,max:15,tip:'$631,614 需≥$2,000,000'}],actions:['大幅增加引荐(再22個+20分)+增加一對一+再2次教育','需同時改善多項以累積分數達70分']},
-  {name:'曹雅茲',light:'red',score:40,need:30,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:5,max:20,tip:'現0.92/周 需≥1.5/周，再給出15個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≅2位，需帶13位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現2次 需≥6次，再參加4次'},{name:'交易價值',cur:0,max:15,tip:'$19,294 需≥$2,000,000'}],actions:['最快：增引荐至1.5/周(+15)+再4次教育(+10)+避免缺席(+5)=+30分','帶入來賓']},
-  {name:'周聖強',light:'red',score:35,need:35,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:0,max:20,tip:'共0個，需立刻開始每周給出引荐（僅9周）'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，再帶5位'},{name:'一對一',cur:5,max:15,tip:'現0.56/周 需>2/周，再做14次'},{name:'分會教育',cur:10,max:15,tip:'現5次 需≥6次，再參加1次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['注意：僅參加9周，需加速行動','立刻每周給出引荐（目前0個）','帶入來賓，再1次教育，增加一對一頻率']},
-  {name:'簡茹瑩',light:'red',score:30,need:40,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:0,max:20,tip:'現0.62/周 需≥1.5/周，再給出22個'},{name:'來賓',cur:0,max:15,tip:'共1位，每4周需≥2位，再帶12位'},{name:'一對一',cur:5,max:15,tip:'現0.54/周 需>2/周，再做36次'},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:0,max:15,tip:'$25,810 需≥$2,000,000'}],actions:['需同時改善多項：增引荐(+20)+增一對一(+10)+參加教育(+10)才能補足40分','帶入來賓也是必要項目']},
-  {name:'蔡牧耘',light:'red',score:30,need:40,cats:[{name:'出席/缺席',cur:0,max:20,tip:'缺席6次，需大幅改善出席，降至0次可補+20分'},{name:'每周引荐',cur:15,max:20,tip:'現1.21/周 需≥1.5/周，再給出8個'},{name:'來賓',cur:0,max:15,tip:'共1位，每4周需≥2位，再帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$1,650 需≥$2,000,000'}],actions:['最關鍵：改善出席（缺席6次→0次可+20分）','馬上參加分會教育（0次），6次可+15分','兩者合計+35分，再增引荐補5分即達綠燈']},
-  {name:'洪梓承',light:'red',score:30,need:40,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.46/周 需≥1.5/周，再給出26個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$217,080 需≥$2,000,000'}],actions:['需大幅改善引荐(+20)+積極參加教育6次(+15)才能補足40分','帶入來賓，避免缺席']},
-  // 黑燈（原紅燈，0-25分）
-  {name:'陳庭漢',light:'black',score:20,need:50,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.29/周 需≥1.5/周，再給出30個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:0,max:15,tip:'現0.46/周 需>2/周，再做38次'},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:0,max:15,tip:'$15,001 需≥$2,000,000'}],actions:['需全面改善：引荐(+20)+一對一(+15)+教育(+10)+來賓(+15)','幾乎每項都需大幅提升才能補足50分']},
-  {name:'羅美淇',light:'black',score:20,need:50,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'共0個，需立刻每周給出引荐（僅8周，時間緊）'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶5位'},{name:'一對一',cur:5,max:15,tip:'現0.62/周 需>2/周，再做12次'},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['注意：僅參加8周，時間最緊迫','立刻每周給出引荐+帶入來賓+參加教育（三管齊下）','零基礎，需全方位啟動']},
-  {name:'林穎宏',light:'black',score:15,need:55,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'共0個，需立刻開始每周給出引荐（僅9周）'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶5位'},{name:'一對一',cur:0,max:15,tip:'現0.44/周 需>2/周，再做15次'},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['注意：僅參加9周，時間非常緊迫','立刻每周給出引荐+增一對一+帶入來賓+參加教育','需每周積極達成各項指標才有機會達綠燈']},
-  {name:'羅琍怜',light:'black',score:10,need:60,cats:[{name:'出席/缺席',cur:0,max:20,tip:'缺席5次，需降至零缺席可補+20分'},{name:'每周引荐',cur:0,max:20,tip:'現0.04/周 需≥1.5/周，再給出36個'},{name:'來賓',cur:0,max:15,tip:'共1位，每4周需≥2位，再帶12位'},{name:'一對一',cur:5,max:15,tip:'現1.04/周 需>2/周，再做24次'},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:5,max:15,tip:'$77,100 需≥$2,000,000'}],actions:['最關鍵：改善出席（缺席5次→0次可+20分）+大幅增引荐(+20分)','還需參加教育+增一對一+帶入來賓，方向全面']}
+  {name:'廖羿為',light:'yellow',score:65,need:5,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:5,max:20,tip:'現0.71/周 需≥1.5/周，再給出17個'},{name:'來賓',cur:10,max:15,tip:'每4周需≥2位，再帶2位可達滿分'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$277,834 需≥$2,000,000'}],actions:['最快：再帶2位來賓即+5分達綠燈','增加引荐頻率至1.5/周可補+15分']},
+  {name:'許宏暐',light:'yellow',score:65,need:5,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:5,max:20,tip:'現0.96/周 需≥1.5/周，再給出14個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶11位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:15,max:15,tip:''}],actions:['最快：避免缺席即+5分達綠燈','增加引荐頻率至1.5/周可補+15分']},
+  {name:'黃奕甫',light:'yellow',score:65,need:5,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$143,976 需≥$2,000,000'}],actions:['最快：避免缺席即+5分達綠燈','來賓帶入仍有提升空間']},
+  {name:'王博翰',light:'yellow',score:55,need:15,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:10,max:20,tip:'現1.25/周 需≥1.5/周，再給出11個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶7位'},{name:'一對一',cur:10,max:15,tip:'現1.25/周 需>2/周，再做14次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['增加引荐至1.5/周（再11個可+10分）','每4周至少帶2位來賓','增加一對一至>2/周（再14次+5分）']},
+  {name:'趙翊帆',light:'yellow',score:55,need:15,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:10,max:20,tip:'現1.08/周 需≥1.5/周，再給出10個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶10位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['避免缺席(+5)+增引荐至1.5/周(+10)=達70分','每4周至少帶2位來賓']},
+  {name:'邱瑞瑋',light:'yellow',score:55,need:15,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:15,max:20,tip:'現1.46/周 需≥1.5/周，再給出2個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['最快：再2個引荐(+5)+再3次教育(+10)=達70分','每4周至少帶2位來賓']},
+  {name:'陳炯霖',light:'yellow',score:55,need:15,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$72,856 需≥$2,000,000'}],actions:['最快：積極參加分會教育（0次→6次可+15分）','每4周至少帶2位來賓']},
+  {name:'洪佑宜',light:'yellow',score:55,need:15,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:5,max:20,tip:'現0.79/周 需≥1.5/周，再給出19個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$349,716 需≥$2,000,000'}],actions:['大幅提升引荐頻率（再19個可+15分）','每4周至少帶2位來賓']},
+  {name:'殷如蒔',light:'yellow',score:50,need:20,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:5,max:20,tip:'現0.71/周 需≥1.5/周，再給出16個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶9位'},{name:'一對一',cur:10,max:15,tip:'現1.21/周 需>2/周，再做19次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['大幅提升引荐（再16個可+15分）','增加一對一至>2/周（再19次+5分）']},
+  {name:'李赫茗',light:'yellow',score:50,need:20,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:10,max:20,tip:'現1.33/周 需≥1.5/周，再給出11個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶11位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['增加引荐至1.5/周(+10)+再3次教育(+10)=達70分','每4周至少帶2位來賓']},
+  {name:'邱致憲',light:'yellow',score:50,need:20,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:15,max:20,tip:'現1.46/周 需≥1.5/周，再給出3個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['最快：再3個引荐(+5)+積極參加教育6次(+15)=達70分','每4周至少帶2位來賓']},
+  {name:'劉鎧霆',light:'yellow',score:50,need:20,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.21/周 需≥1.5/周，再給出32個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:5,max:15,tip:'$506,500 需≥$2,000,000'}],actions:['大幅提升引荐頻率（目前0.21/周，再32個可+20分）','每4周至少帶2位來賓','避免缺席(+5分)']},
+  {name:'何英銘',light:'yellow',score:50,need:20,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:15,max:20,tip:'現1.25/周 需≥1.5/周，再給出6個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:5,max:15,tip:'$486,534 需≥$2,000,000'}],actions:['最快：避免缺席(+5)+增引荐(+5)+積極參加教育(+15)=達70分','每4周至少帶2位來賓']},
+  // 紅燈
+  {name:'呂杰翰',light:'red',score:45,need:25,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:0,max:20,tip:'現0.04/周 需≥1.5/周，再給出22個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶11位'},{name:'一對一',cur:10,max:15,tip:'現1.25/周 需>2/周，再做11次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['大幅增加引荐（再22個可+20分）','增加一對一至>2/周（再11次+5分）','每4周至少帶2位來賓']},
+  {name:'張睿样',light:'red',score:45,need:25,cats:[{name:'出席/缺席',cur:0,max:20,tip:'缺席3次，需降至零缺席可補+20分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:5,max:15,tip:'$518,226 需≥$2,000,000'}],actions:['關鍵：缺席降至0次可補+20分','再3次教育(+10)=達70分','改善出席是最快突破口']},
+  {name:'彭欣如',light:'red',score:40,need:30,cats:[{name:'出席/缺席',cur:10,max:20,tip:'缺席2次，改善可補+10分'},{name:'每周引荐',cur:5,max:20,tip:'現0.79/周 需≥1.5/周，再給出19個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶9位'},{name:'一對一',cur:10,max:15,tip:'現1.05/周 需>2/周，再做20次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['改善出席（缺席2次→0次+10分）','增加引荐至1.5/周（再19個+15分）','增加一對一至>2/周（再20次+5分）']},
+  {name:'許哲文',light:'red',score:40,need:30,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:5,max:20,tip:'現0.62/周 需≥1.5/周，再給出15個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶10位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['增加引荐至1.5/周（再15個+15分）','再3次教育(+10)+避免缺席(+5)=補足30分']},
+  {name:'賴佩伶',light:'red',score:40,need:30,cats:[{name:'出席/缺席',cur:10,max:20,tip:'缺席2次，改善可補+10分'},{name:'每周引荐',cur:5,max:20,tip:'現0.83/周 需≥1.5/周，再給出18個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶11位'},{name:'一對一',cur:10,max:15,tip:'現1.67/周 需>2/周，再做9次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['改善出席（缺席2次→0次+10分）','增加引荐至1.5/周（再18個+15分）','增加一對一至>2/周（再9次+5分）']},
+  {name:'謝佳恩',light:'red',score:40,need:30,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:15,max:20,tip:'現1.46/周 需≥1.5/周，再給出4個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:10,max:15,tip:'現1.42/周 需>2/周，再做15次'},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['積極參加分會教育（0次→6次可+15分）','增引荐補4個(+5)+增一對一(+5)+避免缺席(+5)']},
+  {name:'徐凡雅',light:'red',score:35,need:35,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:0,max:20,tip:'現0.21/周 需≥1.5/周，再給出5個'},{name:'來賓',cur:10,max:15,tip:'每4周需≥2位，再帶1位可達滿分'},{name:'一對一',cur:0,max:15,tip:'共0次 需>2/周，再做7次'},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['增加引荐至1.5/周（再5個可+20分）','積極開始一對一（0次，再7次可+15分）','再1位來賓可滿分+5分，再3次教育+10分']},
+  {name:'簡茹瑩',light:'red',score:35,need:35,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.29/周 需≥1.5/周，再給出22個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶12位'},{name:'一對一',cur:5,max:15,tip:'現0.54/周 需>2/周，再做19次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['大幅增加引荐（再22個+20分）','增加一對一至>2/周（再19次+10分）','避免缺席(+5分)']},
+  {name:'周聖強',light:'red',score:35,need:35,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:0,max:20,tip:'現0.00/周 需≥1.5/周，再給出20個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶7位'},{name:'一對一',cur:5,max:15,tip:'現0.63/周 需>2/周，再做19次'},{name:'分會教育',cur:10,max:15,tip:'現5次 需≥6次，再參加1次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['立刻開始每周給引荐（目前0個）','增加一對一至>2/周（再19次+10分）','再1次教育(+5)+帶來賓']},
+  {name:'洪梓承',light:'red',score:35,need:35,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:0,max:20,tip:'現0.04/周 需≥1.5/周，再給出26個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['大幅增加引荐（再26個+20分）','積極參加教育（0次→6次可+15分）','每4周至少帶2位來賓']},
+  {name:'陳庭漢',light:'red',score:35,need:35,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.17/周 需≥1.5/周，再給出29個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≅2位，需帶13位'},{name:'一對一',cur:5,max:15,tip:'現0.63/周 需>2/周，再做18次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['大幅增加引荐（再29個+20分）','增加一對一至>2/周（再18次+10分）','避免缺席(+5分)']},
+  {name:'許永嘉',light:'red',score:35,need:35,cats:[{name:'出席/缺席',cur:10,max:20,tip:'缺席2次，改善可補+10分'},{name:'每周引荐',cur:0,max:20,tip:'現0.21/周 需≥1.5/周，再給出21個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:10,max:15,tip:'現1.29/周 需>2/周，再做18次'},{name:'分會教育',cur:10,max:15,tip:'現5次 需≥6次，再參加1次'},{name:'交易價值',cur:5,max:15,tip:'$745,415 需≥$2,000,000'}],actions:['改善出席（缺席2次→0次+10分）','大幅增加引荐（再21個+20分）','再1次教育(+5)+增一對一(+5)']},
+  {name:'曹雅茲',light:'red',score:35,need:35,cats:[{name:'出席/缺席',cur:10,max:20,tip:'缺席2次，改善可補+10分'},{name:'每周引荐',cur:5,max:20,tip:'現0.92/周 需≥1.5/周，再給出18個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['改善出席（缺席2次→0次+10分）','增加引荐至1.5/周（再18個+15分）','再3次教育(+10)']},
+  {name:'練羿岑',light:'red',score:30,need:40,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.21/周 需≥1.5/周，再給出26個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶11位'},{name:'一對一',cur:10,max:15,tip:'現1.25/周 需>2/周，再做13次'},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['大幅增加引荐（再26個+20分）','增加一對一（再13次+5分）＋再3次教育(+10)+避免缺席(+5)']},
+  {name:'劉耿逢',light:'red',score:30,need:40,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.21/周 需≥1.5/周，再給出27個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:5,max:15,tip:'現0.63/周 需>2/周，再做19次'},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:5,max:15,tip:'$631,614 需≥$2,000,000'}],actions:['大幅增加引荐（再27個+20分）','增加一對一至>2/周（再19次+10分）','再3次教育(+10)+避免缺席(+5)']},
+  // 黑燈
+  {name:'林文偉',light:'black',score:25,need:45,cats:[{name:'出席/缺席',cur:10,max:20,tip:'缺席2次，改善可補+10分'},{name:'每周引荐',cur:0,max:20,tip:'現0.00/周 需≥1.5/周，再給出23個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶12位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['改善出席（缺席2次→0次+10分）','立刻開始每周給引荐（再23個+20分）','積極參加教育（0次→6次+15分）']},
+  {name:'羅美淇',light:'black',score:20,need:50,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.00/周 需≥1.5/周，需立刻開始'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶7位'},{name:'一對一',cur:5,max:15,tip:'現0.63/周 需>2/周，再做12次'},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['立刻每周給出引荐+帶入來賓+參加教育（三管齊下）','增加一對一至>2/周','避免缺席']},
+  {name:'林穎宏',light:'black',score:15,need:55,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:0,max:20,tip:'現0.00/周 需≥1.5/周，需立刻開始'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶7位'},{name:'一對一',cur:0,max:15,tip:'共0次 需>2/周，再做7次'},{name:'分會教育',cur:0,max:15,tip:'共0次，需≥6次，再參加6次'},{name:'交易價值',cur:0,max:15,tip:'$0 需≥$2,000,000'}],actions:['需全面啟動：引荐+來賓+教育+一對一同時進行','避免缺席','每周積極達成各項指標才有機會達綠燈']}
 ];
 
 function sf(f){cf=f;['all','green','yellow','red','black'].forEach(function(k){var b=document.getElementById('btn-'+k);if(b)b.className='fb'+(k===f?' active':'');});render();}
