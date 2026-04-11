@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金安分會｜週會接龍填報</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --gold-dark: #8B6914;
+    --ink: #1A1A1A;
+    --ink-soft: #3D3D3D;
+    --ink-muted: #777;
+    --paper: #FAFAF8;
+    --paper-warm: #F4F0E8;
+    --border: #E0D8C8;
+    --success: #2D6A4F;
+    --success-bg: #D8F3DC;
+    --warning-bg: #FFF3CD;
+    --warning: #856404;
+    --danger-bg: #FDECEA;
+    --danger: #C0392B;
+    --radius: 10px;
+    --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: var(--ink);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .header-emblem {
+    width: 40px; height: 40px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: var(--gold); font-weight: 700;
+    flex-shrink: 0;
+  }
+  .header-text { flex: 1; }
+  .header-title { font-size: 16px; font-weight: 500; color: #fff; letter-spacing: 0.05em; }
+  .header-sub { font-size: 12px; color: var(--gold-light); margin-top: 2px; }
+
+  /* Main container */
+  .container { max-width: 480px; margin: 0 auto; padding: 24px 16px 60px; }
+
+  /* Step indicator */
+  .steps {
+    display: flex; align-items: center; gap: 0;
+    margin-bottom: 28px;
+  }
+  .step-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--ink-muted);
+  }
+  .step-item.active { color: var(--gold-dark); }
+  .step-item.done { color: var(--success); }
+  .step-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500; background: var(--paper);
+  }
+  .step-item.active .step-num { border-color: var(--gold); background: var(--gold); color: #fff; }
+  .step-item.done .step-num { border-color: var(--success); background: var(--success); color: #fff; }
+  .step-line { flex: 1; height: 1px; background: var(--border); margin: 0 4px; }
+
+  /* Section card */
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+  }
+  .card-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    background: var(--paper-warm);
+    font-size: 13px; font-weight: 500; color: var(--ink-soft);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-header .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* Group grid */
+  .group-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    padding: 16px;
+  }
+  .group-btn {
+    padding: 12px 4px; border: 1px solid var(--border);
+    border-radius: 8px; background: #fff;
+    cursor: pointer; font-size: 14px; font-weight: 500;
+    color: var(--ink-soft); transition: all 0.15s;
+    font-family: 'Noto Sans TC', sans-serif;
+    text-align: center;
+  }
+  .group-btn:hover { border-color: var(--gold); color: var(--gold-dark); background: #FFFBF2; }
+  .group-btn.selected { border-color: var(--gold); background: var(--gold); color: #fff; }
+
+  /* Member grid */
+  .member-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    padding: 16px;
+  }
+  .member-btn {
+    padding: 11px 6px; border: 1px solid var(--border);
+    border-radius: 8px; background: #fff;
+    cursor: pointer; font-size: 15px; font-weight: 400;
+    color: var(--ink); transition: all 0.15s;
+    font-family: 'Noto Sans TC', sans-serif;
+    text-align: center;
+  }
+  .member-btn:hover { border-color: var(--gold); background: #FFFBF2; }
+  .member-btn.selected { border-color: var(--gold); background: var(--gold); color: #fff; font-weight: 500; }
+
+  /* Selected display */
+  .selection-display {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 18px; background: #FFFBF2;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px; color: var(--ink-soft);
+  }
+  .selection-chip {
+    background: var(--gold); color: #fff;
+    padding: 3px 10px; border-radius: 20px;
+    font-size: 13px; font-weight: 500;
+  }
+  .change-btn {
+    margin-left: auto; font-size: 12px; color: var(--gold-dark);
+    background: none; border: none; cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif; text-decoration: underline;
+  }
+
+  /* Form fields */
+  .field-list { padding: 8px 0; }
+  .field-row {
+    display: flex; align-items: center;
+    padding: 12px 18px; border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .field-row:last-child { border-bottom: none; }
+  .field-label { font-size: 14px; color: var(--ink-soft); flex: 0 0 80px; }
+  .field-control { flex: 1; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+  /* Attend buttons */
+  .attend-btn {
+    padding: 6px 14px; border: 1px solid var(--border);
+    border-radius: 20px; background: #fff; cursor: pointer;
+    font-size: 13px; color: var(--ink-soft); transition: all 0.15s;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .attend-btn:hover { border-color: var(--ink-muted); }
+  .attend-btn.on-attend { background: var(--success-bg); border-color: var(--success); color: var(--success); font-weight: 500; }
+  .attend-btn.on-proxy { background: var(--warning-bg); border-color: var(--warning); color: var(--warning); font-weight: 500; }
+  .attend-btn.on-absent { background: var(--danger-bg); border-color: var(--danger); color: var(--danger); font-weight: 500; }
+
+  /* Number inputs */
+  input[type="number"], input[type="text"] {
+    padding: 7px 12px; border: 1px solid var(--border);
+    border-radius: 8px; background: var(--paper);
+    font-size: 14px; color: var(--ink);
+    font-family: 'Noto Sans TC', sans-serif;
+    transition: border 0.15s;
+    outline: none;
+  }
+  input[type="number"] { width: 72px; text-align: center; }
+  input[type="text"] { width: 100%; }
+  input:focus { border-color: var(--gold); background: #fff; }
+  input::placeholder { color: #bbb; }
+
+  /* Submit button */
+  .submit-btn {
+    width: 100%; padding: 14px;
+    background: var(--ink); color: #fff;
+    border: none; border-radius: var(--radius);
+    font-size: 15px; font-weight: 500;
+    font-family: 'Noto Sans TC', sans-serif;
+    cursor: pointer; transition: all 0.2s;
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+  }
+  .submit-btn:hover { background: var(--ink-soft); }
+  .submit-btn:disabled { background: #ccc; cursor: not-allowed; }
+  .submit-btn.loading { background: var(--ink-muted); }
+
+  /* Toast / success */
+  .toast {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    background: var(--success); color: #fff;
+    padding: 12px 24px; border-radius: 8px;
+    font-size: 14px; font-weight: 500;
+    opacity: 0; transition: opacity 0.3s;
+    pointer-events: none; z-index: 999;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; }
+  .toast.error { background: var(--danger); }
+
+  /* Hidden */
+  .hidden { display: none !important; }
+
+  /* Date display */
+  .date-bar {
+    text-align: center; font-size: 12px;
+    color: var(--ink-muted); padding: 10px 0 0;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-emblem">金</div>
+  <div class="header-text">
+    <div class="header-title">金安分會</div>
+    <div class="header-sub">週會接龍填報系統</div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="date-bar" id="dateBar"></div>
+
+  <!-- Step indicator -->
+  <div class="steps" style="margin-top:16px;">
+    <div class="step-item active" id="s1">
+      <div class="step-num">1</div>
+      <span>選小組</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-item" id="s2">
+      <div class="step-num">2</div>
+      <span>選姓名</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-item" id="s3">
+      <div class="step-num">3</div>
+      <span>填資料</span>
+    </div>
+  </div>
+
+  <!-- Step 1: Group -->
+  <div id="step1">
+    <div class="card">
+      <div class="card-header"><div class="dot"></div>請選擇你的小組</div>
+      <div class="group-grid" id="groupGrid"></div>
+    </div>
+  </div>
+
+  <!-- Step 2: Member -->
+  <div id="step2" class="hidden">
+    <div class="card">
+      <div class="card-header"><div class="dot"></div>請選擇你的姓名</div>
+      <div class="selection-display">
+        <span id="selGroupChip" class="selection-chip"></span>
+        <button class="change-btn" onclick="goStep(1)">重選小組</button>
+      </div>
+      <div class="member-grid" id="memberGrid"></div>
+    </div>
+  </div>
+
+  <!-- Step 3: Form -->
+  <div id="step3" class="hidden">
+    <div class="card">
+      <div class="card-header"><div class="dot"></div>填寫本週回報資料</div>
+      <div class="selection-display">
+        <span id="selMemberChip" class="selection-chip"></span>
+        <span id="selGroupLabel" style="font-size:13px; color:var(--ink-muted);"></span>
+        <button class="change-btn" onclick="goStep(2)">重選姓名</button>
+      </div>
+      <div class="field-list">
+        <div class="field-row" style="align-items:flex-start; padding-top:14px; padding-bottom:14px;">
+          <div class="field-label" style="padding-top:4px;">出席狀況</div>
+          <div class="field-control" style="flex-wrap:wrap; gap:8px;">
+            <button class="attend-btn" id="btn-本人" onclick="setAttend('本人')">本人</button>
+            <button class="attend-btn" id="btn-代理人" onclick="setAttend('代理人')">代理人</button>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">一對一</div>
+          <div class="field-control">
+            <input type="number" id="f-oto" min="0" placeholder="0" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">內部引薦</div>
+          <div class="field-control">
+            <input type="number" id="f-internal" min="0" placeholder="0" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">外部引薦</div>
+          <div class="field-control">
+            <input type="number" id="f-external" min="0" placeholder="0" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">金額總計</div>
+          <div class="field-control">
+            <input type="text" id="f-amount" placeholder="輸入金額（選填）" style="width:160px;" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">培訓</div>
+          <div class="field-control">
+            <input type="number" id="f-training" min="0" placeholder="0" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">來賓</div>
+          <div class="field-control">
+            <input type="number" id="f-guest" min="0" placeholder="0" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="submit-btn" id="submitBtn" onclick="submitForm()">送出回報</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SHEET_URL = ''; // 之後填入 Apps Script 部署網址
+
+const groups = {
+  '第1組': ['胡哲維','吳宗恒','何英銘','洪梓承','張嘉倩'],
+  '第2組': ['彭欣如','陳宥寧','洪岳裕','殷如蒔','李赫茗','許宏暐'],
+  '第3組': ['徐凡雅','李佳家','陳芊妤','羅美淇','陳炯霖'],
+  '第4組': ['王博翰','劉芯怡','朱世祺','陳庭漢','洪佑宜'],
+  '第5組': ['簡茹瑩','邱瑞瑋','蕭淑蓉','高翊峯','林穎宏','謝佳恩'],
+  '第6組': ['賴佩伶','廖羿為','林楷鈞','劉耿逢','林文偉'],
+  '第7組': ['許哲文','練羿岑','黃奕甫','邱致憲','曹雅茲','邱雅鈴'],
+  '第8組': ['張睿样','趙翊帆','周聖強','林澐薪','許永嘉','劉鎧霆'],
+};
+
+let selGroup = '', selMember = '', attendStatus = '';
+
+// Date display
+const now = new Date();
+const dateStr = now.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+document.getElementById('dateBar').textContent = dateStr;
+
+// Render groups
+const groupGrid = document.getElementById('groupGrid');
+Object.keys(groups).forEach(g => {
+  const btn = document.createElement('button');
+  btn.className = 'group-btn';
+  btn.textContent = g;
+  btn.onclick = () => {
+    selGroup = g;
+    document.querySelectorAll('.group-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    renderMembers(g);
+    setTimeout(() => goStep(2), 180);
+  };
+  groupGrid.appendChild(btn);
+});
+
+function renderMembers(g) {
+  const grid = document.getElementById('memberGrid');
+  grid.innerHTML = '';
+  groups[g].forEach(m => {
+    const btn = document.createElement('button');
+    btn.className = 'member-btn';
+    btn.textContent = m;
+    btn.onclick = () => {
+      selMember = m;
+      document.querySelectorAll('.member-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      document.getElementById('selMemberChip').textContent = m;
+      document.getElementById('selGroupLabel').textContent = g;
+      resetForm();
+      setTimeout(() => goStep(3), 180);
+    };
+    grid.appendChild(btn);
+  });
+}
+
+function goStep(n) {
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('step2').classList.add('hidden');
+  document.getElementById('step3').classList.add('hidden');
+  document.getElementById('step' + n).classList.remove('hidden');
+
+  if (n >= 1) document.getElementById('s1').className = 'step-item ' + (n === 1 ? 'active' : 'done');
+  if (n >= 2) {
+    document.getElementById('s2').className = 'step-item ' + (n === 2 ? 'active' : n > 2 ? 'done' : '');
+    document.getElementById('selGroupChip').textContent = selGroup;
+  }
+  if (n === 3) document.getElementById('s3').className = 'step-item active';
+  else document.getElementById('s3').className = 'step-item';
+}
+
+function setAttend(v) {
+  attendStatus = v;
+  document.querySelectorAll('.attend-btn').forEach(b => b.className = 'attend-btn');
+  const cls = v === '本人' ? 'on-attend' : 'on-proxy';
+  document.getElementById('btn-' + v).className = 'attend-btn ' + cls;
+}
+
+function resetForm() {
+  attendStatus = '';
+  document.querySelectorAll('.attend-btn').forEach(b => b.className = 'attend-btn');
+  ['f-oto','f-internal','f-external','f-amount','f-training','f-guest'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+}
+
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => t.className = 'toast', 2500);
+}
+
+async function submitForm() {
+  if (!selGroup || !selMember) return showToast('請先選擇小組與姓名', true);
+  if (!attendStatus) return showToast('請選擇出席狀況', true);
+
+  const payload = {
+    group:    selGroup,
+    name:     selMember,
+    attend:   attendStatus,
+    oto:      document.getElementById('f-oto').value || '0',
+    internal: document.getElementById('f-internal').value || '0',
+    external: document.getElementById('f-external').value || '0',
+    amount:   document.getElementById('f-amount').value || '',
+    training: document.getElementById('f-training').value || '',
+    guest:    document.getElementById('f-guest').value || '0',
+  };
+
+  if (!SHEET_URL) {
+    // 尚未設定 Sheet URL，顯示資料預覽
+    showToast('✓ 填報完成（尚未串接 Sheet）', false);
+    console.log('填報資料：', payload);
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '送出中…';
+  btn.className = 'submit-btn loading';
+
+  try {
+    await fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    showToast('✓ 回報成功！', false);
+    setTimeout(() => {
+      resetForm();
+      goStep(1);
+      selGroup = ''; selMember = '';
+      document.querySelectorAll('.group-btn, .member-btn').forEach(b => b.classList.remove('selected'));
+    }, 1500);
+  } catch (err) {
+    showToast('送出失敗，請重試', true);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '送出回報';
+    btn.className = 'submit-btn';
+  }
+}
+</script>
+</body>
+</html>
