@@ -219,20 +219,13 @@
   /* Hidden */
   .hidden { display: none !important; }
 
-  /* Week selector */
+  /* Week display */
   .week-bar {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 8px;
     padding: 12px 0 0;
   }
-  .week-label { font-size: 13px; color: var(--ink-muted); flex-shrink: 0; }
-  .week-select {
-    flex: 1; padding: 7px 12px;
-    border: 1px solid var(--border); border-radius: 8px;
-    background: var(--paper); font-size: 14px;
-    color: var(--ink); font-family: 'Noto Sans TC', sans-serif;
-    outline: none; cursor: pointer;
-  }
-  .week-select:focus { border-color: var(--gold); background: #fff; }
+  .week-label { font-size: 13px; color: var(--ink-muted); }
+  .week-value { font-size: 14px; font-weight: 500; color: var(--gold-dark); }
 </style>
 </head>
 <body>
@@ -247,47 +240,8 @@
 
 <div class="container">
   <div class="week-bar">
-    <span class="week-label">選擇週次</span>
-    <select class="week-select" id="weekSelect">
-      <option value="">請選擇本週日期</option>
-      <option>4/17（週五）</option>
-      <option>4/24（週五）</option>
-      <option>5/1（週五）</option>
-      <option>5/8（週五）</option>
-      <option>5/15（週五）</option>
-      <option>5/22（週五）</option>
-      <option>5/29（週五）</option>
-      <option>6/5（週五）</option>
-      <option>6/12（週五）</option>
-      <option>6/19（週五）</option>
-      <option>6/26（週五）</option>
-      <option>7/3（週五）</option>
-      <option>7/10（週五）</option>
-      <option>7/17（週五）</option>
-      <option>7/24（週五）</option>
-      <option>7/31（週五）</option>
-      <option>8/7（週五）</option>
-      <option>8/14（週五）</option>
-      <option>8/21（週五）</option>
-      <option>8/28（週五）</option>
-      <option>9/4（週五）</option>
-      <option>9/11（週五）</option>
-      <option>9/18（週五）</option>
-      <option>9/25（週五）</option>
-      <option>10/2（週五）</option>
-      <option>10/9（週五）</option>
-      <option>10/16（週五）</option>
-      <option>10/23（週五）</option>
-      <option>10/30（週五）</option>
-      <option>11/6（週五）</option>
-      <option>11/13（週五）</option>
-      <option>11/20（週五）</option>
-      <option>11/27（週五）</option>
-      <option>12/4（週五）</option>
-      <option>12/11（週五）</option>
-      <option>12/18（週五）</option>
-      <option>12/25（週五）</option>
-    </select>
+    <span class="week-label">本週週會</span>
+    <span class="week-value" id="weekDisplay"></span>
   </div>
 
   <!-- Step indicator -->
@@ -405,17 +359,18 @@ const groups = {
 
 let selGroup = '', selMember = '', attendStatus = '';
 
-// Auto-select closest upcoming Friday
-(function() {
-  const sel = document.getElementById('weekSelect');
+// Auto-compute closest upcoming Friday
+const weekDate = (function() {
   const today = new Date();
-  const opts = Array.from(sel.options);
-  for (let i = 1; i < opts.length; i++) {
-    const parts = opts[i].value.replace('（週五）','').split('/');
-    const d = new Date(2026, parseInt(parts[0])-1, parseInt(parts[1]));
-    if (d >= today) { sel.selectedIndex = i; break; }
-  }
+  const d = new Date(today);
+  const day = d.getDay(); // 0=Sun, 5=Fri
+  const diff = day <= 5 ? 5 - day : 7 - day + 5;
+  d.setDate(d.getDate() + diff);
+  const m = d.getMonth() + 1;
+  const dd = d.getDate();
+  return m + '/' + dd + '（週五）';
 })();
+document.getElementById('weekDisplay').textContent = weekDate;
 
 // Render groups
 const groupGrid = document.getElementById('groupGrid');
@@ -491,13 +446,11 @@ function showToast(msg, isError) {
 }
 
 async function submitForm() {
-  const week = document.getElementById('weekSelect').value;
-  if (!week) return showToast('請先選擇本週日期', true);
   if (!selGroup || !selMember) return showToast('請先選擇小組與姓名', true);
   if (!attendStatus) return showToast('請選擇出席狀況', true);
 
   const payload = {
-    week:     week,
+    week:     weekDate,
     group:    selGroup,
     name:     selMember,
     attend:   attendStatus,
