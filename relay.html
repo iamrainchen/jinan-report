@@ -308,18 +308,19 @@
         <button class="change-btn" onclick="goStep(2)">重選姓名</button>
       </div>
       <div style="padding:16px;">
-        <div class="mode-bar">
-          <button class="mode-btn" onclick="selectMode('new')">
-            本週新填
-            <span class="mode-note">第一次填這週的資料</span>
-          </button>
-          <button class="mode-btn" onclick="selectMode('edit')">
-            修改本週填報
-            <span class="mode-note">覆蓋本週已送出的資料</span>
-          </button>
+        <div id="loadingHint" style="text-align:center; font-size:13px; color:var(--ink-muted); padding:12px 0;">查詢本週紀錄中…</div>
+        <div id="modeButtons" class="hidden">
+          <div class="mode-bar">
+            <button class="mode-btn" onclick="selectMode('new')">
+              本週新填
+              <span class="mode-note">第一次填這週的資料</span>
+            </button>
+            <button class="mode-btn" id="editModeBtn" onclick="selectMode('edit')">
+              修改本週填報
+              <span class="mode-note">覆蓋本週已送出的資料</span>
+            </button>
+          </div>
         </div>
-        <div id="loadingHint" class="hidden" style="text-align:center; font-size:13px; color:var(--ink-muted); padding:8px 0;">查詢中…</div>
-        <div id="noDataHint" class="hidden" style="text-align:center; font-size:13px; color:var(--danger); padding:8px 0;">本週尚無填報紀錄，請選「本週新填」</div>
       </div>
     </div>
   </div>
@@ -446,7 +447,7 @@ function renderMembers(g) {
       document.getElementById('selMemberChip').textContent = m;
       document.getElementById('selGroupLabel').textContent = g;
       resetForm();
-      setTimeout(() => goStep('mode'), 180);
+      setTimeout(() => { goStep('mode'); checkExisting(); }, 180);
     };
     grid.appendChild(btn);
   });
@@ -464,7 +465,6 @@ function goStep(n) {
     document.getElementById('s2').className = 'step-item done';
     document.getElementById('selGroupChip').textContent = selGroup;
     document.getElementById('s3').className = 'step-item';
-    document.getElementById('noDataHint').classList.add('hidden');
     return;
   }
 
@@ -502,39 +502,52 @@ function showToast(msg, isError) {
 
 let editMode = false;
 
+async function checkExisting() {
+  existingData = null;
+  document.getElementById('loadingHint').classList.remove('hidden');
+  document.getElementById('modeButtons').classList.add('hidden');
+
+  try {
+    const url = SHEET_URL + '?action=get&week=' + encodeURIComponent(weekDate) + '&name=' + encodeURIComponent(selMember);
+    const res = await fetch(url);
+    const data = await res.json();
+
+    document.getElementById('loadingHint').classList.add('hidden');
+    document.getElementById('modeButtons').classList.remove('hidden');
+
+    if (data && data.status === 'ok') {
+      // 有資料，顯示兩個按鈕
+      existingData = data;
+      document.getElementById('editModeBtn').style.display = '';
+    } else {
+      // 沒資料，只顯示新填
+      document.getElementById('editModeBtn').style.display = 'none';
+    }
+  } catch(err) {
+    document.getElementById('loadingHint').classList.add('hidden');
+    document.getElementById('modeButtons').classList.remove('hidden');
+    document.getElementById('editModeBtn').style.display = 'none';
+  }
+}
+let existingData = null;
+
 async function selectMode(mode) {
   if (mode === 'new') {
     editMode = false;
     resetForm();
     goStep(3);
   } else {
-    // fetch existing data for this week
-    document.getElementById('loadingHint').classList.remove('hidden');
-    document.getElementById('noDataHint').classList.add('hidden');
-    try {
-      const url = SHEET_URL + '?action=get&week=' + encodeURIComponent(weekDate) + '&name=' + encodeURIComponent(selMember);
-      const res = await fetch(url);
-      const data = await res.json();
-      document.getElementById('loadingHint').classList.add('hidden');
-      if (!data || data.status === 'notfound') {
-        document.getElementById('noDataHint').classList.remove('hidden');
-        return;
-      }
-      // Pre-fill form
-      editMode = true;
-      resetForm();
-      if (data.attend) setAttend(data.attend);
-      document.getElementById('f-oto').value = data.oto || '';
-      document.getElementById('f-internal').value = data.internal || '';
-      document.getElementById('f-external').value = data.external || '';
-      document.getElementById('f-amount').value = data.amount || '';
-      document.getElementById('f-training').value = data.training || '';
-      document.getElementById('f-guest').value = data.guest || '';
-      goStep(3);
-    } catch(err) {
-      document.getElementById('loadingHint').classList.add('hidden');
-      showToast('查詢失敗，請重試', true);
-    }
+    // 直接用已查好的資料帶入
+    editMode = true;
+    resetForm();
+    if (existingData.attend) setAttend(existingData.attend);
+    document.getElementById('f-oto').value = existingData.oto || '';
+    document.getElementById('f-internal').value = existingData.internal || '';
+    document.getElementById('f-external').value = existingData.external || '';
+    document.getElementById('f-amount').value = existingData.amount || '';
+    document.getElementById('f-training').value = existingData.training || '';
+    document.getElementById('f-guest').value = existingData.guest || '';
+    goStep(3);
   }
 }
 
