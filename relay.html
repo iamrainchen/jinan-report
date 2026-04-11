@@ -218,6 +218,23 @@
   /* Hidden */
   .hidden { display: none !important; }
 
+  /* Mode selection */
+  .mode-bar {
+    display: flex; gap: 10px; margin-bottom: 16px;
+  }
+  .mode-btn {
+    flex: 1; padding: 14px 8px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: #fff; cursor: pointer;
+    font-size: 14px; font-weight: 500; color: var(--ink-soft);
+    font-family: "Noto Sans TC", sans-serif;
+    transition: all 0.15s; text-align: center; line-height: 1.5;
+  }
+  .mode-btn:hover { border-color: var(--gold); background: #FFFBF2; }
+  .mode-btn.mode-new { border-color: var(--success); background: var(--success-bg); color: var(--success); }
+  .mode-btn.mode-edit { border-color: #1a73e8; background: #e8f0fe; color: #1a73e8; }
+  .mode-note { font-size: 11px; font-weight: 400; display: block; margin-top: 2px; opacity: 0.8; }
+
   /* Week display */
   .week-bar {
     display: flex; align-items: center; gap: 8px;
@@ -278,6 +295,32 @@
         <button class="change-btn" onclick="goStep(1)">重選小組</button>
       </div>
       <div class="member-grid" id="memberGrid"></div>
+    </div>
+  </div>
+
+  <!-- Mode selection -->
+  <div id="stepMode" class="hidden">
+    <div class="card">
+      <div class="card-header"><div class="dot"></div>你要做什麼？</div>
+      <div class="selection-display">
+        <span id="selMemberChipMode" class="selection-chip"></span>
+        <span id="selGroupLabelMode" style="font-size:13px; color:var(--ink-muted);"></span>
+        <button class="change-btn" onclick="goStep(2)">重選姓名</button>
+      </div>
+      <div style="padding:16px;">
+        <div class="mode-bar">
+          <button class="mode-btn" onclick="selectMode('new')">
+            本週新填
+            <span class="mode-note">第一次填這週的資料</span>
+          </button>
+          <button class="mode-btn" onclick="selectMode('edit')">
+            修改本週填報
+            <span class="mode-note">覆蓋本週已送出的資料</span>
+          </button>
+        </div>
+        <div id="loadingHint" class="hidden" style="text-align:center; font-size:13px; color:var(--ink-muted); padding:8px 0;">查詢中…</div>
+        <div id="noDataHint" class="hidden" style="text-align:center; font-size:13px; color:var(--danger); padding:8px 0;">本週尚無填報紀錄，請選「本週新填」</div>
+      </div>
     </div>
   </div>
 
@@ -398,10 +441,12 @@ function renderMembers(g) {
       selMember = m;
       document.querySelectorAll('.member-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
+      document.getElementById('selMemberChipMode').textContent = m;
+      document.getElementById('selGroupLabelMode').textContent = g;
       document.getElementById('selMemberChip').textContent = m;
       document.getElementById('selGroupLabel').textContent = g;
       resetForm();
-      setTimeout(() => goStep(3), 180);
+      setTimeout(() => goStep('mode'), 180);
     };
     grid.appendChild(btn);
   });
@@ -410,9 +455,20 @@ function renderMembers(g) {
 function goStep(n) {
   document.getElementById('step1').classList.add('hidden');
   document.getElementById('step2').classList.add('hidden');
+  document.getElementById('stepMode').classList.add('hidden');
   document.getElementById('step3').classList.add('hidden');
-  document.getElementById('step' + n).classList.remove('hidden');
 
+  if (n === 'mode') {
+    document.getElementById('stepMode').classList.remove('hidden');
+    document.getElementById('s1').className = 'step-item done';
+    document.getElementById('s2').className = 'step-item done';
+    document.getElementById('selGroupChip').textContent = selGroup;
+    document.getElementById('s3').className = 'step-item';
+    document.getElementById('noDataHint').classList.add('hidden');
+    return;
+  }
+
+  document.getElementById('step' + n).classList.remove('hidden');
   if (n >= 1) document.getElementById('s1').className = 'step-item ' + (n === 1 ? 'active' : 'done');
   if (n >= 2) {
     document.getElementById('s2').className = 'step-item ' + (n === 2 ? 'active' : n > 2 ? 'done' : '');
@@ -444,12 +500,51 @@ function showToast(msg, isError) {
   setTimeout(() => t.className = 'toast', 2500);
 }
 
+let editMode = false;
+
+async function selectMode(mode) {
+  if (mode === 'new') {
+    editMode = false;
+    resetForm();
+    goStep(3);
+  } else {
+    // fetch existing data for this week
+    document.getElementById('loadingHint').classList.remove('hidden');
+    document.getElementById('noDataHint').classList.add('hidden');
+    try {
+      const url = SHEET_URL + '?action=get&week=' + encodeURIComponent(weekDate) + '&name=' + encodeURIComponent(selMember);
+      const res = await fetch(url);
+      const data = await res.json();
+      document.getElementById('loadingHint').classList.add('hidden');
+      if (!data || data.status === 'notfound') {
+        document.getElementById('noDataHint').classList.remove('hidden');
+        return;
+      }
+      // Pre-fill form
+      editMode = true;
+      resetForm();
+      if (data.attend) setAttend(data.attend);
+      document.getElementById('f-oto').value = data.oto || '';
+      document.getElementById('f-internal').value = data.internal || '';
+      document.getElementById('f-external').value = data.external || '';
+      document.getElementById('f-amount').value = data.amount || '';
+      document.getElementById('f-training').value = data.training || '';
+      document.getElementById('f-guest').value = data.guest || '';
+      goStep(3);
+    } catch(err) {
+      document.getElementById('loadingHint').classList.add('hidden');
+      showToast('查詢失敗，請重試', true);
+    }
+  }
+}
+
 async function submitForm() {
   if (!selGroup || !selMember) return showToast('請先選擇小組與姓名', true);
   if (!attendStatus) return showToast('請選擇出席狀況', true);
 
   const payload = {
     week:     weekDate,
+    editMode: editMode,
     group:    selGroup,
     name:     selMember,
     attend:   attendStatus,
