@@ -311,14 +311,8 @@
         <div id="loadingHint" style="text-align:center; font-size:13px; color:var(--ink-muted); padding:12px 0;">查詢本週紀錄中…</div>
         <div id="modeButtons" class="hidden">
           <div class="mode-bar">
-            <button class="mode-btn" onclick="selectMode('new')">
-              本週新填
-              <span class="mode-note">第一次填這週的資料</span>
-            </button>
-            <button class="mode-btn" id="editModeBtn" onclick="selectMode('edit')">
-              修改本週填報
-              <span class="mode-note">覆蓋本週已送出的資料</span>
-            </button>
+            <button class="mode-btn" id="newModeBtn" onclick="selectMode('new')">填寫</button>
+            <button class="mode-btn" id="editModeBtn" onclick="selectMode('edit')">修改</button>
           </div>
         </div>
       </div>
@@ -516,16 +510,19 @@ async function checkExisting() {
     document.getElementById('modeButtons').classList.remove('hidden');
 
     if (data && data.status === 'ok') {
-      // 有資料，顯示兩個按鈕
+      // 有資料，只顯示修改
       existingData = data;
+      document.getElementById('newModeBtn').style.display = 'none';
       document.getElementById('editModeBtn').style.display = '';
     } else {
       // 沒資料，只顯示新填
+      document.getElementById('newModeBtn').style.display = '';
       document.getElementById('editModeBtn').style.display = 'none';
     }
   } catch(err) {
     document.getElementById('loadingHint').classList.add('hidden');
     document.getElementById('modeButtons').classList.remove('hidden');
+    document.getElementById('newModeBtn').style.display = '';
     document.getElementById('editModeBtn').style.display = 'none';
   }
 }
