@@ -140,6 +140,31 @@ body{background:var(--paper);font-family:'Noto Sans TC',sans-serif;color:var(--i
   .card-list{display:none;}
 }
 
+/* 洪岳裕頁 hyr-view 用 position:fixed overlay */
+.hyr-cell{background:var(--surface);border-radius:var(--radius);border:1px solid #E8E4DC;padding:13px 12px;min-height:115px;cursor:pointer;transition:box-shadow .14s,transform .14s;position:relative;overflow:hidden;}
+.hyr-cell:hover{box-shadow:0 3px 14px rgba(0,0,0,.08);transform:translateY(-1px);}
+.hyr-cell.hyr-center{cursor:default;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:none;}
+.hyr-cell.hyr-static{cursor:default;pointer-events:none;}
+.hyr-cell.hyr-static:hover{box-shadow:none;transform:none;}
+@media(max-width:540px){
+  .hyr-stage{padding:.65rem .75rem;}
+  .hyr-mandala{display:none!important;}
+  .hyr-list{display:flex;flex-direction:column;gap:8px;}
+  .hyr-m-card{background:#EAF7F4;border-radius:var(--radius);border:1px solid #C8EDEA;overflow:hidden;cursor:pointer;}
+  .hyr-m-card:active{opacity:.85;}
+  .hyr-m-header{display:flex;align-items:center;gap:10px;padding:13px 14px 10px;}
+  .hyr-m-title{font-size:15px;font-weight:500;color:#0A4A3A;flex:1;}
+  .hyr-m-arrow{font-size:15px;color:#4CAF98;}
+  .hyr-m-tags{display:flex;flex-wrap:wrap;gap:4px;padding:0 14px 11px 33px;}
+  .hyr-m-tag{font-size:11px;padding:2px 8px;border-radius:10px;background:#C8EDEA;color:#0A4A3A;}
+  .hyr-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .hyr-detail-item{background:#EAF7F4;border-radius:8px;border:1px solid #C8EDEA;padding:10px 11px;font-size:13px;font-weight:500;color:#0A4A3A;}
+}
+@media(min-width:541px){
+  .hyr-list{display:none!important;}
+  .hyr-mandala{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);}
+}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 .mandala,.card-list{animation:fadeUp .2s ease both;}
 </style>
@@ -158,6 +183,20 @@ body{background:var(--paper);font-family:'Noto Sans TC',sans-serif;color:var(--i
 </div>
 <div class="stage" id="stage"></div>
 <div class="hint-bar" id="hint">點選任一產業格，進入第二層</div>
+
+<!-- 洪岳裕專屬頁 -->
+<div id="hyr-view" style="display:none;position:fixed;inset:0;background:var(--paper);z-index:999;overflow-y:auto;">
+  <div style="background:var(--surface);border-bottom:1px solid var(--gold-pale);padding:1.4rem 1rem 1.1rem;text-align:center;">
+    <div style="font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:600;letter-spacing:.1em;">洪岳裕 · 物理治療</div>
+    <div style="width:36px;height:1.5px;background:var(--gold);margin:.5rem auto .35rem;"></div>
+    <div style="font-size:.68rem;color:var(--ink-soft);">服務族群與合作產業地圖</div>
+  </div>
+  <div id="hyr-nav" style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;padding:.55rem 1rem;font-size:.72rem;background:var(--surface);border-bottom:1px solid #EDEAE4;min-height:32px;">
+    <span style="color:var(--gold);cursor:pointer;" onclick="hideHYR()">← 金安分會</span>
+  </div>
+  <div id="hyr-stage" style="padding:.9rem;max-width:760px;margin:0 auto;"></div>
+  <div id="hyr-hint" style="text-align:center;font-size:.65rem;color:var(--ink-faint);padding:.5rem 0 .2rem;letter-spacing:.04em;">點選族群格，展開合作細項</div>
+</div>
 
 <script>
 const PAL={
@@ -197,7 +236,7 @@ const SVC={
   '網站設計':      ['系統建置','數位媒體行銷','視覺設計','品牌企畫','電商平台','整合行銷','影音動畫','資安顧問'],
   /* 健康美麗補充 */
   '女性健康物理治療':['物理治療','健康管理師','國際認證泌乳顧問','抗老化訓練','健康&保健','保險規劃','婦產科','心理諮詢'],
-  '物理治療':      ['女性健康物理治療','健康管理師','抗老化訓練','健康&保健','美容儀器設備','保險規劃','骨科診所','瑜伽健身'],
+  '物理治療':      ['高階主管','孕婦','產後一個月','退休族','運動傷害','抗老化逆齡','術後恢復','連鎖發展'],
   '抗老化訓練':    ['健康管理師','物理治療','女性健康物理治療','美容儀器設備','健康&保健','國際認證泌乳顧問','營養師','保險規劃'],
   '健康管理師':    ['物理治療','女性健康物理治療','抗老化訓練','國際認證泌乳顧問','健康&保健','美容儀器設備','保險規劃','營養師'],
   '國際認證泌乳顧問':['女性健康物理治療','健康管理師','抗老化訓練','健康&保健','婦產科','心理諮詢','保險規劃','母嬰用品'],
@@ -523,7 +562,9 @@ function renderL2(ind){
       } else {
         card.className='m-sub-card';
         card.style.background=pl.bg;
-        card.innerHTML=`<div class="m-sub-header"><div class="m-sub-dot" style="background:${pl.acc};"></div><div class="m-sub-info"><div class="m-sub-title" style="color:${pl.dark};">${sub.t}</div><div class="m-sub-members" style="color:${pl.acc};">${sub.members.map(m=>m.n).join('・')}</div></div><div class="m-sub-arrow" style="color:${pl.acc};">›</div></div>`;
+        const isHYR=sub.members.some(m=>m.n==='洪岳裕');
+        const hyrBtn=isHYR?`<div style="padding:0 13px 10px;"><button onclick="event.stopPropagation();showHYR()" style="width:100%;background:${pl.acc};color:#fff;font-size:11px;padding:5px 0;border-radius:8px;cursor:pointer;border:none;font-family:inherit;">查看完整服務地圖 →</button></div>`:'';
+        card.innerHTML=`<div class="m-sub-header"><div class="m-sub-dot" style="background:${pl.acc};"></div><div class="m-sub-info"><div class="m-sub-title" style="color:${pl.dark};">${sub.t}</div><div class="m-sub-members" style="color:${pl.acc};">${sub.members.map(m=>m.n).join('・')}</div></div><div class="m-sub-arrow" style="color:${pl.acc};">›</div></div>${hyrBtn}`;
         card.addEventListener('click',()=>renderL3(ind,sub));
       }
       list.appendChild(card);
@@ -550,7 +591,9 @@ function renderL2(ind){
           const found=findSubByMember(m.n);
           return `<div class="ci"><div class="ci-dot" style="background:${pl.acc};"></div><span style="color:${pl.dark};${found?'cursor:pointer;text-decoration:underline;text-underline-offset:2px;':''}" ${found?`onclick="event.stopPropagation();renderL3FromName('${m.n}')"`:''}>${m.n}</span></div>`;
         }).join('');
-        div.innerHTML=`<div class="cell-accent" style="background:${pl.acc};"></div><div class="ct" style="color:${pl.dark};">${slot.t}</div>${membersHTML}`;
+        const isHYR=slot.members.some(m=>m.n==='洪岳裕');
+        const hyrBtn=isHYR?`<button onclick="event.stopPropagation();showHYR()" style="margin-top:7px;width:100%;background:${pl.acc};color:#fff;font-size:10px;padding:4px 0;border-radius:6px;cursor:pointer;border:none;font-family:inherit;">查看完整服務地圖 →</button>`:'';
+        div.innerHTML=`<div class="cell-accent" style="background:${pl.acc};"></div><div class="ct" style="color:${pl.dark};">${slot.t}</div>${membersHTML}${hyrBtn}`;
         div.addEventListener('click',()=>renderL3(ind,slot));
       }
       g.appendChild(div);
@@ -592,7 +635,10 @@ function renderL3(ind,sub){
   let centerHTML='';
   if(sub.members.length===1){
     const m=sub.members[0];
-    centerHTML=`<div class="avatar" style="background:rgba(255,255,255,.25);color:#fff;">${m.n[0]}</div><div class="member-name" style="color:#fff;">${m.n}</div><div class="member-role" style="color:rgba(255,255,255,.85);font-size:10px;margin-top:3px;">${sub.t}</div>`;
+    const extraLink = m.n==='洪岳裕'
+      ? `<button onclick="event.stopPropagation();showHYR()" style="margin-top:8px;background:rgba(255,255,255,.2);color:#fff;font-size:11px;padding:5px 12px;border-radius:10px;cursor:pointer;border:1px solid rgba(255,255,255,.5);font-family:inherit;width:100%;">查看完整服務地圖 →</button>`
+      : '';
+    centerHTML=`<div class="avatar" style="background:rgba(255,255,255,.25);color:#fff;">${m.n[0]}</div><div class="member-name" style="color:#fff;">${m.n}</div><div class="member-role" style="color:rgba(255,255,255,.85);font-size:10px;margin-top:3px;">${sub.t}</div>${extraLink}`;
   } else {
     centerHTML=`<div class="cc2-title" style="color:#fff;">${sub.t}</div><div class="member-multi" style="margin-top:6px;">${sub.members.map(m=>{
       const found=findSubByMember(m.n);
@@ -601,18 +647,25 @@ function renderL3(ind,sub){
     }).join('')}</div>`;
   }
 
-  // 合作業別格：有會員則名字可點
+  // 合作業別格：有會員則名字可點；物理治療的格子可直接進入 HYR 族群
   function makeSvcCell(svc, pl){
     const div=document.createElement('div');
     const matched=findMembers(svc);
-    div.className='cell no-hover';
-    div.style.background=pl.bg;div.style.borderColor=pl.pale;
-    if(matched){
-      div.style.borderColor=pl.acc;
-      div.style.cursor='default';
+    // 如果是洪岳裕的族群，點擊直接進入對應族群
+    const hyrGroup = sub.t==='物理治療' ? HYR_GROUPS.find(g=>g&&g.label===svc) : null;
+    if(hyrGroup){
+      div.className='cell';
+      div.style.background=pl.bg;div.style.borderColor=pl.acc;div.style.cursor='pointer';
+      div.innerHTML=`<div class="cell-accent" style="background:${pl.acc};opacity:.7;"></div><div class="svc-title" style="color:${pl.dark};margin-bottom:5px;">${svc}</div><div style="font-size:10px;color:${pl.acc};margin-top:4px;">點擊展開 →</div>`;
+      div.addEventListener('click',()=>{ showHYR(); setTimeout(()=>hyrRenderL2(hyrGroup),50); });
+    } else if(matched){
+      div.className='cell no-hover';
+      div.style.background=pl.bg;div.style.borderColor=pl.acc;div.style.cursor='default';
       const namesHTML=matched.map(n=>memberSpan(n,pl.acc)).map(s=>`<div class="ci"><div class="ci-dot" style="background:${pl.acc};"></div>${s}</div>`).join('');
       div.innerHTML=`<div class="cell-accent" style="background:${pl.acc};opacity:.6;"></div><div class="svc-title" style="color:${pl.dark};margin-bottom:5px;">${svc}</div>${namesHTML}`;
     } else {
+      div.className='cell no-hover';
+      div.style.background=pl.bg;div.style.borderColor=pl.pale;
       div.innerHTML=`<div class="cell-accent" style="background:${pl.acc};opacity:.3;"></div><div class="svc-title" style="color:${pl.dark};">${svc}</div>`;
     }
     return div;
@@ -627,10 +680,15 @@ function renderL3(ind,sub){
     const sg=document.createElement('div');sg.className='m-svc-grid';
     svcs.forEach(svc=>{
       const matched=findMembers(svc);
+      const hyrGroup = sub.t==='物理治療' ? HYR_GROUPS.find(g=>g&&g.label===svc) : null;
       const item=document.createElement('div');
       item.className='m-svc-item';
       item.style.background=pl.bg;
-      if(matched){
+      if(hyrGroup){
+        item.style.borderColor=pl.acc;item.style.cursor='pointer';
+        item.innerHTML=`<div class="m-svc-accent" style="background:${pl.acc};opacity:.7;"></div><div class="m-svc-title" style="color:${pl.dark};">${svc}</div><div style="font-size:10px;color:${pl.acc};margin-top:3px;">點擊展開 →</div>`;
+        item.addEventListener('click',()=>{ showHYR(); setTimeout(()=>hyrRenderL2(hyrGroup),50); });
+      } else if(matched){
         item.style.borderColor=pl.acc;
         const namesHTML=matched.map(n=>memberSpan(n,pl.acc)).map(s=>`<div style="margin-top:2px;">▸ ${s}</div>`).join('');
         item.innerHTML=`<div class="m-svc-accent" style="background:${pl.acc};opacity:.6;"></div><div class="m-svc-title" style="color:${pl.dark};margin-bottom:3px;">${svc}</div>${namesHTML}`;
@@ -671,6 +729,118 @@ function renderL3FromName(name){
   const found=findSubByMember(name);
   if(!found) return;
   renderL3(found.ind, found.sub);
+}
+
+/* ══════════════════════════════
+   洪岳裕專屬頁
+══════════════════════════════ */
+const HYR_ACC='#4CAF98', HYR_DARK='#0A4A3A', HYR_BG='#EAF7F4', HYR_PALE='#C8EDEA';
+
+const HYR_GROUPS=[
+  {id:'executive',label:'高階主管',items:['高階健檢','高爾夫教練','獵人頭','精品店','領導力教練','個人品牌/公關','形象顧問','西服訂製']},
+  {id:'pregnant',label:'孕婦',items:['導樂','產科醫師','孕婦Spa','月子餐','產前教育','孕婦瑜珈','孕婦皮拉提斯','孕婦寫真']},
+  {id:'postpartum',label:'產後一個月',items:['泌乳顧問','月子中心','產後體態','彌月禮盒','心理諮商','嬰兒睡眠','到府托育','產後落髮']},
+  {id:'retired',label:'退休族',items:['數位賦能','銀髮手機攝影','遠距醫療','智慧居家','護具','理財規劃','銀髮旅遊','抗衰老醫學']},
+  null,
+  {id:'sports',label:'運動傷害',items:['運動按摩','體能教練','運動護具','攀岩/抱石教練','運動醫學中心','網球教練','高爾夫教練','跑團']},
+  {id:'antiaging',label:'抗老化逆齡',items:['營養師','抗老化訓練','再生醫學','家醫科醫師','骨/復健診所','助步車/手杖','護具（護膝/護腰）','藥師諮詢']},
+  {id:'recovery',label:'術後恢復',items:['術後機能養','到府護理','醫療器材租賃','止痛（儀器/器材）','醫療護具','照服員派遣','疤痕貼片','骨科診所']},
+  {id:'network',label:'連鎖發展',items:['商空設計','人資顧問','商空仲介','連鎖顧問','企業律師','醫療行銷','勞資顧問','會計稅務']},
+];
+
+function showHYR(){
+  document.getElementById('hyr-view').style.display='block';
+  hyrRenderL1();
+}
+
+function hideHYR(){
+  document.getElementById('hyr-view').style.display='none';
+}
+
+function hyrRenderL1(){
+  document.getElementById('hyr-nav').innerHTML=`<span style="color:var(--gold);cursor:pointer;" onclick="hideHYR()">← 金安分會</span><span style="color:var(--ink-faint);margin:0 4px;">›</span><span style="color:var(--ink-mid);font-weight:500;">物理治療 · 洪岳裕</span><button onclick="hideHYR()" style="margin-left:auto;background:#4CAF98;color:#fff;font-size:10px;padding:3px 10px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;white-space:nowrap;">返回金安分會</button>`;
+  document.getElementById('hyr-hint').textContent='點選族群格，展開合作細項';
+  const stage=document.getElementById('hyr-stage');stage.innerHTML='';
+
+  if(isMobile()){
+    const list=document.createElement('div');list.className='hyr-list';
+    const banner=document.createElement('div');
+    banner.style.cssText=`background:${HYR_ACC};border-radius:10px;padding:16px;text-align:center;margin-bottom:4px;`;
+    banner.innerHTML=`<div style="font-family:'Noto Serif TC',serif;font-size:18px;font-weight:600;color:#fff;">洪岳裕</div><div style="font-size:12px;color:rgba(255,255,255,.8);margin-top:3px;">物理治療師</div><div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:6px;">8 大服務族群</div>`;
+    list.appendChild(banner);
+    HYR_GROUPS.forEach(g=>{
+      if(!g)return;
+      const card=document.createElement('div');card.className='hyr-m-card';
+      card.innerHTML=`<div class="hyr-m-header"><div style="width:9px;height:9px;border-radius:50%;background:${HYR_ACC};flex-shrink:0;"></div><div class="hyr-m-title">${g.label}</div><div class="hyr-m-arrow">›</div></div><div class="hyr-m-tags">${g.items.slice(0,4).map(i=>`<span class="hyr-m-tag">${i}</span>`).join('')}${g.items.length>4?`<span class="hyr-m-tag" style="background:transparent;color:var(--ink-faint);">+${g.items.length-4}</span>`:''}</div>`;
+      card.addEventListener('click',()=>hyrRenderL2(g));
+      list.appendChild(card);
+    });
+    stage.appendChild(list);
+  } else {
+    const grid=document.createElement('div');grid.className='hyr-mandala';
+    HYR_GROUPS.forEach(grp=>{
+      const div=document.createElement('div');
+      if(!grp){
+        div.className='hyr-cell hyr-center';
+        div.style.background=HYR_ACC;
+        div.innerHTML=`<div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.25);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:18px;font-weight:600;margin:0 auto 8px;">裕</div><div style="font-family:'Noto Serif TC',serif;font-size:16px;font-weight:600;color:#fff;">洪岳裕</div><div style="font-size:11px;color:rgba(255,255,255,.8);margin-top:3px;">物理治療師</div>`;
+      } else {
+        div.className='hyr-cell';
+        div.style.background=HYR_BG;div.style.borderColor=HYR_PALE;
+        div.innerHTML=`<div style="position:absolute;top:0;left:0;right:0;height:3px;background:${HYR_ACC};border-radius:10px 10px 0 0;"></div><div style="font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;color:${HYR_DARK};margin-bottom:7px;">${grp.label}</div>${grp.items.slice(0,4).map(i=>`<div style="font-size:12px;line-height:2;display:flex;align-items:center;gap:5px;"><div style="width:6px;height:6px;border-radius:50%;background:${HYR_ACC};flex-shrink:0;"></div><span style="color:${HYR_DARK};">${i}</span></div>`).join('')}<div style="font-size:11px;color:${HYR_ACC};margin-top:3px;">＋${grp.items.length-4} 項</div>`;
+        div.addEventListener('click',()=>hyrRenderL2(grp));
+      }
+      grid.appendChild(div);
+    });
+    stage.appendChild(grid);
+  }
+}
+
+function hyrRenderL2(grp){
+  document.getElementById('hyr-nav').innerHTML=`<span style="color:var(--gold);cursor:pointer;" onclick="hideHYR()">← 金安分會</span><span style="color:var(--ink-faint);margin:0 4px;">›</span><span style="color:var(--gold);cursor:pointer;" onclick="hyrRenderL1()">物理治療</span><span style="color:var(--ink-faint);margin:0 4px;">›</span><span style="color:var(--ink-mid);font-weight:500;">${grp.label}</span><button onclick="hideHYR()" style="margin-left:auto;background:#4CAF98;color:#fff;font-size:10px;padding:3px 10px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;white-space:nowrap;">返回金安分會</button>`;
+  document.getElementById('hyr-hint').textContent='合作與轉介的業別';
+  const stage=document.getElementById('hyr-stage');stage.innerHTML='';
+
+  if(isMobile()){
+    const list=document.createElement('div');list.className='hyr-list';
+    const header=document.createElement('div');
+    header.style.cssText=`background:${HYR_ACC};border-radius:10px;padding:14px;text-align:center;margin-bottom:4px;`;
+    header.innerHTML=`<div style="font-size:10px;color:rgba(255,255,255,.7);margin-bottom:3px;">服務族群</div><div style="font-family:'Noto Serif TC',serif;font-size:17px;font-weight:600;color:#fff;">${grp.label}</div><div style="font-size:10px;color:rgba(255,255,255,.65);margin-top:6px;cursor:pointer;text-decoration:underline;" onclick="hyrRenderL1()">← 返回總覽</div>`;
+    list.appendChild(header);
+    const grid=document.createElement('div');grid.className='hyr-detail-grid';
+    grp.items.forEach(item=>{
+      const div=document.createElement('div');div.className='hyr-detail-item';
+      div.innerHTML=`<div style="width:6px;height:6px;border-radius:50%;background:${HYR_ACC};margin-bottom:6px;"></div>${item}`;
+      grid.appendChild(div);
+    });
+    list.appendChild(grid);
+    stage.appendChild(list);
+  } else {
+    const cols=3;
+    const slots=cols*Math.ceil((grp.items.length+1)/cols);
+    const centerPos=grp.items.length<=8?Math.floor(slots/2):0;
+    const arr=[];let idx=0;
+    for(let i=0;i<slots;i++){
+      if(i===centerPos) arr.push({isCenter:true});
+      else if(idx<grp.items.length) arr.push(grp.items[idx++]);
+      else arr.push(null);
+    }
+    const grid=document.createElement('div');grid.className='hyr-mandala';
+    arr.forEach(slot=>{
+      const div=document.createElement('div');
+      if(slot&&slot.isCenter){
+        div.className='hyr-cell hyr-center';div.style.background=HYR_ACC;
+        div.innerHTML=`<div style="font-size:10px;color:rgba(255,255,255,.7);margin-bottom:4px;">服務族群</div><div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:#fff;">${grp.label}</div><div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:8px;cursor:pointer;text-decoration:underline;" onclick="hyrRenderL1()">← 返回</div>`;
+      } else if(!slot){
+        div.style.background='transparent';div.style.border='none';div.style.pointerEvents='none';
+      } else {
+        div.className='hyr-cell hyr-static';div.style.background=HYR_BG;div.style.borderColor=HYR_PALE;
+        div.innerHTML=`<div style="position:absolute;top:0;left:0;right:0;height:3px;background:${HYR_ACC};opacity:.5;border-radius:10px 10px 0 0;"></div><div style="font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;color:${HYR_DARK};">${slot}</div>`;
+      }
+      grid.appendChild(div);
+    });
+    stage.appendChild(grid);
+  }
 }
 
 renderL1();
