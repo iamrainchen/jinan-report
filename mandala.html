@@ -909,11 +909,115 @@ function toggleAdminBar(){
   bar.style.display = bar.style.display === 'none' ? 'flex' : 'none';
 }
 
+/* ══════════════════════════════
+   編輯介面
+══════════════════════════════ */
+function openEditor(){
+  document.getElementById('editor-overlay').style.display='flex';
+  renderEditorList();
+}
+function closeEditor(){
+  document.getElementById('editor-overlay').style.display='none';
+}
+
+function renderEditorList(){
+  const panel=document.getElementById('editor-panel');
+  let html=`<div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:14px;">選擇要編輯的會員</div>`;
+  DATA.forEach(ind=>{
+    if(!ind)return;
+    const pl=PAL[ind.pal];
+    html+=`<div style="margin-bottom:14px;">`;
+    html+=`<div style="font-size:11px;font-weight:500;color:${pl.dark};padding:4px 8px;background:${pl.bg};border-radius:6px;margin-bottom:6px;border-left:3px solid ${pl.acc};">${ind.title}</div>`;
+    ind.subs.forEach(sub=>{
+      if(sub.members.length===0)return;
+      sub.members.forEach(m=>{
+        html+=`<div onclick="openMemberEditor('${ind.id}','${sub.t.replace(/'/g,"\'")}','${m.n}')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:${pl.bg};color:${pl.dark};display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">${m.n[0]}</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">${m.n}</div><div style="font-size:11px;color:var(--ink-soft);">${sub.t}</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
+        </div>`;
+      });
+    });
+    html+=`</div>`;
+  });
+  panel.innerHTML=html;
+}
+
+function openMemberEditor(indId,subT,memberName){
+  const ind=DATA.find(d=>d&&d.id===indId);
+  const pl=PAL[ind.pal];
+  const svcs=SVC[subT]||['','','','','','','',''];
+  const svcsPadded=[...svcs,...Array(8).fill('')].slice(0,8);
+  const panel=document.getElementById('editor-panel');
+  panel.innerHTML=`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+      <button onclick="renderEditorList()" style="background:var(--paper);border:1px solid #E8E4DC;border-radius:6px;padding:5px 10px;font-size:12px;cursor:pointer;font-family:inherit;">← 返回</button>
+      <div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;">${memberName} · 編輯</div>
+    </div>
+    <div style="background:${pl.bg};border-radius:10px;padding:14px;margin-bottom:16px;border-left:3px solid ${pl.acc};">
+      <div style="font-size:11px;color:${pl.dark};font-weight:500;margin-bottom:8px;">基本資料</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div>
+          <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">姓名</div>
+          <input id="edit-name" value="${memberName}" style="width:100%;padding:7px 10px;border:1px solid #E8E4DC;border-radius:6px;font-size:13px;font-family:inherit;outline:none;" />
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">子項名稱（第二層）</div>
+          <input id="edit-sub" value="${subT}" style="width:100%;padding:7px 10px;border:1px solid #E8E4DC;border-radius:6px;font-size:13px;font-family:inherit;outline:none;" />
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <div style="font-size:11px;color:var(--ink-soft);font-weight:500;margin-bottom:8px;">合作產業（第三層 · 共8格）</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        ${svcsPadded.map((s,i)=>`<div>
+          <div style="font-size:10px;color:var(--ink-faint);margin-bottom:3px;">第 ${i+1} 格</div>
+          <input class="svc-input" value="${s.replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;border:1px solid #E8E4DC;border-radius:6px;font-size:12px;font-family:inherit;outline:none;" placeholder="合作產業" />
+        </div>`).join('')}
+      </div>
+    </div>
+    <button onclick="saveMemberEdit('${indId}','${subT.replace(/'/g,"\'")}','${memberName}')" style="width:100%;background:${pl.acc};color:#fff;font-size:13px;font-weight:500;padding:10px;border-radius:8px;cursor:pointer;border:none;font-family:inherit;">✓ 儲存</button>
+  `;
+}
+
+function saveMemberEdit(indId,oldSubT,oldName){
+  const newName=document.getElementById('edit-name').value.trim();
+  const newSubT=document.getElementById('edit-sub').value.trim();
+  const newSvcs=[...document.querySelectorAll('.svc-input')].map(i=>i.value.trim()).filter(s=>s);
+  if(!newName||!newSubT){alert('姓名和子項名稱不能為空');return;}
+  const ind=DATA.find(d=>d&&d.id===indId);
+  const sub=ind.subs.find(s=>s.t===oldSubT);
+  const member=sub&&sub.members.find(m=>m.n===oldName);
+  if(member)member.n=newName;
+  if(sub&&sub.t!==newSubT){
+    if(SVC[oldSubT]){SVC[newSubT]=SVC[oldSubT];delete SVC[oldSubT];}
+    sub.t=newSubT;
+  }
+  SVC[newSubT]=newSvcs;
+  Object.keys(MLOOKUP).forEach(k=>delete MLOOKUP[k]);
+  DATA.forEach(d=>{if(!d)return;d.subs.forEach(s=>{if(s.members.length>0)MLOOKUP[s.t]=s.members.map(m=>m.n);});});
+  alert('✓ 已更新！記得按推送到 GitHub。');
+  renderEditorList();
+}
+
+
 renderL1();
 window.addEventListener('resize',()=>{
   if(document.getElementById('stage').children.length>0) renderL1();
 });
 </script>
+
+
+<!-- 編輯介面 Overlay -->
+<div id="editor-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:var(--paper);border-radius:14px;width:100%;max-width:560px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.2);">
+    <div style="display:flex;align-items:center;padding:14px 16px;background:var(--surface);border-bottom:1px solid #E8E4DC;flex-shrink:0;">
+      <div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;">✏️ 編輯會員資料</div>
+      <span onclick="closeEditor()" style="margin-left:auto;font-size:20px;cursor:pointer;color:var(--ink-soft);">✕</span>
+    </div>
+    <div id="editor-panel" style="padding:16px;overflow-y:auto;flex:1;"></div>
+  </div>
+</div>
 
 <!-- 管理工具列 -->
 <div id="admin-trigger" onclick="toggleAdminBar()" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;background:#2A2218;color:#C9A84C;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.2);z-index:1000;user-select:none;">⚙️</div>
@@ -921,6 +1025,7 @@ window.addEventListener('resize',()=>{
 <div id="admin-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#2A2218;padding:12px 16px;z-index:1001;align-items:center;gap:10px;flex-wrap:wrap;border-top:2px solid #C9A84C;">
   <span style="color:#C9A84C;font-size:13px;font-weight:500;">管理模式</span>
   <input id="gh-token-input" type="password" placeholder="貼上 GitHub Token" style="flex:1;min-width:180px;max-width:280px;background:#3D2E10;color:#F2EAD3;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #5A4E3A;font-family:inherit;outline:none;" />
+  <button onclick="openEditor()" style="background:#5A4E3A;color:#F2EAD3;font-size:12px;padding:6px 14px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;font-weight:500;">✏️ 編輯會員</button>
   <button id="gh-push-btn" onclick="pushToGitHub()" style="background:#C9A84C;color:#1A1208;font-size:12px;padding:6px 16px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;font-weight:500;">推送到 GitHub</button>
   <span style="color:#9A8E78;font-size:11px;">更新後約 1-2 分鐘生效</span>
   <span onclick="toggleAdminBar()" style="color:#9A8E78;font-size:20px;cursor:pointer;margin-left:auto;">✕</span>
