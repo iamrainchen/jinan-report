@@ -843,10 +843,89 @@ function hyrRenderL2(grp){
   }
 }
 
+
+/* ══════════════════════════════
+   GitHub 自動更新功能
+══════════════════════════════ */
+const GITHUB_CONFIG = {
+  owner: 'iamrainchen',
+  repo: 'jinan-report',
+  path: 'jinan-mandala-v6.html',
+  branch: 'main'
+};
+
+async function pushToGitHub(){
+  const token = document.getElementById('gh-token-input').value.trim();
+  if(!token){ alert('請先輸入 GitHub Token'); return; }
+  const btn = document.getElementById('gh-push-btn');
+  btn.textContent = '上傳中...';
+  btn.disabled = true;
+
+  try {
+    const getRes = await fetch(
+      `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`,
+      { headers: { Authorization: `token ${token}` } }
+    );
+    const getJson = await getRes.json();
+    const sha = getJson.sha;
+
+    const html = document.documentElement.outerHTML;
+    const encoded = btoa(unescape(encodeURIComponent(html)));
+
+    const putRes = await fetch(
+      `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: '更新會員資料',
+          content: encoded,
+          sha: sha,
+          branch: GITHUB_CONFIG.branch
+        })
+      }
+    );
+    const _token = token; // avoid lint
+
+    if(putRes.ok){
+      btn.textContent = '✓ 已更新！';
+      btn.style.background = '#4CAF98';
+      setTimeout(()=>{ btn.textContent='推送到 GitHub'; btn.disabled=false; btn.style.background=''; }, 3000);
+    } else {
+      const err = await putRes.json();
+      btn.textContent = '失敗：' + (err.message||'未知錯誤');
+      btn.disabled = false;
+    }
+  } catch(e) {
+    btn.textContent = '錯誤：' + e.message;
+    btn.disabled = false;
+  }
+}
+
+function toggleAdminBar(){
+  const bar = document.getElementById('admin-bar');
+  bar.style.display = bar.style.display === 'none' ? 'flex' : 'none';
+}
+
 renderL1();
 window.addEventListener('resize',()=>{
   if(document.getElementById('stage').children.length>0) renderL1();
 });
 </script>
+
+<!-- 管理工具列 -->
+<div id="admin-trigger" onclick="toggleAdminBar()" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;background:#2A2218;color:#C9A84C;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.2);z-index:1000;user-select:none;">⚙️</div>
+
+<div id="admin-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#2A2218;padding:12px 16px;z-index:1001;align-items:center;gap:10px;flex-wrap:wrap;border-top:2px solid #C9A84C;">
+  <span style="color:#C9A84C;font-size:13px;font-weight:500;">管理模式</span>
+  <input id="gh-token-input" type="password" placeholder="貼上 GitHub Token" style="flex:1;min-width:180px;max-width:280px;background:#3D2E10;color:#F2EAD3;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #5A4E3A;font-family:inherit;outline:none;" />
+  <button id="gh-push-btn" onclick="pushToGitHub()" style="background:#C9A84C;color:#1A1208;font-size:12px;padding:6px 16px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;font-weight:500;">推送到 GitHub</button>
+  <span style="color:#9A8E78;font-size:11px;">更新後約 1-2 分鐘生效</span>
+  <span onclick="toggleAdminBar()" style="color:#9A8E78;font-size:20px;cursor:pointer;margin-left:auto;">✕</span>
+</div>
+
 </body>
 </html>
