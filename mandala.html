@@ -868,8 +868,14 @@ async function pushToGitHub(){
     const getJson = await getRes.json();
     const sha = getJson.sha;
 
-    const html = document.documentElement.outerHTML;
-    const encoded = btoa(unescape(encodeURIComponent(html)));
+    // 從 GitHub 拿原始 HTML 替換 DATA/SVC 再推回
+    const rawContent = atob(getJson.content.replace(/\n/g,''));
+    const dataStr = JSON.stringify(DATA);
+    const svcStr = JSON.stringify(SVC);
+    let updatedHTML = rawContent.replace(/const DATA=\[[\s\S]*?\];/, 'const DATA='+dataStr+';');
+    updatedHTML = updatedHTML.replace(/const SVC=\{[\s\S]*?\};/, 'const SVC='+svcStr+';');
+
+    const encoded = btoa(unescape(encodeURIComponent(updatedHTML)));
 
     const putRes = await fetch(
       `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`,
