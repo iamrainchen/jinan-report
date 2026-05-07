@@ -861,70 +861,63 @@ async function pushToGitHub(){
   btn.disabled = true;
 
   try {
+    // 1. 取得目前 GitHub 上的檔案
     const getRes = await fetch(
       `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`,
-      { headers: { Authorization: `token ${token}` } }
+      { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
     );
+    if(!getRes.ok) throw new Error('無法取得檔案：' + getRes.status);
     const getJson = await getRes.json();
     const sha = getJson.sha;
 
-    // 從 GitHub 拿原始 HTML，用標記定位替換 DATA/SVC
-    const rawContent = atob(getJson.content.replace(/\n/g,''));
-    console.log('[DEBUG] rawContent length:', rawContent.length);
-    console.log('[DEBUG] DATA_START in raw:', rawContent.includes('/*DATA_START*/'));
-    console.log('[DEBUG] SVC_START in raw:', rawContent.includes('/*SVC_START*/'));
-    
+    // 2. 解碼原始 HTML
+    const rawContent = decodeURIComponent(escape(atob(getJson.content.replace(/\n/g,''))));
+
+    // 3. 序列化目前的 DATA 和 SVC
     const dataStr = JSON.stringify(DATA);
     const svcStr = JSON.stringify(SVC);
-    console.log('[DEBUG] DATA members count:', DATA.filter(d=>d).reduce((a,d)=>a+d.subs.reduce((b,s)=>b+s.members.length,0),0));
-    
-    let updatedHTML = rawContent.replace(
-      /\/\*DATA_START\*\/const DATA=[\s\S]*?\/\*DATA_END\*\//,
-      '/*DATA_START*/const DATA='+dataStr+';/*DATA_END*/'
-    );
-    console.log('[DEBUG] DATA replaced:', updatedHTML !== rawContent);
-    
-    updatedHTML = updatedHTML.replace(
-      /\/\*SVC_START\*\/const SVC=[\s\S]*?\/\*SVC_END\*\//,
-      '/*SVC_START*/const SVC='+svcStr+';/*SVC_END*/'
-    );
-    console.log('[DEBUG] SVC replaced:', updatedHTML.includes(dataStr.substring(0,20)));
-    console.log('[DEBUG] updatedHTML length:', updatedHTML.length);
 
-    const encoded = btoa(unescape(encodeURIComponent(updatedHTML)));
+    // 4. 用標記替換（標記在原始碼裡）
+    let updated = rawContent;
+    const dataRe = /\/\*DATA_START\*\/const DATA=[\s\S]*?\/\*DATA_END\*\//;
+    const svcRe = /\/\*SVC_START\*\/const SVC=[\s\S]*?\/\*SVC_END\*\//;
 
+    if(dataRe.test(updated)){
+      updated = updated.replace(dataRe, '/*DATA_START*/const DATA='+dataStr+';/*DATA_END*/');
+    } else {
+      throw new Error('找不到 DATA 標記，請重新上傳最新版 HTML');
+    }
+    if(svcRe.test(updated)){
+      updated = updated.replace(svcRe, '/*SVC_START*/const SVC='+svcStr+';/*SVC_END*/');
+    } else {
+      throw new Error('找不到 SVC 標記，請重新上傳最新版 HTML');
+    }
+
+    // 5. 推送
+    const encoded = btoa(unescape(encodeURIComponent(updated)));
     const putRes = await fetch(
       `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`,
       {
         method: 'PUT',
-        headers: {
-          Authorization: `token ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          message: '更新會員資料',
-          content: encoded,
-          sha: sha,
-          branch: GITHUB_CONFIG.branch
-        })
+        headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: '更新會員資料', content: encoded, sha: sha, branch: GITHUB_CONFIG.branch })
       }
     );
-    const _token = token; // avoid lint
-
     if(putRes.ok){
       btn.textContent = '✓ 已更新！';
       btn.style.background = '#4CAF98';
       setTimeout(()=>{ btn.textContent='推送到 GitHub'; btn.disabled=false; btn.style.background=''; }, 3000);
     } else {
       const err = await putRes.json();
-      btn.textContent = '失敗：' + (err.message||'未知錯誤');
-      btn.disabled = false;
+      throw new Error(err.message || '推送失敗');
     }
   } catch(e) {
     btn.textContent = '錯誤：' + e.message;
-    btn.disabled = false;
+    btn.style.background = '#D06050';
+    setTimeout(()=>{ btn.textContent='推送到 GitHub'; btn.disabled=false; btn.style.background=''; }, 5000);
   }
 }
+
 
 function toggleAdminBar(){
   const bar = document.getElementById('admin-bar');
