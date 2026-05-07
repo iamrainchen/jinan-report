@@ -210,7 +210,7 @@ const PAL={
   fin:  {bg:'#EEF1F7',acc:'#6070A8',dark:'#1A2460',pale:'#D4D8EE'},
 };
 
-const SVC={
+/*SVC_START*/const SVC={
   /* 企業服務補充 */
   '國際包裹集運':  ['報關代理','倉儲管理','電商平台','包材容器','貨物保險','物流系統','海關顧問','冷鏈物流'],
   '飯店管理顧問':  ['旅遊規劃師','餐飲業者','活動策展','品牌企畫','整合行銷','商用不動產','保險規劃','商業顧問'],
@@ -326,9 +326,9 @@ const SVC={
   '資產配置':      ['律師','稅務顧問','銀行融資','商用不動產','保險規劃','信託服務','財富管理','企業傳承'],
   '信託':          ['律師','會計師','銀行融資','財富管理','商用不動產','保險規劃','退休規劃','企業傳承'],
   '外匯投資':      ['銀行融資','稅務顧問','律師','財富管理','保險規劃','電商平台','商業運輸','企業顧問'],
-};
+};/*SVC_END*/
 
-const DATA=[
+/*DATA_START*/const DATA=[
   {id:'biz',pal:'biz',title:'企業服務類',subs:[
     {t:'律師',members:[{n:'李赫茗'}]},
     {t:'會計師',members:[{n:'洪佑宜'}]},
@@ -410,7 +410,7 @@ const DATA=[
     {t:'信託',members:[]},
     {t:'外匯投資',members:[]},
   ]},
-];
+];/*DATA_END*/
 
 function p(id){return PAL[id];}
 function totalMembers(){let n=0;DATA.forEach(d=>{if(d)d.subs.forEach(s=>{n+=s.members.length;});});return n;}
@@ -868,12 +868,18 @@ async function pushToGitHub(){
     const getJson = await getRes.json();
     const sha = getJson.sha;
 
-    // 從 GitHub 拿原始 HTML 替換 DATA/SVC 再推回
+    // 從 GitHub 拿原始 HTML，用標記定位替換 DATA/SVC
     const rawContent = atob(getJson.content.replace(/\n/g,''));
     const dataStr = JSON.stringify(DATA);
     const svcStr = JSON.stringify(SVC);
-    let updatedHTML = rawContent.replace(/const DATA=\[[\s\S]*?\];/, 'const DATA='+dataStr+';');
-    updatedHTML = updatedHTML.replace(/const SVC=\{[\s\S]*?\};/, 'const SVC='+svcStr+';');
+    let updatedHTML = rawContent.replace(
+      /\/\*DATA_START\*\/const DATA=[\s\S]*?\/\*DATA_END\*\//,
+      '/*DATA_START*/const DATA='+dataStr+';/*DATA_END*/'
+    );
+    updatedHTML = updatedHTML.replace(
+      /\/\*SVC_START\*\/const SVC=[\s\S]*?\/\*SVC_END\*\//,
+      '/*SVC_START*/const SVC='+svcStr+';/*SVC_END*/'
+    );
 
     const encoded = btoa(unescape(encodeURIComponent(updatedHTML)));
 
