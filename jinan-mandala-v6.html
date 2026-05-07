@@ -1,7 +1,7 @@
 <html lang="zh-TW"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>金安分會 · 產業九宮格</title>
+<title>éå®åæ Â· ç¢æ¥­ä¹å®®æ ¼</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&amp;family=Noto+Sans+TC:wght@300;400;500&amp;display=swap" rel="stylesheet">
 <style>
 :root {
@@ -14,34 +14,34 @@
 html{scroll-behavior:smooth;}
 body{background:var(--paper);font-family:'Noto Sans TC',sans-serif;color:var(--ink);min-height:100vh;}
 
-/* ── HEADER ── */
+/* ââ HEADER ââ */
 .header{text-align:center;padding:1.4rem 1rem 1.1rem;background:var(--surface);border-bottom:1px solid var(--gold-pale);}
 .header h1{font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:600;letter-spacing:.1em;}
 .header-line{width:36px;height:1.5px;background:var(--gold);margin:.5rem auto .35rem;}
 .header p{font-size:.68rem;color:var(--ink-soft);letter-spacing:.05em;}
 
-/* ── NAV BAR ── */
+/* ââ NAV BAR ââ */
 .nav-bar{display:flex;align-items:center;flex-wrap:wrap;gap:4px;padding:.55rem 1rem;font-size:.7rem;color:var(--ink-soft);background:var(--surface);border-bottom:1px solid #EDEAE4;min-height:32px;}
 .nav-link{color:var(--gold);cursor:pointer;}
 .nav-link:active{opacity:.7;}
 .nav-sep{color:var(--ink-faint);}
 .nav-cur{color:var(--ink-mid);font-weight:500;}
 
-/* ── LEGEND ── */
+/* ââ LEGEND ââ */
 .legend{display:flex;gap:1.2rem;justify-content:center;padding:.45rem 1rem;font-size:.65rem;color:var(--ink-soft);background:var(--surface);border-bottom:1px solid #EDEAE4;}
 .leg{display:flex;align-items:center;gap:4px;}
 .leg-dot{width:6px;height:6px;border-radius:50%;background:var(--ink-soft);}
 .leg-ring{width:6px;height:6px;border-radius:50%;border:1.5px solid var(--ink-faint);}
 
-/* ── HINT ── */
+/* ââ HINT ââ */
 .hint-bar{text-align:center;font-size:.65rem;color:var(--ink-faint);padding:.5rem 0 .2rem;letter-spacing:.04em;}
 
-/* ── STAGE ── */
+/* ââ STAGE ââ */
 .stage{padding:.9rem;max-width:760px;margin:0 auto;}
 
-/* ════════════════════════════════
-   DESKTOP: 3×3 mandala grid
-   ════════════════════════════════ */
+/* ââââââââââââââââââââââââââââââââ
+   DESKTOP: 3Ã3 mandala grid
+   ââââââââââââââââââââââââââââââââ */
 .mandala{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);}
 
 .cell{background:var(--surface);border-radius:var(--radius);border:1px solid #E8E4DC;padding:11px 10px;min-height:108px;cursor:pointer;transition:box-shadow .14s,transform .14s;position:relative;overflow:hidden;}
@@ -79,9 +79,9 @@ body{background:var(--paper);font-family:'Noto Sans TC',sans-serif;color:var(--i
 .m-role-s{font-size:10px;color:rgba(255,255,255,.7);}
 .svc-title{font-size:12px;font-weight:500;line-height:1.5;}
 
-/* ════════════════════════════════
+/* ââââââââââââââââââââââââââââââââ
    MOBILE: card list layout
-   ════════════════════════════════ */
+   ââââââââââââââââââââââââââââââââ */
 @media (max-width: 540px) {
   .stage{padding:.65rem .75rem;}
 
@@ -138,7 +138,7 @@ body{background:var(--paper);font-family:'Noto Sans TC',sans-serif;color:var(--i
   .card-list{display:none;}
 }
 
-/* 洪岳裕頁 hyr-view 用 position:fixed overlay */
+/* æ´ªå²³è£é  hyr-view ç¨ position:fixed overlay */
 .hyr-cell{background:var(--surface);border-radius:var(--radius);border:1px solid #E8E4DC;padding:13px 12px;min-height:115px;cursor:pointer;transition:box-shadow .14s,transform .14s;position:relative;overflow:hidden;}
 .hyr-cell:hover{box-shadow:0 3px 14px rgba(0,0,0,.08);transform:translateY(-1px);}
 .hyr-cell.hyr-center{cursor:default;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:none;}
@@ -179,30 +179,30 @@ body{background:var(--paper);font-family:'Noto Sans TC',sans-serif;color:var(--i
 <body monica-id="ofpnmcalabcbjgholdjcjblkibolbppb" monica-version="9.0.10">
 
 <div class="header">
-  <h1>金安分會 · 八大產業</h1>
+  <h1>éå®åæ Â· å«å¤§ç¢æ¥­</h1>
   <div class="header-line"></div>
-  <p>點選格子逐層探索</p>
+  <p>é»é¸æ ¼å­éå±¤æ¢ç´¢</p>
 </div>
-<div class="nav-bar" id="nav"><span class="nav-cur">金安分會</span></div>
+<div class="nav-bar" id="nav"><span class="nav-cur">éå®åæ</span></div>
 <div class="legend">
-  <div class="leg"><div class="leg-dot"></div>已有會員</div>
-  <div class="leg"><div class="leg-ring"></div>尚待開發</div>
+  <div class="leg"><div class="leg-dot"></div>å·²ææå¡</div>
+  <div class="leg"><div class="leg-ring"></div>å°å¾éç¼</div>
 </div>
-<div class="stage" id="stage"><div class="mandala"><div class="cell" style="background: rgb(237, 244, 251); border-color: rgb(216, 234, 250);"><div class="cell-accent" style="background:#6BA0CC;"></div><div class="ct" style="color:#1C4A72;">企業服務類</div><div class="ci"><div class="ci-dot" style="background:#6BA0CC;"></div><span style="color:#1C4A72;">律師</span></div><div class="ci"><div class="ci-dot" style="background:#6BA0CC;"></div><span style="color:#1C4A72;">會計師</span></div><div class="ci"><div class="ci-dot" style="background:#6BA0CC;"></div><span style="color:#1C4A72;">包材容器</span></div><div class="ci"><div class="ci-dot" style="background:#6BA0CC;"></div><span style="color:#1C4A72;">國際包裹集運</span></div><div class="ci-more" style="color:#6BA0CC;">＋3 項</div></div><div class="cell" style="background: rgb(237, 247, 236); border-color: rgb(212, 240, 210);"><div class="cell-accent" style="background:#6AAF64;"></div><div class="ct" style="color:#1A4A18;">營建裝修類</div><div class="ci"><div class="ci-dot" style="background:#6AAF64;"></div><span style="color:#1A4A18;">商空設計</span></div><div class="ci"><div class="ci-dot" style="background:#6AAF64;"></div><span style="color:#1A4A18;">住家設計</span></div><div class="ci"><div class="ci-dot" style="background:#6AAF64;"></div><span style="color:#1A4A18;">系統廚具</span></div><div class="ci"><div class="ci-dot" style="background:#6AAF64;"></div><span style="color:#1A4A18;">系統傢俱</span></div><div class="ci-more" style="color:#6AAF64;">＋4 項</div></div><div class="cell" style="background: rgb(253, 245, 232); border-color: rgb(248, 232, 192);"><div class="cell-accent" style="background:#C89840;"></div><div class="ct" style="color:#5A3C08;">機電建材類</div><div class="ci"><div class="ci-dot" style="background:#C89840;"></div><span style="color:#5A3C08;">水電承包</span></div><div class="ci"><div class="ci-dot" style="background:#C89840;"></div><span style="color:#5A3C08;">冷氣空調</span></div><div class="ci"><div class="ci-dot" style="background:#C89840;"></div><span style="color:#5A3C08;">磁磚工程</span></div><div class="ci"><div class="ci-ring" style="border-color:#C89840;opacity:.5;"></div><span style="color:#C89840;opacity:.7;">消防工程</span></div><div class="ci-more" style="color:#C89840;">＋4 項</div></div><div class="cell" style="background: rgb(245, 238, 248); border-color: rgb(232, 216, 244);"><div class="cell-accent" style="background:#9E6EC0;"></div><div class="ct" style="color:#40186A;">顧問培訓類</div><div class="ci"><div class="ci-dot" style="background:#9E6EC0;"></div><span style="color:#40186A;">理財顧問</span></div><div class="ci"><div class="ci-dot" style="background:#9E6EC0;"></div><span style="color:#40186A;">殯葬業顧問</span></div><div class="ci"><div class="ci-ring" style="border-color:#9E6EC0;opacity:.5;"></div><span style="color:#9E6EC0;opacity:.7;">政府補助顧問</span></div><div class="ci"><div class="ci-ring" style="border-color:#9E6EC0;opacity:.5;"></div><span style="color:#9E6EC0;opacity:.7;">教育訓練</span></div><div class="ci-more" style="color:#9E6EC0;">＋3 項</div></div><div class="cell center-cell" style="background: rgb(42, 34, 24); border: none;"><div class="cc-title" style="color:#F2EAD3;">金安分會</div><div class="cc-sub" style="color:#B8952A;">八大產業生態圈</div><div class="cc-stats"><div class="cc-stat" style="background:rgba(255,255,255,.08);color:#C8B888;">42位會員</div><div class="cc-stat" style="background:rgba(255,255,255,.08);color:#C8B888;">8大類</div></div></div><div class="cell" style="background: rgb(253, 238, 237); border-color: rgb(248, 216, 212);"><div class="cell-accent" style="background:#D06050;"></div><div class="ct" style="color:#6A1C14;">廣告行銷類</div><div class="ci"><div class="ci-dot" style="background:#D06050;"></div><span style="color:#6A1C14;">整合行銷</span></div><div class="ci"><div class="ci-dot" style="background:#D06050;"></div><span style="color:#6A1C14;">活動形象攝影</span></div><div class="ci"><div class="ci-dot" style="background:#D06050;"></div><span style="color:#6A1C14;">數位媒體行銷</span></div><div class="ci"><div class="ci-dot" style="background:#D06050;"></div><span style="color:#6A1C14;">活動策展</span></div><div class="ci-more" style="color:#D06050;">＋6 項</div></div><div class="cell" style="background: rgb(234, 247, 244); border-color: rgb(200, 237, 234);"><div class="cell-accent" style="background:#4CAF98;"></div><div class="ct" style="color:#0A4A3A;">健康美麗類</div><div class="ci"><div class="ci-dot" style="background:#4CAF98;"></div><span style="color:#0A4A3A;">女性健康物理治療</span></div><div class="ci"><div class="ci-dot" style="background:#4CAF98;"></div><span style="color:#0A4A3A;">物理治療</span></div><div class="ci"><div class="ci-dot" style="background:#4CAF98;"></div><span style="color:#0A4A3A;">抗老化訓練</span></div><div class="ci"><div class="ci-dot" style="background:#4CAF98;"></div><span style="color:#0A4A3A;">健康管理師</span></div><div class="ci-more" style="color:#4CAF98;">＋4 項</div></div><div class="cell" style="background: rgb(254, 250, 232); border-color: rgb(244, 236, 196);"><div class="cell-accent" style="background:#C0A030;"></div><div class="ct" style="color:#504010;">休閒生活類</div><div class="ci"><div class="ci-dot" style="background:#C0A030;"></div><span style="color:#504010;">旅遊規劃師</span></div><div class="ci"><div class="ci-dot" style="background:#C0A030;"></div><span style="color:#504010;">客製化餐點</span></div><div class="ci"><div class="ci-dot" style="background:#C0A030;"></div><span style="color:#504010;">國際沙龍師</span></div><div class="ci"><div class="ci-dot" style="background:#C0A030;"></div><span style="color:#504010;">旅行攝影</span></div><div class="ci-more" style="color:#C0A030;">＋4 項</div></div><div class="cell" style="background: rgb(238, 241, 247); border-color: rgb(212, 216, 238);"><div class="cell-accent" style="background:#6070A8;"></div><div class="ct" style="color:#1A2460;">金融保險類</div><div class="ci"><div class="ci-dot" style="background:#6070A8;"></div><span style="color:#1A2460;">退休規劃</span></div><div class="ci"><div class="ci-dot" style="background:#6070A8;"></div><span style="color:#1A2460;">人壽保險</span></div><div class="ci"><div class="ci-dot" style="background:#6070A8;"></div><span style="color:#1A2460;">產險</span></div><div class="ci"><div class="ci-dot" style="background:#6070A8;"></div><span style="color:#1A2460;">國際理財</span></div><div class="ci-more" style="color:#6070A8;">＋4 項</div></div></div></div>
-<div class="hint-bar" id="hint">點選任一產業格，進入第二層</div>
+<div class="stage" id="stage"><div class="mandala"><div class="cell" style="background: rgb(237, 244, 251); border-color: rgb(216, 234, 250);"><div class="cell-accent" style="background:#6BA0CC;"></div><div class="ct" style="color:#1C4A72;">ä¼æ¥­æåé¡</div><div class="ci"><div class="ci-dot" style="background:#6BA0CC;"></div><span style="color:#1C4A72;">å¾å¸«</span></div><div class="ci"><div class="ci-dot" style="background:#6BA0CC;"></div><span style="color:#1C4A72;">æè¨å¸«</span></div><div class="ci"><div class="ci-dot" style="background:#6BA0CC;"></div><span style="color:#1C4A72;">åæå®¹å¨</span></div><div class="ci"><div class="ci-dot" style="background:#6BA0CC;"></div><span style="color:#1C4A72;">åéåè£¹éé</span></div><div class="ci-more" style="color:#6BA0CC;">ï¼3 é </div></div><div class="cell" style="background: rgb(237, 247, 236); border-color: rgb(212, 240, 210);"><div class="cell-accent" style="background:#6AAF64;"></div><div class="ct" style="color:#1A4A18;">çå»ºè£ä¿®é¡</div><div class="ci"><div class="ci-dot" style="background:#6AAF64;"></div><span style="color:#1A4A18;">åç©ºè¨­è¨</span></div><div class="ci"><div class="ci-dot" style="background:#6AAF64;"></div><span style="color:#1A4A18;">ä½å®¶è¨­è¨</span></div><div class="ci"><div class="ci-dot" style="background:#6AAF64;"></div><span style="color:#1A4A18;">ç³»çµ±å»å·</span></div><div class="ci"><div class="ci-dot" style="background:#6AAF64;"></div><span style="color:#1A4A18;">ç³»çµ±å¢ä¿±</span></div><div class="ci-more" style="color:#6AAF64;">ï¼4 é </div></div><div class="cell" style="background: rgb(253, 245, 232); border-color: rgb(248, 232, 192);"><div class="cell-accent" style="background:#C89840;"></div><div class="ct" style="color:#5A3C08;">æ©é»å»ºæé¡</div><div class="ci"><div class="ci-dot" style="background:#C89840;"></div><span style="color:#5A3C08;">æ°´é»æ¿å</span></div><div class="ci"><div class="ci-dot" style="background:#C89840;"></div><span style="color:#5A3C08;">å·æ°£ç©ºèª¿</span></div><div class="ci"><div class="ci-dot" style="background:#C89840;"></div><span style="color:#5A3C08;">ç£ç£å·¥ç¨</span></div><div class="ci"><div class="ci-ring" style="border-color:#C89840;opacity:.5;"></div><span style="color:#C89840;opacity:.7;">æ¶é²å·¥ç¨</span></div><div class="ci-more" style="color:#C89840;">ï¼4 é </div></div><div class="cell" style="background: rgb(245, 238, 248); border-color: rgb(232, 216, 244);"><div class="cell-accent" style="background:#9E6EC0;"></div><div class="ct" style="color:#40186A;">é¡§åå¹è¨é¡</div><div class="ci"><div class="ci-dot" style="background:#9E6EC0;"></div><span style="color:#40186A;">çè²¡é¡§å</span></div><div class="ci"><div class="ci-dot" style="background:#9E6EC0;"></div><span style="color:#40186A;">æ®¯è¬æ¥­é¡§å</span></div><div class="ci"><div class="ci-ring" style="border-color:#9E6EC0;opacity:.5;"></div><span style="color:#9E6EC0;opacity:.7;">æ¿åºè£å©é¡§å</span></div><div class="ci"><div class="ci-ring" style="border-color:#9E6EC0;opacity:.5;"></div><span style="color:#9E6EC0;opacity:.7;">æè²è¨ç·´</span></div><div class="ci-more" style="color:#9E6EC0;">ï¼3 é </div></div><div class="cell center-cell" style="background: rgb(42, 34, 24); border: none;"><div class="cc-title" style="color:#F2EAD3;">éå®åæ</div><div class="cc-sub" style="color:#B8952A;">å«å¤§ç¢æ¥­çæå</div><div class="cc-stats"><div class="cc-stat" style="background:rgba(255,255,255,.08);color:#C8B888;">42ä½æå¡</div><div class="cc-stat" style="background:rgba(255,255,255,.08);color:#C8B888;">8å¤§é¡</div></div></div><div class="cell" style="background: rgb(253, 238, 237); border-color: rgb(248, 216, 212);"><div class="cell-accent" style="background:#D06050;"></div><div class="ct" style="color:#6A1C14;">å»£åè¡é·é¡</div><div class="ci"><div class="ci-dot" style="background:#D06050;"></div><span style="color:#6A1C14;">æ´åè¡é·</span></div><div class="ci"><div class="ci-dot" style="background:#D06050;"></div><span style="color:#6A1C14;">æ´»åå½¢è±¡æå½±</span></div><div class="ci"><div class="ci-dot" style="background:#D06050;"></div><span style="color:#6A1C14;">æ¸ä½åªé«è¡é·</span></div><div class="ci"><div class="ci-dot" style="background:#D06050;"></div><span style="color:#6A1C14;">æ´»åç­å±</span></div><div class="ci-more" style="color:#D06050;">ï¼6 é </div></div><div class="cell" style="background: rgb(234, 247, 244); border-color: rgb(200, 237, 234);"><div class="cell-accent" style="background:#4CAF98;"></div><div class="ct" style="color:#0A4A3A;">å¥åº·ç¾éºé¡</div><div class="ci"><div class="ci-dot" style="background:#4CAF98;"></div><span style="color:#0A4A3A;">å¥³æ§å¥åº·ç©çæ²»ç</span></div><div class="ci"><div class="ci-dot" style="background:#4CAF98;"></div><span style="color:#0A4A3A;">ç©çæ²»ç</span></div><div class="ci"><div class="ci-dot" style="background:#4CAF98;"></div><span style="color:#0A4A3A;">æèåè¨ç·´</span></div><div class="ci"><div class="ci-dot" style="background:#4CAF98;"></div><span style="color:#0A4A3A;">å¥åº·ç®¡çå¸«</span></div><div class="ci-more" style="color:#4CAF98;">ï¼4 é </div></div><div class="cell" style="background: rgb(254, 250, 232); border-color: rgb(244, 236, 196);"><div class="cell-accent" style="background:#C0A030;"></div><div class="ct" style="color:#504010;">ä¼éçæ´»é¡</div><div class="ci"><div class="ci-dot" style="background:#C0A030;"></div><span style="color:#504010;">æéè¦åå¸«</span></div><div class="ci"><div class="ci-dot" style="background:#C0A030;"></div><span style="color:#504010;">å®¢è£½åé¤é»</span></div><div class="ci"><div class="ci-dot" style="background:#C0A030;"></div><span style="color:#504010;">åéæ²é¾å¸«</span></div><div class="ci"><div class="ci-dot" style="background:#C0A030;"></div><span style="color:#504010;">æè¡æå½±</span></div><div class="ci-more" style="color:#C0A030;">ï¼4 é </div></div><div class="cell" style="background: rgb(238, 241, 247); border-color: rgb(212, 216, 238);"><div class="cell-accent" style="background:#6070A8;"></div><div class="ct" style="color:#1A2460;">éèä¿éªé¡</div><div class="ci"><div class="ci-dot" style="background:#6070A8;"></div><span style="color:#1A2460;">éä¼è¦å</span></div><div class="ci"><div class="ci-dot" style="background:#6070A8;"></div><span style="color:#1A2460;">äººå£½ä¿éª</span></div><div class="ci"><div class="ci-dot" style="background:#6070A8;"></div><span style="color:#1A2460;">ç¢éª</span></div><div class="ci"><div class="ci-dot" style="background:#6070A8;"></div><span style="color:#1A2460;">åéçè²¡</span></div><div class="ci-more" style="color:#6070A8;">ï¼4 é </div></div></div></div>
+<div class="hint-bar" id="hint">é»é¸ä»»ä¸ç¢æ¥­æ ¼ï¼é²å¥ç¬¬äºå±¤</div>
 
-<!-- 洪岳裕專屬頁 -->
+<!-- æ´ªå²³è£å°å±¬é  -->
 <div id="hyr-view" style="display:none;position:fixed;inset:0;background:var(--paper);z-index:999;overflow-y:auto;">
   <div style="background:var(--surface);border-bottom:1px solid var(--gold-pale);padding:1.4rem 1rem 1.1rem;text-align:center;">
-    <div style="font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:600;letter-spacing:.1em;">洪岳裕 · 物理治療</div>
+    <div style="font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:600;letter-spacing:.1em;">æ´ªå²³è£ Â· ç©çæ²»ç</div>
     <div style="width:36px;height:1.5px;background:var(--gold);margin:.5rem auto .35rem;"></div>
-    <div style="font-size:.68rem;color:var(--ink-soft);">服務族群與合作產業地圖</div>
+    <div style="font-size:.68rem;color:var(--ink-soft);">æåæç¾¤èåä½ç¢æ¥­å°å</div>
   </div>
   <div id="hyr-nav" style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;padding:.55rem 1rem;font-size:.72rem;background:var(--surface);border-bottom:1px solid #EDEAE4;min-height:32px;">
-    <span style="color:var(--gold);cursor:pointer;" onclick="hideHYR()">← 金安分會</span>
+    <span style="color:var(--gold);cursor:pointer;" onclick="hideHYR()">â éå®åæ</span>
   </div>
   <div id="hyr-stage" style="padding:.9rem;max-width:760px;margin:0 auto;"></div>
-  <div id="hyr-hint" style="text-align:center;font-size:.65rem;color:var(--ink-faint);padding:.5rem 0 .2rem;letter-spacing:.04em;">點選族群格，展開合作細項</div>
+  <div id="hyr-hint" style="text-align:center;font-size:.65rem;color:var(--ink-faint);padding:.5rem 0 .2rem;letter-spacing:.04em;">é»é¸æç¾¤æ ¼ï¼å±éåä½ç´°é </div>
 </div>
 
 <script>
@@ -217,215 +217,17 @@ const PAL={
   fin:  {bg:'#EEF1F7',acc:'#6070A8',dark:'#1A2460',pale:'#D4D8EE'},
 };
 
-const SVC={
-  /* 企業服務補充 */
-  '國際包裹集運':  ['報關代理','倉儲管理','電商平台','包材容器','貨物保險','物流系統','海關顧問','冷鏈物流'],
-  '飯店管理顧問':  ['旅遊規劃師','餐飲業者','活動策展','品牌企畫','整合行銷','商用不動產','保險規劃','商業顧問'],
-  /* 營建裝修補充 */
-  '漏水檢測工程':  ['水電承包','防水工程','建材供應','商空設計','住家設計','磁磚工程','商用不動產','保險規劃'],
-  /* 機電建材補充 */
-  '水電承包':      ['冷氣空調','消防工程','建材供應','磁磚工程','商空設計','漏水檢測工程','物業管理','產險'],
-  '冷氣空調':      ['水電承包','消防工程','建材供應','節能顧問','物業管理','設備維修','商空設計','產險'],
-  '磁磚工程':      ['商空設計','住家設計','衛浴設備','防水工程','木工工程','石材供應','建材供應','清潔服務'],
-  /* 顧問培訓補充 */
-  '理財顧問':      ['律師','會計師','銀行融資','保險規劃','商用不動產','稅務顧問','退休規劃','信託服務'],
-  '自媒體教育顧問':['整合行銷','數位媒體行銷','品牌企畫','影音動畫','網站設計','活動策展','視覺設計','系統建置'],
-  '殯葬業顧問':    ['律師','信託服務','保險規劃','心理諮詢','宗教服務','花藝佈置','理財顧問','退休規劃'],
-  /* 廣告行銷補充 */
-  '整合行銷':      ['品牌企畫','數位媒體行銷','活動策展','影音動畫','視覺設計','公關顧問','網站設計','大圖輸出'],
-  '活動形象攝影':  ['活動策展','展場規劃','品牌企畫','整合行銷','視覺設計','影音動畫','大圖輸出','網站設計'],
-  '數位媒體行銷':  ['整合行銷','品牌企畫','網站設計','視覺設計','系統建置','電商平台','影音動畫','公關顧問'],
-  '活動策展':      ['展場規劃','活動形象攝影','餐飲業者','大圖輸出','視覺設計','整合行銷','品牌企畫','影音動畫'],
-  '展場規劃':      ['活動策展','活動形象攝影','大圖輸出','視覺設計','整合行銷','品牌企畫','商空設計','建材供應'],
-  '品牌企畫':      ['整合行銷','視覺設計','數位媒體行銷','網站設計','影音動畫','活動策展','公關顧問','大圖輸出'],
-  '影音動畫':      ['整合行銷','品牌企畫','活動策展','數位媒體行銷','視覺設計','網站設計','活動形象攝影','系統建置'],
-  '視覺設計':      ['品牌企畫','整合行銷','網站設計','數位媒體行銷','大圖輸出','影音動畫','包材容器','活動策展'],
-  '網站設計':      ['系統建置','數位媒體行銷','視覺設計','品牌企畫','電商平台','整合行銷','影音動畫','資安顧問'],
-  /* 健康美麗補充 */
-  '女性健康物理治療':['物理治療','健康管理師','國際認證泌乳顧問','抗老化訓練','健康&保健','保險規劃','婦產科','心理諮詢'],
-  '物理治療':      ['高階主管','孕婦','產後一個月','退休族','運動傷害','抗老化逆齡','術後恢復','連鎖發展'],
-  '抗老化訓練':    ['健康管理師','物理治療','女性健康物理治療','美容儀器設備','健康&保健','國際認證泌乳顧問','營養師','保險規劃'],
-  '健康管理師':    ['物理治療','女性健康物理治療','抗老化訓練','國際認證泌乳顧問','健康&保健','美容儀器設備','保險規劃','營養師'],
-  '國際認證泌乳顧問':['女性健康物理治療','健康管理師','抗老化訓練','健康&保健','婦產科','心理諮詢','保險規劃','母嬰用品'],
-  /* 休閒生活補充 */
-  '旅遊規劃師':    ['旅行攝影','國際沙龍師','保險規劃','飯店管理顧問','租車服務','客製化餐點','活動策展','國際包裹集運'],
-  '客製化餐點':    ['活動策展','展場規劃','旅遊規劃師','國際沙龍師','食材供應','整合行銷','品牌企畫','外送平台'],
-  '國際沙龍師':    ['旅遊規劃師','旅行攝影','客製化餐點','品牌企畫','整合行銷','活動策展','視覺設計','飯店管理顧問'],
-  /* 金融保險補充 */
-  '產險':          ['商用不動產','律師','水電承包','汽車業者','企業風險顧問','理財顧問','倉儲業者','產險'],
-  '國際理財':      ['律師','稅務顧問','銀行融資','商用不動產','退休規劃','信託服務','外匯投資','資產配置'],
-  '律師':          ['會計師','商用不動產','保險規劃','銀行理財','公司顧問','人力資源','移民顧問','智財代理'],
-  '會計師':      ['律師','理財規劃','稅務顧問','企業顧問','薪資系統','銀行融資','保險規劃','財務軟體'],
-  '包材容器':          ['物流運輸','大圖印刷','品牌設計','電商平台','禮品業','食品製造','倉儲服務','代工廠'],
-  '商業運輸':      ['包材容器','報關代理','倉儲管理','電商平台','貨物保險','物流系統','海關顧問','冷鏈物流'],
-  '商用不動產':    ['商空設計','住家設計','銀行貸款','律師','產險','物業管理','搬遷服務','系統傢俱'],
-  '系統建置': ['網路行銷','平面設計','資安顧問','雲端服務','電商平台','自動化顧問','系統整合','數位轉型'],
-  '商業顧問':      ['律師','會計師','人力資源','教育培訓','品牌推廣','銀行融資','政府補助','策略夥伴'],
-  '法律事務':      ['會計師','不動產','保險','銀行','人力資源','商業顧問','移民顧問','公司設立'],
-  /* 營建裝修 */
-  '商空設計':      ['系統傢俱','燈光設計','窗簾布藝','系統廚具','木工工程','商用不動產','空間攝影','軟裝配飾'],
-  '住家設計':      ['系統傢俱','系統廚具','木工工程','油漆工程','燈光設計','窗簾布藝','商用不動產','空間攝影'],
-  '系統廚具':      ['商空設計','住家設計','系統傢俱','木工工程','油漆工程','家電設備','廚衛設備','建材供應'],
-  '系統傢俱':      ['商空設計','住家設計','系統廚具','木工工程','燈光設計','窗簾布藝','搬家服務','建材供應'],
-  '油漆工程':      ['商空設計','住家設計','木工工程','防水工程','磁磚工程','商用不動產','建材供應','清潔服務'],
-  '木工工程':      ['商空設計','住家設計','系統廚具','系統傢俱','燈光設計','油漆工程','建材供應','收納顧問'],
-  '建築工程':      ['結構技師','商空設計','景觀設計','水電工程','消防工程','建材供應','商用不動產','銀行融資'],
-  '統包工程':      ['商空設計','水電工程','消防工程','暖通空調','磁磚工程','鋁窗','產險','律師'],
-  '家具製造':      ['商空設計','木工工程','系統廚具','空間攝影','搬家服務','包裝運輸','電商平台','展覽設計'],
-  '粉刷師&裝飾師': ['商空設計','木工工程','防水工程','磁磚工程','商用不動產','建材供應','清潔服務','系統傢俱'],
-  '細木工':        ['商空設計','系統廚具','系統傢俱','燈光設計','油漆粉刷','建材供應','收納顧問','搬家服務'],
-  '建築&工程':     ['結構技師','室內設計','水電工程','消防工程','建材供應','商用不動產','產險','律師'],
-  '統包工程':      ['室內設計','水電工程','消防工程','空調工程','磁磚工程','鋁窗工程','產險','律師'],
-  '水電配管':      ['室內設計','消防工程','空調工程','建材供應','磁磚工程','物業管理','節能顧問','建築商'],
-  /* 機電建材 */
-  '建築商/總承包': ['室內設計','水電工程','消防工程','空調工程','磁磚工程','鋁窗工程','產險','律師'],
-  '暖通空調':      ['水電工程','建材供應','室內設計','消防工程','節能顧問','物業管理','設備維修','建築商'],
-  '瓷磚工程':      ['室內設計','衛浴設備','防水工程','細木工','石材供應','油漆粉刷','建材供應','清潔服務'],
-  '消防工程':      ['建築商','水電工程','弱電工程','物業管理','產險','室內設計','建材供應','律師'],
-  '弱電工程':      ['建築商','水電工程','消防工程','物業管理','資安顧問','智能家居','系統整合','電腦設計'],
-  '鋁窗':          ['室內設計','建築商','防水工程','建材供應','不動產','玻璃工程','隔音顧問','物業管理'],
-  '太陽能設備':    ['建築商','水電工程','節能顧問','政府補助','物業管理','銀行融資','保險規劃','電費管理'],
-  '建材供應':      ['建築商','室內設計','水電工程','磁磚工程','防水工程','油漆粉刷','倉儲物流','採購顧問'],
-  /* 廣告行銷 */
-  '媒體服務':      ['品牌推廣','攝影師','活動策劃','公關顧問','廣告投放','KOL合作','內容創作','平面設計'],
-  '攝影師':        ['室內設計','品牌推廣','活動策劃','婚禮顧問','旅行社','媒體服務','平面設計','影音製作'],
-  '網路行銷':      ['品牌推廣','平面設計','廣告投放','電商平台','系統開發','內容創作','媒體服務','數據分析'],
-  '活動策劃':      ['場地租借','餐飲業者','攝影師','影音製作','媒體服務','花藝佈置','主持人','交通租車'],
-  '品牌推廣':      ['平面設計','廣告投放','網路行銷','公關顧問','媒體服務','攝影師','包裝設計','商業顧問'],
-  '廣告&營銷':     ['媒體服務','品牌推廣','平面設計','活動策劃','攝影師','公關顧問','數位行銷','市場調查'],
-  '波力IP授權':['授權代理','品牌合作','商品開發','活動策展','整合行銷','媒體服務','數位媒體行銷','視覺設計'],
-  '大圖輸出':      ['廣告投放','活動策劃','展覽設計','品牌推廣','室內裝飾','門市設計','包裝設計','攝影師'],
-  '平面設計/網頁': ['品牌推廣','廣告投放','網路行銷','系統開發','電商平台','攝影師','印刷輸出','系統整合'],
-  /* 顧問培訓 */
-  '財務顧問':      ['律師','會計師','銀行融資','保險規劃','不動產','稅務顧問','退休規劃','信託服務'],
-  '商業顧問_con':  ['律師','會計師','人力資源','教育培訓','品牌推廣','銀行融資','政府補助','策略夥伴'],
-  '葬禮策劃/服務': ['律師','遺產信託','保險規劃','心理諮詢','宗教服務','花藝佈置','攝影師','財富管理'],
-  '政府補助顧問':  ['商業顧問','律師','會計師','教育培訓','銀行融資','研發單位','人力資源','新創輔導'],
-  '教育訓練':      ['商業顧問','人力資源','演講顧問','場地租借','影音製作','平面設計','系統開發','心理諮詢'],
-  '身心靈顧問':    ['心理諮詢','健康保健','瑜伽健身','婚姻諮詢','物理治療','藝術療癒','靜修場地','營養師'],
-  '婚姻諮詢':      ['心理諮詢','律師','身心靈顧問','教育培訓','保險規劃','親子教育','婚禮顧問','財務顧問'],
-  '人力資源':      ['律師','會計師','教育培訓','商業顧問','薪資系統','心理諮詢','獵頭服務','企業文化'],
-  /* 健康美麗 */
-  '物理治療師':    ['骨科診所','運動中心','健身教練','按摩療癒','輔具商','保險規劃','養護機構','瑜伽教室'],
-  '健康&保健':     ['物理治療','營養師','健身教練','中醫診所','保險規劃','有機食品','心理諮詢','美容保養'],
-  '醫療服務':      ['藥局','物理治療','保險規劃','健康管理','養護機構','心理諮詢','醫療器材','照護服務'],
-  '美容儀器設備':  ['美容診所','皮膚科','整形外科','美容沙龍','保險規劃','器材維修','培訓機構','藥局'],
-  '女性健康':      ['婦產科','保險規劃','心理諮詢','營養師','瑜伽教室','美容保養','身心靈顧問','健康管理'],
-  '微整射頻':      ['皮膚科','美容儀器','保險規劃','美容沙龍','攝影師','品牌推廣','藥局','健康管理'],
-  '牙醫/口腔':     ['骨科診所','保險規劃','美容診所','藥局','攝影師','品牌推廣','健康管理','養護機構'],
-  '健康保健服務':  ['保險規劃','物理治療','健身教練','營養師','心理諮詢','企業培訓','醫療服務','養護機構'],
-  /* 休閒生活 */
-  '旅行攝影':      ['旅遊規劃師','品牌企畫','整合行銷','數位媒體行銷','活動策展','影音動畫','客製化餐點','飯店管理顧問'],
-  '旅行社':        ['旅行攝影','保險規劃','航空合作','飯店業者','租車服務','導遊翻譯','行李服務','商務差旅'],
-  '餐飲業者':      ['食材供應','活動策劃','外燴服務','包裝設計','廣告行銷','室內設計','設備商','外送平台'],
-  '藝術&娛樂':     ['活動策劃','媒體服務','攝影師','品牌推廣','文創商品','展覽場地','企業贊助','音響設備'],
-  '寵物服務':      ['獸醫診所','寵物食品','保險規劃','攝影師','寵物用品','飯店業者','訓練顧問','動物保護'],
-  '健身休閒':      ['物理治療','營養師','保險規劃','健康保健','運動品牌','場地租借','企業培訓','瑜伽教室'],
-  '美髮沙龍':      ['美容保養','攝影師','品牌推廣','婚禮顧問','服裝造型','化妝師','保險規劃','廣告行銷'],
-  '文創手作':      ['品牌推廣','廣告行銷','電商平台','攝影師','包裝設計','展覽場地','旅行社','企業禮品'],
-  '戶外體驗':      ['旅行社','保險規劃','攝影師','餐飲業者','運動品牌','場地租借','企業培訓','急救醫療'],
-  /* 金融保險 */
-  '金融保險（其他）':['律師','會計師','理財規劃','銀行融資','商用不動產','稅務顧問','退休規劃','信託服務'],
-  '財產保險':      ['商用不動產','律師','建築商','汽車業者','企業風險顧問','理財規劃','倉儲業者','產險'],
-  '財富管理':      ['律師','稅務顧問','銀行融資','商用不動產','保險規劃','退休規劃','信託服務','企業傳承'],
-  '退休規劃':      ['保險規劃','律師','會計師','銀行融資','醫療服務','長照服務','信託服務','財富管理'],
-  '人壽保險':      ['理財規劃','律師','會計師','健康管理師','醫療服務','退休規劃','信託服務','財產保險'],
-  '資產配置':      ['律師','稅務顧問','銀行融資','商用不動產','保險規劃','信託服務','財富管理','企業傳承'],
-  '信託':          ['律師','會計師','銀行融資','財富管理','商用不動產','保險規劃','退休規劃','企業傳承'],
-  '外匯投資':      ['銀行融資','稅務顧問','律師','財富管理','保險規劃','電商平台','商業運輸','企業顧問'],
-};
+const SVC={"國際包裹集運":["報關代理","倉儲管理","電商平台","包材容器","貨物保險","物流系統","海關顧問","冷鏈物流"],"飯店管理顧問":["旅遊規劃師","餐飲業者","活動策展","品牌企畫","整合行銷","商用不動產","保險規劃","商業顧問"],"漏水檢測工程":["水電承包","防水工程","建材供應","商空設計","住家設計","磁磚工程","商用不動產","保險規劃"],"水電承包":["冷氣空調","消防工程","建材供應","磁磚工程","商空設計","漏水檢測工程","物業管理","產險"],"冷氣空調":["水電承包","消防工程","建材供應","節能顧問","物業管理","設備維修","商空設計","產險"],"磁磚工程":["商空設計","住家設計","衛浴設備","防水工程","木工工程","石材供應","建材供應","清潔服務"],"理財顧問":["律師","會計師","銀行融資","保險規劃","商用不動產","稅務顧問","退休規劃","信託服務"],"自媒體教育顧問":["整合行銷","數位媒體行銷","品牌企畫","影音動畫","網站設計","活動策展","視覺設計","系統建置"],"殯葬業顧問":["律師","信託服務","保險規劃","心理諮詢","宗教服務","花藝佈置","理財顧問","退休規劃"],"整合行銷":["品牌企畫","數位媒體行銷","活動策展","影音動畫","視覺設計","公關顧問","網站設計","大圖輸出"],"活動形象攝影":["活動策展","展場規劃","品牌企畫","整合行銷","視覺設計","影音動畫","大圖輸出","網站設計"],"數位媒體行銷":["整合行銷","品牌企畫","網站設計","視覺設計","系統建置","電商平台","影音動畫","公關顧問"],"活動策展":["展場規劃","活動形象攝影","餐飲業者","大圖輸出","視覺設計","整合行銷","品牌企畫","影音動畫"],"展場規劃":["活動策展","活動形象攝影","大圖輸出","視覺設計","整合行銷","品牌企畫","商空設計","建材供應"],"品牌企畫":["整合行銷","視覺設計","數位媒體行銷","網站設計","影音動畫","活動策展","公關顧問","大圖輸出"],"影音動畫":["整合行銷","品牌企畫","活動策展","數位媒體行銷","視覺設計","網站設計","活動形象攝影","系統建置"],"視覺設計":["品牌企畫","整合行銷","網站設計","數位媒體行銷","大圖輸出","影音動畫","包材容器","活動策展"],"網站設計":["系統建置","數位媒體行銷","視覺設計","品牌企畫","電商平台","整合行銷","影音動畫","資安顧問"],"女性健康物理治療":["物理治療","健康管理師","國際認證泌乳顧問","抗老化訓練","健康&保健","保險規劃","婦產科","心理諮詢"],"物理治療":["高階主管","孕婦","產後一個月","退休族","運動傷害","抗老化逆齡","術後恢復","連鎖發展"],"抗老化訓練":["健康管理師","物理治療","女性健康物理治療","美容儀器設備","健康&保健","國際認證泌乳顧問","營養師","保險規劃"],"健康管理師":["物理治療","女性健康物理治療","抗老化訓練","國際認證泌乳顧問","健康&保健","美容儀器設備","保險規劃","營養師"],"國際認證泌乳顧問":["女性健康物理治療","健康管理師","抗老化訓練","健康&保健","婦產科","心理諮詢","保險規劃","母嬰用品"],"旅遊規劃師":["旅行攝影","國際沙龍師","保險規劃","飯店管理顧問","租車服務","客製化餐點","活動策展","國際包裹集運"],"客製化餐點":["活動策展","展場規劃","旅遊規劃師","國際沙龍師","食材供應","整合行銷","品牌企畫","外送平台"],"國際沙龍師":["旅遊規劃師","旅行攝影","客製化餐點","品牌企畫","整合行銷","活動策展","視覺設計","飯店管理顧問"],"產險":["商用不動產","律師","水電承包","汽車業者","企業風險顧問","理財顧問","倉儲業者","產險"],"國際理財":["律師","稅務顧問","銀行融資","商用不動產","退休規劃","信託服務","外匯投資","資產配置"],"律師":["會計師","商用不動產","保險規劃","銀行理財","公司顧問","人力資源","移民顧問","智財代理"],"會計師":["律師","理財規劃","稅務顧問","企業顧問","薪資系統","銀行融資","保險規劃","財務軟體"],"包材容器":["物流運輸","大圖印刷","品牌設計","電商平台","禮品業","食品製造","倉儲服務","代工廠"],"商業運輸":["包材容器","報關代理","倉儲管理","電商平台","貨物保險","物流系統","海關顧問","冷鏈物流"],"商用不動產":["商空設計","住家設計","銀行貸款","律師","產險","物業管理","搬遷服務","系統傢俱"],"系統建置":["網路行銷","平面設計","資安顧問","雲端服務","電商平台","自動化顧問","系統整合","數位轉型"],"商業顧問":["律師","會計師","人力資源","教育培訓","品牌推廣","銀行融資","政府補助","策略夥伴"],"法律事務":["會計師","不動產","保險","銀行","人力資源","商業顧問","移民顧問","公司設立"],"商空設計":["系統傢俱","燈光設計","窗簾布藝","系統廚具","木工工程","商用不動產","空間攝影","軟裝配飾"],"住家設計":["系統傢俱","系統廚具","木工工程","油漆工程","燈光設計","窗簾布藝","商用不動產","空間攝影"],"系統廚具":["商空設計","住家設計","系統傢俱","木工工程","油漆工程","家電設備","廚衛設備","建材供應"],"系統傢俱":["商空設計","住家設計","系統廚具","木工工程","燈光設計","窗簾布藝","搬家服務","建材供應"],"油漆工程":["商空設計","住家設計","木工工程","防水工程","磁磚工程","商用不動產","建材供應","清潔服務"],"木工工程":["商空設計","住家設計","系統廚具","系統傢俱","燈光設計","油漆工程","建材供應","收納顧問"],"建築工程":["結構技師","商空設計","景觀設計","水電工程","消防工程","建材供應","商用不動產","銀行融資"],"統包工程":["室內設計","水電工程","消防工程","空調工程","磁磚工程","鋁窗工程","產險","律師"],"家具製造":["商空設計","木工工程","系統廚具","空間攝影","搬家服務","包裝運輸","電商平台","展覽設計"],"粉刷師&裝飾師":["商空設計","木工工程","防水工程","磁磚工程","商用不動產","建材供應","清潔服務","系統傢俱"],"細木工":["商空設計","系統廚具","系統傢俱","燈光設計","油漆粉刷","建材供應","收納顧問","搬家服務"],"建築&工程":["結構技師","室內設計","水電工程","消防工程","建材供應","商用不動產","產險","律師"],"水電配管":["室內設計","消防工程","空調工程","建材供應","磁磚工程","物業管理","節能顧問","建築商"],"建築商/總承包":["室內設計","水電工程","消防工程","空調工程","磁磚工程","鋁窗工程","產險","律師"],"暖通空調":["水電工程","建材供應","室內設計","消防工程","節能顧問","物業管理","設備維修","建築商"],"瓷磚工程":["室內設計","衛浴設備","防水工程","細木工","石材供應","油漆粉刷","建材供應","清潔服務"],"消防工程":["建築商","水電工程","弱電工程","物業管理","產險","室內設計","建材供應","律師"],"弱電工程":["建築商","水電工程","消防工程","物業管理","資安顧問","智能家居","系統整合","電腦設計"],"鋁窗":["室內設計","建築商","防水工程","建材供應","不動產","玻璃工程","隔音顧問","物業管理"],"太陽能設備":["建築商","水電工程","節能顧問","政府補助","物業管理","銀行融資","保險規劃","電費管理"],"建材供應":["建築商","室內設計","水電工程","磁磚工程","防水工程","油漆粉刷","倉儲物流","採購顧問"],"媒體服務":["品牌推廣","攝影師","活動策劃","公關顧問","廣告投放","KOL合作","內容創作","平面設計"],"攝影師":["室內設計","品牌推廣","活動策劃","婚禮顧問","旅行社","媒體服務","平面設計","影音製作"],"網路行銷":["品牌推廣","平面設計","廣告投放","電商平台","系統開發","內容創作","媒體服務","數據分析"],"活動策劃":["場地租借","餐飲業者","攝影師","影音製作","媒體服務","花藝佈置","主持人","交通租車"],"品牌推廣":["平面設計","廣告投放","網路行銷","公關顧問","媒體服務","攝影師","包裝設計","商業顧問"],"廣告&營銷":["媒體服務","品牌推廣","平面設計","活動策劃","攝影師","公關顧問","數位行銷","市場調查"],"波力IP授權":["授權代理","品牌合作","商品開發","活動策展","整合行銷","媒體服務","數位媒體行銷","視覺設計"],"大圖輸出":["廣告投放","活動策劃","展覽設計","品牌推廣","室內裝飾","門市設計","包裝設計","攝影師"],"平面設計/網頁":["品牌推廣","廣告投放","網路行銷","系統開發","電商平台","攝影師","印刷輸出","系統整合"],"財務顧問":["律師","會計師","銀行融資","保險規劃","不動產","稅務顧問","退休規劃","信託服務"],"商業顧問_con":["律師","會計師","人力資源","教育培訓","品牌推廣","銀行融資","政府補助","策略夥伴"],"葬禮策劃/服務":["律師","遺產信託","保險規劃","心理諮詢","宗教服務","花藝佈置","攝影師","財富管理"],"政府補助顧問":["商業顧問","律師","會計師","教育培訓","銀行融資","研發單位","人力資源","新創輔導"],"教育訓練":["商業顧問","人力資源","演講顧問","場地租借","影音製作","平面設計","系統開發","心理諮詢"],"身心靈顧問":["心理諮詢","健康保健","瑜伽健身","婚姻諮詢","物理治療","藝術療癒","靜修場地","營養師"],"婚姻諮詢":["心理諮詢","律師","身心靈顧問","教育培訓","保險規劃","親子教育","婚禮顧問","財務顧問"],"人力資源":["律師","會計師","教育培訓","商業顧問","薪資系統","心理諮詢","獵頭服務","企業文化"],"物理治療師":["骨科診所","運動中心","健身教練","按摩療癒","輔具商","保險規劃","養護機構","瑜伽教室"],"健康&保健":["物理治療","營養師","健身教練","中醫診所","保險規劃","有機食品","心理諮詢","美容保養"],"醫療服務":["藥局","物理治療","保險規劃","健康管理","養護機構","心理諮詢","醫療器材","照護服務"],"美容儀器設備":["美容診所","皮膚科","整形外科","美容沙龍","保險規劃","器材維修","培訓機構","藥局"],"女性健康":["婦產科","保險規劃","心理諮詢","營養師","瑜伽教室","美容保養","身心靈顧問","健康管理"],"微整射頻":["皮膚科","美容儀器","保險規劃","美容沙龍","攝影師","品牌推廣","藥局","健康管理"],"牙醫/口腔":["骨科診所","保險規劃","美容診所","藥局","攝影師","品牌推廣","健康管理","養護機構"],"健康保健服務":["保險規劃","物理治療","健身教練","營養師","心理諮詢","企業培訓","醫療服務","養護機構"],"旅行攝影":["104高年級/社區大學","出版社/線上課程","手機配件商","物理教練/健身教練","拍照用服裝道具","百貨行銷/比賽窗口","定製化旅行社","退休理財"],"旅行社":["旅行攝影","保險規劃","航空合作","飯店業者","租車服務","導遊翻譯","行李服務","商務差旅"],"餐飲業者":["食材供應","活動策劃","外燴服務","包裝設計","廣告行銷","室內設計","設備商","外送平台"],"藝術&娛樂":["活動策劃","媒體服務","攝影師","品牌推廣","文創商品","展覽場地","企業贊助","音響設備"],"寵物服務":["獸醫診所","寵物食品","保險規劃","攝影師","寵物用品","飯店業者","訓練顧問","動物保護"],"健身休閒":["物理治療","營養師","保險規劃","健康保健","運動品牌","場地租借","企業培訓","瑜伽教室"],"美髮沙龍":["美容保養","攝影師","品牌推廣","婚禮顧問","服裝造型","化妝師","保險規劃","廣告行銷"],"文創手作":["品牌推廣","廣告行銷","電商平台","攝影師","包裝設計","展覽場地","旅行社","企業禮品"],"戶外體驗":["旅行社","保險規劃","攝影師","餐飲業者","運動品牌","場地租借","企業培訓","急救醫療"],"金融保險（其他）":["律師","會計師","理財規劃","銀行融資","商用不動產","稅務顧問","退休規劃","信託服務"],"財產保險":["商用不動產","律師","建築商","汽車業者","企業風險顧問","理財規劃","倉儲業者","產險"],"財富管理":["律師","稅務顧問","銀行融資","商用不動產","保險規劃","退休規劃","信託服務","企業傳承"],"退休規劃":["保險規劃","律師","會計師","銀行融資","醫療服務","長照服務","信託服務","財富管理"],"人壽保險":["理財規劃","律師","會計師","健康管理師","醫療服務","退休規劃","信託服務","財產保險"],"資產配置":["律師","稅務顧問","銀行融資","商用不動產","保險規劃","信託服務","財富管理","企業傳承"],"信託":["律師","會計師","銀行融資","財富管理","商用不動產","保險規劃","退休規劃","企業傳承"],"外匯投資":["銀行融資","稅務顧問","律師","財富管理","保險規劃","電商平台","商業運輸","企業顧問"]};
 
-const DATA=[
-  {id:'biz',pal:'biz',title:'企業服務類',subs:[
-    {t:'律師',members:[{n:'李赫茗'}]},
-    {t:'會計師',members:[{n:'洪佑宜'}]},
-    {t:'包材容器',members:[{n:'何英銘'}]},
-    {t:'國際包裹集運',members:[{n:'廖羿為'}]},
-    {t:'商用不動產',members:[{n:'劉芯怡'}]},
-    {t:'系統建置',members:[{n:'賴佩伶'}]},
-    {t:'法律事務',members:[]},
-  ]},
-  {id:'build',pal:'build',title:'營建裝修類',subs:[
-    {t:'商空設計',members:[{n:'朱世祺'}]},
-    {t:'住家設計',members:[{n:'吳宗恆'}]},
-    {t:'系統廚具',members:[{n:'許哲文'}]},
-    {t:'系統傢俱',members:[{n:'林楷鈞'}]},
-    {t:'油漆工程',members:[{n:'洪梓承'}]},
-    {t:'木工工程',members:[{n:'羅美淇'}]},
-    {t:'漏水檢測工程',members:[{n:'練羿岑'}]},
-    {t:'統包工程',members:[]},
-  ]},
-  {id:'mep',pal:'mep',title:'機電建材類',subs:[
-    {t:'水電承包',members:[{n:'胡哲維'}]},
-    {t:'冷氣空調',members:[{n:'王博翰'}]},
-    {t:'磁磚工程',members:[{n:'林穎宏'}]},
-    {t:'消防工程',members:[]},
-    {t:'弱電工程',members:[]},
-    {t:'鋁窗',members:[]},
-    {t:'太陽能設備',members:[]},
-    {t:'建材供應',members:[]},
-  ]},
-  {id:'con',pal:'con',title:'顧問培訓類',subs:[
-    {t:'理財顧問',members:[{n:'陳芊妤'}]},
-    {t:'殯葬業顧問',members:[{n:'張睿样'}]},
-    {t:'政府補助顧問',members:[]},
-    {t:'教育訓練',members:[]},
-    {t:'身心靈顧問',members:[]},
-    {t:'婚姻諮詢',members:[]},
-    {t:'人力資源',members:[]},
-  ]},
-  null,
-  {id:'adv',pal:'adv',title:'廣告行銷類',subs:[
-    {t:'整合行銷',members:[{n:'蕭淑蓉'}]},
-    {t:'活動形象攝影',members:[{n:'劉鎧霆'}]},
-    {t:'數位媒體行銷',members:[{n:'李佳家'}]},
-    {t:'活動策展',members:[{n:'劉耿逢'}]},
-    {t:'展場規劃',members:[{n:'邱瑞瑋'}]},
-    {t:'影音動畫',members:[{n:'林文偉'}]},
-    {t:'大圖輸出',members:[{n:'謝佳恩'}]},
-    {t:'視覺設計',members:[{n:'趙翊帆'}]},
-    {t:'網站設計',members:[{n:'陳宥寧'}]},
-    {t:'波力IP授權',members:[{n:'陳鳳琴'}]},
-  ]},
-  {id:'hlt',pal:'hlt',title:'健康美麗類',subs:[
-    {t:'女性健康物理治療',members:[{n:'邱雅鈴'}]},
-    {t:'物理治療',members:[{n:'洪岳裕'}]},
-    {t:'抗老化訓練',members:[{n:'黃奕甫'}]},
-    {t:'健康管理師',members:[{n:'邱致憲'}]},
-    {t:'國際認證泌乳顧問',members:[{n:'林澐薪'}]},
-    {t:'美容儀器設備',members:[{n:'許宏暐'}]},
-    {t:'微整射頻',members:[]},
-    {t:'牙醫/口腔',members:[]},
-  ]},
-  {id:'lif',pal:'lif',title:'休閒生活類',subs:[
-    {t:'旅遊規劃師',members:[{n:'簡茹瑩'}]},
-    {t:'客製化餐點',members:[{n:'殷如蒔'}]},
-    {t:'國際沙龍師',members:[{n:'周聖強'}]},
-    {t:'旅行攝影',members:[{n:'陳炯霖'}]},
-    {t:'寵物服務',members:[]},
-    {t:'健身休閒',members:[]},
-    {t:'文創手作',members:[]},
-    {t:'戶外體驗',members:[]},
-  ]},
-  {id:'fin',pal:'fin',title:'金融保險類',subs:[
-    {t:'退休規劃',members:[{n:'彭欣如'}]},
-    {t:'人壽保險',members:[{n:'曹雅茲'}]},
-    {t:'產險',members:[{n:'陳庭漢'}]},
-    {t:'國際理財',members:[{n:'徐凡雅'}]},
-    {t:'資產配置',members:[]},
-    {t:'財富管理',members:[]},
-    {t:'信託',members:[]},
-    {t:'外匯投資',members:[]},
-  ]},
-];
+const DATA=[{"id":"biz","pal":"biz","title":"企業服務類","subs":[{"t":"律師","members":[{"n":"李赫茗"}]},{"t":"會計師","members":[{"n":"洪佑宜"}]},{"t":"包材容器","members":[{"n":"何英銘"}]},{"t":"國際包裹集運","members":[{"n":"廖羿為"}]},{"t":"商用不動產","members":[{"n":"劉芯怡"}]},{"t":"系統建置","members":[{"n":"賴佩伶"}]},{"t":"法律事務","members":[]}]},{"id":"build","pal":"build","title":"營建裝修類","subs":[{"t":"商空設計","members":[{"n":"朱世祺"}]},{"t":"住家設計","members":[{"n":"吳宗恆"}]},{"t":"系統廚具","members":[{"n":"許哲文"}]},{"t":"系統傢俱","members":[{"n":"林楷鈞"}]},{"t":"油漆工程","members":[{"n":"洪梓承"}]},{"t":"木工工程","members":[{"n":"羅美淇"}]},{"t":"漏水檢測工程","members":[{"n":"練羿岑"}]},{"t":"統包工程","members":[]}]},{"id":"mep","pal":"mep","title":"機電建材類","subs":[{"t":"水電承包","members":[{"n":"胡哲維"}]},{"t":"冷氣空調","members":[{"n":"王博翰"}]},{"t":"磁磚工程","members":[{"n":"林穎宏"}]},{"t":"消防工程","members":[]},{"t":"弱電工程","members":[]},{"t":"鋁窗","members":[]},{"t":"太陽能設備","members":[]},{"t":"建材供應","members":[]}]},{"id":"con","pal":"con","title":"顧問培訓類","subs":[{"t":"理財顧問","members":[{"n":"陳芊妤"}]},{"t":"殯葬業顧問","members":[{"n":"張睿样"}]},{"t":"政府補助顧問","members":[]},{"t":"教育訓練","members":[]},{"t":"身心靈顧問","members":[]},{"t":"婚姻諮詢","members":[]},{"t":"人力資源","members":[]}]},null,{"id":"adv","pal":"adv","title":"廣告行銷類","subs":[{"t":"整合行銷","members":[{"n":"蕭淑蓉"}]},{"t":"活動形象攝影","members":[{"n":"劉鎧霆"}]},{"t":"數位媒體行銷","members":[{"n":"李佳家"}]},{"t":"活動策展","members":[{"n":"劉耿逢"}]},{"t":"展場規劃","members":[{"n":"邱瑞瑋"}]},{"t":"影音動畫","members":[{"n":"林文偉"}]},{"t":"大圖輸出","members":[{"n":"謝佳恩"}]},{"t":"視覺設計","members":[{"n":"趙翊帆"}]},{"t":"網站設計","members":[{"n":"陳宥寧"}]},{"t":"波力IP授權","members":[{"n":"陳鳳琴"}]}]},{"id":"hlt","pal":"hlt","title":"健康美麗類","subs":[{"t":"女性健康物理治療","members":[{"n":"邱雅鈴"}]},{"t":"物理治療","members":[{"n":"洪岳裕"}]},{"t":"抗老化訓練","members":[{"n":"黃奕甫"}]},{"t":"健康管理師","members":[{"n":"邱致憲"}]},{"t":"國際認證泌乳顧問","members":[{"n":"林澐薪"}]},{"t":"美容儀器設備","members":[{"n":"許宏暐"}]},{"t":"微整射頻","members":[]},{"t":"牙醫/口腔","members":[]}]},{"id":"lif","pal":"lif","title":"休閒生活類","subs":[{"t":"旅遊規劃師","members":[{"n":"簡茹瑩"}]},{"t":"客製化餐點","members":[{"n":"殷如蒔"}]},{"t":"國際沙龍師","members":[{"n":"周聖強"}]},{"t":"旅行攝影","members":[{"n":"陳炯霖"}]},{"t":"寵物服務","members":[]},{"t":"健身休閒","members":[]},{"t":"文創手作","members":[]},{"t":"戶外體驗","members":[]}]},{"id":"fin","pal":"fin","title":"金融保險類","subs":[{"t":"退休規劃","members":[{"n":"彭欣如"}]},{"t":"人壽保險","members":[{"n":"曹雅茲"}]},{"t":"產險","members":[{"n":"陳庭漢"}]},{"t":"國際理財","members":[{"n":"徐凡雅"}]},{"t":"資產配置","members":[]},{"t":"財富管理","members":[]},{"t":"信託","members":[]},{"t":"外匯投資","members":[]}]}];
 
 function p(id){return PAL[id];}
 function totalMembers(){let n=0;DATA.forEach(d=>{if(d)d.subs.forEach(s=>{n+=s.members.length;});});return n;}
 function isMobile(){return window.innerWidth<=540;}
 
-/* 動態排列：
-   - 子項 ≤8（總格9）：中心在正中央（position 4）
-   - 子項 ≥9（總格12+）：中心放第一格 */
+/* åææåï¼
+   - å­é  â¤8ï¼ç¸½æ ¼9ï¼ï¼ä¸­å¿å¨æ­£ä¸­å¤®ï¼position 4ï¼
+   - å­é  â¥9ï¼ç¸½æ ¼12+ï¼ï¼ä¸­å¿æ¾ç¬¬ä¸æ ¼ */
 function arrangeGrid(items){
   const cols=3;
   const n=items.length;
@@ -434,7 +236,7 @@ function arrangeGrid(items){
   const slots=cols*rows;
   const arr=[];
   if(n<=8){
-    // 中心置中
+    // ä¸­å¿ç½®ä¸­
     const centerPos=Math.floor(slots/2);
     let idx=0;
     for(let i=0;i<slots;i++){
@@ -443,7 +245,7 @@ function arrangeGrid(items){
       else { arr.push({isBlank:true}); }
     }
   } else {
-    // 中心放第一格
+    // ä¸­å¿æ¾ç¬¬ä¸æ ¼
     arr.push({isCenter:true});
     items.forEach(it=>arr.push(it));
     while(arr.length<slots) arr.push({isBlank:true});
@@ -451,7 +253,7 @@ function arrangeGrid(items){
   return {arr, cols, rows};
 }
 
-/* 建立業別→會員查找表 */
+/* å»ºç«æ¥­å¥âæå¡æ¥æ¾è¡¨ */
 function buildLookup(){
   const map={};
   DATA.forEach(d=>{
@@ -474,10 +276,10 @@ function findMembers(label){
 
 let currentInd=null;
 
-/* ════ RENDER L1 ════ */
+/* ââââ RENDER L1 ââââ */
 function renderL1(){
-  document.getElementById('nav').innerHTML=`<span class="nav-cur">金安分會</span>`;
-  document.getElementById('hint').textContent='點選任一產業格，進入第二層';
+  document.getElementById('nav').innerHTML=`<span class="nav-cur">éå®åæ</span>`;
+  document.getElementById('hint').textContent='é»é¸ä»»ä¸ç¢æ¥­æ ¼ï¼é²å¥ç¬¬äºå±¤';
   const stage=document.getElementById('stage');
   stage.innerHTML='';
   const total=totalMembers();
@@ -489,7 +291,7 @@ function renderL1(){
     // center banner
     const banner=document.createElement('div');
     banner.className='m-center-banner';
-    banner.innerHTML=`<div class="cc-title">金安分會</div><div class="cc-sub">八大產業生態圈</div><div class="m-center-stats"><div class="m-cstat">${total} 位會員</div><div class="m-cstat">8 大產業</div></div>`;
+    banner.innerHTML=`<div class="cc-title">éå®åæ</div><div class="cc-sub">å«å¤§ç¢æ¥­çæå</div><div class="m-center-stats"><div class="m-cstat">${total} ä½æå¡</div><div class="m-cstat">8 å¤§ç¢æ¥­</div></div>`;
     list.appendChild(banner);
     DATA.forEach(ind=>{
       if(!ind)return;
@@ -503,9 +305,9 @@ function renderL1(){
           <div class="m-ind-stripe" style="background:${pl.acc};"></div>
           <div class="m-ind-info">
             <div class="m-ind-title" style="color:${pl.dark};">${ind.title}</div>
-            <div class="m-ind-meta">${filled.length} 位會員・${empty.length} 待開發</div>
+            <div class="m-ind-meta">${filled.length} ä½æå¡ã»${empty.length} å¾éç¼</div>
           </div>
-          <div class="m-ind-arrow" style="color:${pl.acc};">›</div>
+          <div class="m-ind-arrow" style="color:${pl.acc};">âº</div>
         </div>
         <div class="m-ind-tags">
           ${ind.subs.slice(0,5).map(s=>s.members.length>0
@@ -528,12 +330,12 @@ function renderL1(){
       if(!ind){
         div.className='cell center-cell';
         div.style.background='#2A2218';div.style.border='none';
-        div.innerHTML=`<div class="cc-title" style="color:#F2EAD3;">金安分會</div><div class="cc-sub" style="color:#B8952A;">八大產業生態圈</div><div class="cc-stats"><div class="cc-stat" style="background:rgba(255,255,255,.08);color:#C8B888;">${total}位會員</div><div class="cc-stat" style="background:rgba(255,255,255,.08);color:#C8B888;">8大類</div></div>`;
+        div.innerHTML=`<div class="cc-title" style="color:#F2EAD3;">éå®åæ</div><div class="cc-sub" style="color:#B8952A;">å«å¤§ç¢æ¥­çæå</div><div class="cc-stats"><div class="cc-stat" style="background:rgba(255,255,255,.08);color:#C8B888;">${total}ä½æå¡</div><div class="cc-stat" style="background:rgba(255,255,255,.08);color:#C8B888;">8å¤§é¡</div></div>`;
       } else {
         const pl=p(ind.pal);
         div.className='cell';
         div.style.background=pl.bg;div.style.borderColor=pl.pale;
-        div.innerHTML=`<div class="cell-accent" style="background:${pl.acc};"></div><div class="ct" style="color:${pl.dark};">${ind.title}</div>${ind.subs.slice(0,4).map(s=>`<div class="ci">${s.members.length>0?`<div class="ci-dot" style="background:${pl.acc};"></div><span style="color:${pl.dark};">${s.t}</span>`:`<div class="ci-ring" style="border-color:${pl.acc};opacity:.5;"></div><span style="color:${pl.acc};opacity:.7;">${s.t}</span>`}</div>`).join('')}<div class="ci-more" style="color:${pl.acc};">＋${ind.subs.length-4} 項</div>`;
+        div.innerHTML=`<div class="cell-accent" style="background:${pl.acc};"></div><div class="ct" style="color:${pl.dark};">${ind.title}</div>${ind.subs.slice(0,4).map(s=>`<div class="ci">${s.members.length>0?`<div class="ci-dot" style="background:${pl.acc};"></div><span style="color:${pl.dark};">${s.t}</span>`:`<div class="ci-ring" style="border-color:${pl.acc};opacity:.5;"></div><span style="color:${pl.acc};opacity:.7;">${s.t}</span>`}</div>`).join('')}<div class="ci-more" style="color:${pl.acc};">ï¼${ind.subs.length-4} é </div>`;
         div.addEventListener('click',()=>renderL2(ind));
       }
       g.appendChild(div);
@@ -542,12 +344,12 @@ function renderL1(){
   }
 }
 
-/* ════ RENDER L2 ════ */
+/* ââââ RENDER L2 ââââ */
 function renderL2(ind){
   currentInd=ind;
   const pl=p(ind.pal);
-  document.getElementById('nav').innerHTML=`<span class="nav-link" onclick="renderL1()">金安分會</span><span class="nav-sep">›</span><span class="nav-cur">${ind.title}</span>`;
-  document.getElementById('hint').textContent='點選子項格查看詳情';
+  document.getElementById('nav').innerHTML=`<span class="nav-link" onclick="renderL1()">éå®åæ</span><span class="nav-sep">âº</span><span class="nav-cur">${ind.title}</span>`;
+  document.getElementById('hint').textContent='é»é¸å­é æ ¼æ¥çè©³æ';
   const stage=document.getElementById('stage');stage.innerHTML='';
   const memberCount=ind.subs.reduce((a,s)=>a+s.members.length,0);
   const emptyCount=ind.subs.filter(s=>s.members.length===0).length;
@@ -558,19 +360,19 @@ function renderL2(ind){
     const banner=document.createElement('div');
     banner.className='m-l2-banner';
     banner.style.background=pl.acc;
-    banner.innerHTML=`<div class="cc2-title" style="color:#fff;">${ind.title}</div><div class="cc2-sub" style="color:rgba(255,255,255,.8);margin-top:3px;">${memberCount} 位會員・${emptyCount} 待開發</div>`;
+    banner.innerHTML=`<div class="cc2-title" style="color:#fff;">${ind.title}</div><div class="cc2-sub" style="color:rgba(255,255,255,.8);margin-top:3px;">${memberCount} ä½æå¡ã»${emptyCount} å¾éç¼</div>`;
     list.appendChild(banner);
     ind.subs.forEach(sub=>{
       const card=document.createElement('div');
       if(sub.members.length===0){
         card.className='m-sub-card empty-sub';
-        card.innerHTML=`<div class="m-sub-header"><div class="m-sub-dot empty-dot"></div><div class="m-sub-info"><div class="m-sub-title" style="color:var(--ink-soft);">${sub.t}</div><div class="m-sub-members">尚待開發・歡迎推薦</div></div></div>`;
+        card.innerHTML=`<div class="m-sub-header"><div class="m-sub-dot empty-dot"></div><div class="m-sub-info"><div class="m-sub-title" style="color:var(--ink-soft);">${sub.t}</div><div class="m-sub-members">å°å¾éç¼ã»æ­¡è¿æ¨è¦</div></div></div>`;
       } else {
         card.className='m-sub-card';
         card.style.background=pl.bg;
-        const isHYR=sub.members.some(m=>m.n==='洪岳裕');
-        const hyrBtn=isHYR?`<div style="padding:0 13px 10px;"><button onclick="event.stopPropagation();showHYR()" style="width:100%;background:${pl.acc};color:#fff;font-size:11px;padding:5px 0;border-radius:8px;cursor:pointer;border:none;font-family:inherit;">查看完整服務地圖 →</button></div>`:'';
-        card.innerHTML=`<div class="m-sub-header"><div class="m-sub-dot" style="background:${pl.acc};"></div><div class="m-sub-info"><div class="m-sub-title" style="color:${pl.dark};">${sub.t}</div><div class="m-sub-members" style="color:${pl.acc};">${sub.members.map(m=>m.n).join('・')}</div></div><div class="m-sub-arrow" style="color:${pl.acc};">›</div></div>${hyrBtn}`;
+        const isHYR=sub.members.some(m=>m.n==='æ´ªå²³è£');
+        const hyrBtn=isHYR?`<div style="padding:0 13px 10px;"><button onclick="event.stopPropagation();showHYR()" style="width:100%;background:${pl.acc};color:#fff;font-size:11px;padding:5px 0;border-radius:8px;cursor:pointer;border:none;font-family:inherit;">æ¥çå®æ´æåå°å â</button></div>`:'';
+        card.innerHTML=`<div class="m-sub-header"><div class="m-sub-dot" style="background:${pl.acc};"></div><div class="m-sub-info"><div class="m-sub-title" style="color:${pl.dark};">${sub.t}</div><div class="m-sub-members" style="color:${pl.acc};">${sub.members.map(m=>m.n).join('ã»')}</div></div><div class="m-sub-arrow" style="color:${pl.acc};">âº</div></div>${hyrBtn}`;
         card.addEventListener('click',()=>renderL3(ind,sub));
       }
       list.appendChild(card);
@@ -585,20 +387,20 @@ function renderL2(ind){
       const div=document.createElement('div');
       if(slot.isCenter){
         div.className='cell center-cell';div.style.background=pl.acc;div.style.border='none';
-        div.innerHTML=`<div class="cc2-title" style="color:#fff;">${ind.title}</div><div class="cc2-sub" style="color:rgba(255,255,255,.75);">${memberCount}位會員・${emptyCount}待開發</div>`;
+        div.innerHTML=`<div class="cc2-title" style="color:#fff;">${ind.title}</div><div class="cc2-sub" style="color:rgba(255,255,255,.75);">${memberCount}ä½æå¡ã»${emptyCount}å¾éç¼</div>`;
       } else if(slot.isBlank){
         div.className='cell';div.style.background='transparent';div.style.border='none';div.style.cursor='default';div.style.pointerEvents='none';
       } else if(slot.members.length===0){
         div.className='cell empty-cell';div.style.background=pl.bg;
-        div.innerHTML=`<div class="empty-label">尚待開發</div><div class="empty-title">${slot.t}</div><div class="empty-note">歡迎推薦合適夥伴</div>`;
+        div.innerHTML=`<div class="empty-label">å°å¾éç¼</div><div class="empty-title">${slot.t}</div><div class="empty-note">æ­¡è¿æ¨è¦åé©å¤¥ä¼´</div>`;
       } else {
         div.className='cell';div.style.background=pl.bg;div.style.borderColor=pl.pale;
         const membersHTML=slot.members.map(m=>{
           const found=findSubByMember(m.n);
           return `<div class="ci"><div class="ci-dot" style="background:${pl.acc};"></div><span style="color:${pl.dark};${found?'cursor:pointer;text-decoration:underline;text-underline-offset:2px;':''}" ${found?`onclick="event.stopPropagation();renderL3FromName('${m.n}')"`:''}>${m.n}</span></div>`;
         }).join('');
-        const isHYR=slot.members.some(m=>m.n==='洪岳裕');
-        const hyrBtn=isHYR?`<button onclick="event.stopPropagation();showHYR()" style="margin-top:7px;width:100%;background:${pl.acc};color:#fff;font-size:10px;padding:4px 0;border-radius:6px;cursor:pointer;border:none;font-family:inherit;">查看完整服務地圖 →</button>`:'';
+        const isHYR=slot.members.some(m=>m.n==='æ´ªå²³è£');
+        const hyrBtn=isHYR?`<button onclick="event.stopPropagation();showHYR()" style="margin-top:7px;width:100%;background:${pl.acc};color:#fff;font-size:10px;padding:4px 0;border-radius:6px;cursor:pointer;border:none;font-family:inherit;">æ¥çå®æ´æåå°å â</button>`:'';
         div.innerHTML=`<div class="cell-accent" style="background:${pl.acc};"></div><div class="ct" style="color:${pl.dark};">${slot.t}</div>${membersHTML}${hyrBtn}`;
         div.addEventListener('click',()=>renderL3(ind,slot));
       }
@@ -608,7 +410,7 @@ function renderL2(ind){
   }
 }
 
-/* 根據姓名找到對應的 ind + sub */
+/* æ ¹æå§åæ¾å°å°æç ind + sub */
 function findSubByMember(name){
   for(const d of DATA){
     if(!d) continue;
@@ -619,16 +421,16 @@ function findSubByMember(name){
   return null;
 }
 
-/* ════ RENDER L3 ════ */
+/* ââââ RENDER L3 ââââ */
 function renderL3(ind,sub){
   currentInd=ind;
   const pl=p(ind.pal);
-  document.getElementById('nav').innerHTML=`<span class="nav-link" onclick="renderL1()">金安分會</span><span class="nav-sep">›</span><span class="nav-link" onclick="renderL2(currentInd)">${ind.title}</span><span class="nav-sep">›</span><span class="nav-cur">${sub.t}</span>`;
-  document.getElementById('hint').textContent='可互相介紹・合作的周邊產業';
+  document.getElementById('nav').innerHTML=`<span class="nav-link" onclick="renderL1()">éå®åæ</span><span class="nav-sep">âº</span><span class="nav-link" onclick="renderL2(currentInd)">${ind.title}</span><span class="nav-sep">âº</span><span class="nav-cur">${sub.t}</span>`;
+  document.getElementById('hint').textContent='å¯äºç¸ä»ç´¹ã»åä½çå¨éç¢æ¥­';
   const stage=document.getElementById('stage');stage.innerHTML='';
-  const svcs=SVC[sub.t]||Array(8).fill('合作產業');
+  const svcs=SVC[sub.t]||Array(8).fill('åä½ç¢æ¥­');
 
-  /* 可點擊的會員名字 span */
+  /* å¯é»æçæå¡åå­ span */
   function memberSpan(name, color){
     const found=findSubByMember(name);
     if(found){
@@ -637,12 +439,12 @@ function renderL3(ind,sub){
     return `<span style="color:${color};font-size:10px;font-weight:500;">${name}</span>`;
   }
 
-  // center HTML — 姓名 + 產業別
+  // center HTML â å§å + ç¢æ¥­å¥
   let centerHTML='';
   if(sub.members.length===1){
     const m=sub.members[0];
-    const extraLink = m.n==='洪岳裕'
-      ? `<button onclick="event.stopPropagation();showHYR()" style="margin-top:8px;background:rgba(255,255,255,.2);color:#fff;font-size:11px;padding:5px 12px;border-radius:10px;cursor:pointer;border:1px solid rgba(255,255,255,.5);font-family:inherit;width:100%;">查看完整服務地圖 →</button>`
+    const extraLink = m.n==='æ´ªå²³è£'
+      ? `<button onclick="event.stopPropagation();showHYR()" style="margin-top:8px;background:rgba(255,255,255,.2);color:#fff;font-size:11px;padding:5px 12px;border-radius:10px;cursor:pointer;border:1px solid rgba(255,255,255,.5);font-family:inherit;width:100%;">æ¥çå®æ´æåå°å â</button>`
       : '';
     centerHTML=`<div class="avatar" style="background:rgba(255,255,255,.25);color:#fff;">${m.n[0]}</div><div class="member-name" style="color:#fff;">${m.n}</div><div class="member-role" style="color:rgba(255,255,255,.85);font-size:10px;margin-top:3px;">${sub.t}</div>${extraLink}`;
   } else {
@@ -653,16 +455,16 @@ function renderL3(ind,sub){
     }).join('')}</div>`;
   }
 
-  // 合作業別格：有會員則名字可點；物理治療的格子可直接進入 HYR 族群
+  // åä½æ¥­å¥æ ¼ï¼ææå¡ååå­å¯é»ï¼ç©çæ²»ççæ ¼å­å¯ç´æ¥é²å¥ HYR æç¾¤
   function makeSvcCell(svc, pl){
     const div=document.createElement('div');
     const matched=findMembers(svc);
-    // 如果是洪岳裕的族群，點擊直接進入對應族群
-    const hyrGroup = sub.t==='物理治療' ? HYR_GROUPS.find(g=>g&&g.label===svc) : null;
+    // å¦ææ¯æ´ªå²³è£çæç¾¤ï¼é»æç´æ¥é²å¥å°ææç¾¤
+    const hyrGroup = sub.t==='ç©çæ²»ç' ? HYR_GROUPS.find(g=>g&&g.label===svc) : null;
     if(hyrGroup){
       div.className='cell';
       div.style.background=pl.bg;div.style.borderColor=pl.acc;div.style.cursor='pointer';
-      div.innerHTML=`<div class="cell-accent" style="background:${pl.acc};opacity:.7;"></div><div class="svc-title" style="color:${pl.dark};margin-bottom:5px;">${svc}</div><div style="font-size:10px;color:${pl.acc};margin-top:4px;">點擊展開 →</div>`;
+      div.innerHTML=`<div class="cell-accent" style="background:${pl.acc};opacity:.7;"></div><div class="svc-title" style="color:${pl.dark};margin-bottom:5px;">${svc}</div><div style="font-size:10px;color:${pl.acc};margin-top:4px;">é»æå±é â</div>`;
       div.addEventListener('click',()=>{ showHYR(); setTimeout(()=>hyrRenderL2(hyrGroup),50); });
     } else if(matched){
       div.className='cell no-hover';
@@ -686,17 +488,17 @@ function renderL3(ind,sub){
     const sg=document.createElement('div');sg.className='m-svc-grid';
     svcs.forEach(svc=>{
       const matched=findMembers(svc);
-      const hyrGroup = sub.t==='物理治療' ? HYR_GROUPS.find(g=>g&&g.label===svc) : null;
+      const hyrGroup = sub.t==='ç©çæ²»ç' ? HYR_GROUPS.find(g=>g&&g.label===svc) : null;
       const item=document.createElement('div');
       item.className='m-svc-item';
       item.style.background=pl.bg;
       if(hyrGroup){
         item.style.borderColor=pl.acc;item.style.cursor='pointer';
-        item.innerHTML=`<div class="m-svc-accent" style="background:${pl.acc};opacity:.7;"></div><div class="m-svc-title" style="color:${pl.dark};">${svc}</div><div style="font-size:10px;color:${pl.acc};margin-top:3px;">點擊展開 →</div>`;
+        item.innerHTML=`<div class="m-svc-accent" style="background:${pl.acc};opacity:.7;"></div><div class="m-svc-title" style="color:${pl.dark};">${svc}</div><div style="font-size:10px;color:${pl.acc};margin-top:3px;">é»æå±é â</div>`;
         item.addEventListener('click',()=>{ showHYR(); setTimeout(()=>hyrRenderL2(hyrGroup),50); });
       } else if(matched){
         item.style.borderColor=pl.acc;
-        const namesHTML=matched.map(n=>memberSpan(n,pl.acc)).map(s=>`<div style="margin-top:2px;">▸ ${s}</div>`).join('');
+        const namesHTML=matched.map(n=>memberSpan(n,pl.acc)).map(s=>`<div style="margin-top:2px;">â¸ ${s}</div>`).join('');
         item.innerHTML=`<div class="m-svc-accent" style="background:${pl.acc};opacity:.6;"></div><div class="m-svc-title" style="color:${pl.dark};margin-bottom:3px;">${svc}</div>${namesHTML}`;
       } else {
         item.innerHTML=`<div class="m-svc-accent" style="background:${pl.acc};opacity:.3;"></div><div class="m-svc-title" style="color:${pl.dark};">${svc}</div>`;
@@ -730,28 +532,28 @@ function renderL3(ind,sub){
   }
 }
 
-/* 從姓名直接跳到個人 L3 */
+/* å¾å§åç´æ¥è·³å°åäºº L3 */
 function renderL3FromName(name){
   const found=findSubByMember(name);
   if(!found) return;
   renderL3(found.ind, found.sub);
 }
 
-/* ══════════════════════════════
-   洪岳裕專屬頁
-══════════════════════════════ */
+/* ââââââââââââââââââââââââââââââ
+   æ´ªå²³è£å°å±¬é 
+ââââââââââââââââââââââââââââââ */
 const HYR_ACC='#4CAF98', HYR_DARK='#0A4A3A', HYR_BG='#EAF7F4', HYR_PALE='#C8EDEA';
 
 const HYR_GROUPS=[
-  {id:'executive',label:'高階主管',items:['高階健檢','高爾夫教練','獵人頭','精品店','領導力教練','個人品牌/公關','形象顧問','西服訂製']},
-  {id:'pregnant',label:'孕婦',items:['導樂','產科醫師','孕婦Spa','月子餐','產前教育','孕婦瑜珈','孕婦皮拉提斯','孕婦寫真']},
-  {id:'postpartum',label:'產後一個月',items:['泌乳顧問','月子中心','產後體態','彌月禮盒','心理諮商','嬰兒睡眠','到府托育','產後落髮']},
-  {id:'retired',label:'退休族',items:['數位賦能','銀髮手機攝影','遠距醫療','智慧居家','護具','理財規劃','銀髮旅遊','抗衰老醫學']},
+  {id:'executive',label:'é«éä¸»ç®¡',items:['é«éå¥æª¢','é«ç¾å¤«æç·´','çµäººé ­','ç²¾ååº','é å°åæç·´','åäººåç/å¬é','å½¢è±¡é¡§å','è¥¿æè¨è£½']},
+  {id:'pregnant',label:'å­å©¦',items:['å°æ¨','ç¢ç§é«å¸«','å­å©¦Spa','æå­é¤','ç¢åæè²','å­å©¦çç','å­å©¦ç®æææ¯','å­å©¦å¯«ç']},
+  {id:'postpartum',label:'ç¢å¾ä¸åæ',items:['æ³ä¹³é¡§å','æå­ä¸­å¿','ç¢å¾é«æ','å½æç¦®ç','å¿çè«®å','å¬°åç¡ç ','å°åºæè²','ç¢å¾è½é«®']},
+  {id:'retired',label:'éä¼æ',items:['æ¸ä½è³¦è½','éé«®ææ©æå½±','é è·é«ç','æºæ§å±å®¶','è­·å·','çè²¡è¦å','éé«®æé','æè¡°èé«å­¸']},
   null,
-  {id:'sports',label:'運動傷害',items:['運動按摩','體能教練','運動護具','攀岩/抱石教練','運動醫學中心','網球教練','高爾夫教練','跑團']},
-  {id:'antiaging',label:'抗老化逆齡',items:['營養師','抗老化訓練','再生醫學','家醫科醫師','骨/復健診所','助步車/手杖','護具（護膝/護腰）','藥師諮詢']},
-  {id:'recovery',label:'術後恢復',items:['術後機能養','到府護理','醫療器材租賃','止痛（儀器/器材）','醫療護具','照服員派遣','疤痕貼片','骨科診所']},
-  {id:'network',label:'連鎖發展',items:['商空設計','人資顧問','商空仲介','連鎖顧問','企業律師','醫療行銷','勞資顧問','會計稅務']},
+  {id:'sports',label:'éåå·å®³',items:['éåææ©','é«è½æç·´','éåè­·å·','æå²©/æ±ç³æç·´','éåé«å­¸ä¸­å¿','ç¶²çæç·´','é«ç¾å¤«æç·´','è·å']},
+  {id:'antiaging',label:'æèåéé½¡',items:['çé¤å¸«','æèåè¨ç·´','åçé«å­¸','å®¶é«ç§é«å¸«','éª¨/å¾©å¥è¨ºæ','å©æ­¥è»/ææ','è­·å·ï¼è­·è/è­·è°ï¼','è¥å¸«è«®è©¢']},
+  {id:'recovery',label:'è¡å¾æ¢å¾©',items:['è¡å¾æ©è½é¤','å°åºè­·ç','é«çå¨æç§è³','æ­¢çï¼åå¨/å¨æï¼','é«çè­·å·','ç§æå¡æ´¾é£','ç¤çè²¼ç','éª¨ç§è¨ºæ']},
+  {id:'network',label:'é£éç¼å±',items:['åç©ºè¨­è¨','äººè³é¡§å','åç©ºä»²ä»','é£éé¡§å','ä¼æ¥­å¾å¸«','é«çè¡é·','åè³é¡§å','æè¨ç¨å']},
 ];
 
 function showHYR(){
@@ -764,20 +566,20 @@ function hideHYR(){
 }
 
 function hyrRenderL1(){
-  document.getElementById('hyr-nav').innerHTML=`<span style="color:var(--gold);cursor:pointer;" onclick="hideHYR()">← 金安分會</span><span style="color:var(--ink-faint);margin:0 4px;">›</span><span style="color:var(--ink-mid);font-weight:500;">物理治療 · 洪岳裕</span><button onclick="hideHYR()" style="margin-left:auto;background:#4CAF98;color:#fff;font-size:10px;padding:3px 10px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;white-space:nowrap;">返回金安分會</button>`;
-  document.getElementById('hyr-hint').textContent='點選族群格，展開合作細項';
+  document.getElementById('hyr-nav').innerHTML=`<span style="color:var(--gold);cursor:pointer;" onclick="hideHYR()">â éå®åæ</span><span style="color:var(--ink-faint);margin:0 4px;">âº</span><span style="color:var(--ink-mid);font-weight:500;">ç©çæ²»ç Â· æ´ªå²³è£</span><button onclick="hideHYR()" style="margin-left:auto;background:#4CAF98;color:#fff;font-size:10px;padding:3px 10px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;white-space:nowrap;">è¿åéå®åæ</button>`;
+  document.getElementById('hyr-hint').textContent='é»é¸æç¾¤æ ¼ï¼å±éåä½ç´°é ';
   const stage=document.getElementById('hyr-stage');stage.innerHTML='';
 
   if(isMobile()){
     const list=document.createElement('div');list.className='hyr-list';
     const banner=document.createElement('div');
     banner.style.cssText=`background:${HYR_ACC};border-radius:10px;padding:16px;text-align:center;margin-bottom:4px;`;
-    banner.innerHTML=`<div style="font-family:'Noto Serif TC',serif;font-size:18px;font-weight:600;color:#fff;">洪岳裕</div><div style="font-size:12px;color:rgba(255,255,255,.8);margin-top:3px;">物理治療師</div><div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:6px;">8 大服務族群</div>`;
+    banner.innerHTML=`<div style="font-family:'Noto Serif TC',serif;font-size:18px;font-weight:600;color:#fff;">æ´ªå²³è£</div><div style="font-size:12px;color:rgba(255,255,255,.8);margin-top:3px;">ç©çæ²»çå¸«</div><div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:6px;">8 å¤§æåæç¾¤</div>`;
     list.appendChild(banner);
     HYR_GROUPS.forEach(g=>{
       if(!g)return;
       const card=document.createElement('div');card.className='hyr-m-card';
-      card.innerHTML=`<div class="hyr-m-header"><div style="width:9px;height:9px;border-radius:50%;background:${HYR_ACC};flex-shrink:0;"></div><div class="hyr-m-title">${g.label}</div><div class="hyr-m-arrow">›</div></div><div class="hyr-m-tags">${g.items.slice(0,4).map(i=>`<span class="hyr-m-tag">${i}</span>`).join('')}${g.items.length>4?`<span class="hyr-m-tag" style="background:transparent;color:var(--ink-faint);">+${g.items.length-4}</span>`:''}</div>`;
+      card.innerHTML=`<div class="hyr-m-header"><div style="width:9px;height:9px;border-radius:50%;background:${HYR_ACC};flex-shrink:0;"></div><div class="hyr-m-title">${g.label}</div><div class="hyr-m-arrow">âº</div></div><div class="hyr-m-tags">${g.items.slice(0,4).map(i=>`<span class="hyr-m-tag">${i}</span>`).join('')}${g.items.length>4?`<span class="hyr-m-tag" style="background:transparent;color:var(--ink-faint);">+${g.items.length-4}</span>`:''}</div>`;
       card.addEventListener('click',()=>hyrRenderL2(g));
       list.appendChild(card);
     });
@@ -789,11 +591,11 @@ function hyrRenderL1(){
       if(!grp){
         div.className='hyr-cell hyr-center';
         div.style.background=HYR_ACC;
-        div.innerHTML=`<div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.25);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:18px;font-weight:600;margin:0 auto 8px;">裕</div><div style="font-family:'Noto Serif TC',serif;font-size:16px;font-weight:600;color:#fff;">洪岳裕</div><div style="font-size:11px;color:rgba(255,255,255,.8);margin-top:3px;">物理治療師</div>`;
+        div.innerHTML=`<div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.25);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:18px;font-weight:600;margin:0 auto 8px;">è£</div><div style="font-family:'Noto Serif TC',serif;font-size:16px;font-weight:600;color:#fff;">æ´ªå²³è£</div><div style="font-size:11px;color:rgba(255,255,255,.8);margin-top:3px;">ç©çæ²»çå¸«</div>`;
       } else {
         div.className='hyr-cell';
         div.style.background=HYR_BG;div.style.borderColor=HYR_PALE;
-        div.innerHTML=`<div style="position:absolute;top:0;left:0;right:0;height:3px;background:${HYR_ACC};border-radius:10px 10px 0 0;"></div><div style="font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;color:${HYR_DARK};margin-bottom:7px;">${grp.label}</div>${grp.items.slice(0,4).map(i=>`<div style="font-size:12px;line-height:2;display:flex;align-items:center;gap:5px;"><div style="width:6px;height:6px;border-radius:50%;background:${HYR_ACC};flex-shrink:0;"></div><span style="color:${HYR_DARK};">${i}</span></div>`).join('')}<div style="font-size:11px;color:${HYR_ACC};margin-top:3px;">＋${grp.items.length-4} 項</div>`;
+        div.innerHTML=`<div style="position:absolute;top:0;left:0;right:0;height:3px;background:${HYR_ACC};border-radius:10px 10px 0 0;"></div><div style="font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;color:${HYR_DARK};margin-bottom:7px;">${grp.label}</div>${grp.items.slice(0,4).map(i=>`<div style="font-size:12px;line-height:2;display:flex;align-items:center;gap:5px;"><div style="width:6px;height:6px;border-radius:50%;background:${HYR_ACC};flex-shrink:0;"></div><span style="color:${HYR_DARK};">${i}</span></div>`).join('')}<div style="font-size:11px;color:${HYR_ACC};margin-top:3px;">ï¼${grp.items.length-4} é </div>`;
         div.addEventListener('click',()=>hyrRenderL2(grp));
       }
       grid.appendChild(div);
@@ -803,15 +605,15 @@ function hyrRenderL1(){
 }
 
 function hyrRenderL2(grp){
-  document.getElementById('hyr-nav').innerHTML=`<span style="color:var(--gold);cursor:pointer;" onclick="hideHYR()">← 金安分會</span><span style="color:var(--ink-faint);margin:0 4px;">›</span><span style="color:var(--gold);cursor:pointer;" onclick="hyrRenderL1()">物理治療</span><span style="color:var(--ink-faint);margin:0 4px;">›</span><span style="color:var(--ink-mid);font-weight:500;">${grp.label}</span><button onclick="hideHYR()" style="margin-left:auto;background:#4CAF98;color:#fff;font-size:10px;padding:3px 10px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;white-space:nowrap;">返回金安分會</button>`;
-  document.getElementById('hyr-hint').textContent='合作與轉介的業別';
+  document.getElementById('hyr-nav').innerHTML=`<span style="color:var(--gold);cursor:pointer;" onclick="hideHYR()">â éå®åæ</span><span style="color:var(--ink-faint);margin:0 4px;">âº</span><span style="color:var(--gold);cursor:pointer;" onclick="hyrRenderL1()">ç©çæ²»ç</span><span style="color:var(--ink-faint);margin:0 4px;">âº</span><span style="color:var(--ink-mid);font-weight:500;">${grp.label}</span><button onclick="hideHYR()" style="margin-left:auto;background:#4CAF98;color:#fff;font-size:10px;padding:3px 10px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;white-space:nowrap;">è¿åéå®åæ</button>`;
+  document.getElementById('hyr-hint').textContent='åä½èè½ä»çæ¥­å¥';
   const stage=document.getElementById('hyr-stage');stage.innerHTML='';
 
   if(isMobile()){
     const list=document.createElement('div');list.className='hyr-list';
     const header=document.createElement('div');
     header.style.cssText=`background:${HYR_ACC};border-radius:10px;padding:14px;text-align:center;margin-bottom:4px;`;
-    header.innerHTML=`<div style="font-size:10px;color:rgba(255,255,255,.7);margin-bottom:3px;">服務族群</div><div style="font-family:'Noto Serif TC',serif;font-size:17px;font-weight:600;color:#fff;">${grp.label}</div><div style="font-size:10px;color:rgba(255,255,255,.65);margin-top:6px;cursor:pointer;text-decoration:underline;" onclick="hyrRenderL1()">← 返回總覽</div>`;
+    header.innerHTML=`<div style="font-size:10px;color:rgba(255,255,255,.7);margin-bottom:3px;">æåæç¾¤</div><div style="font-family:'Noto Serif TC',serif;font-size:17px;font-weight:600;color:#fff;">${grp.label}</div><div style="font-size:10px;color:rgba(255,255,255,.65);margin-top:6px;cursor:pointer;text-decoration:underline;" onclick="hyrRenderL1()">â è¿åç¸½è¦½</div>`;
     list.appendChild(header);
     const grid=document.createElement('div');grid.className='hyr-detail-grid';
     grp.items.forEach(item=>{
@@ -836,7 +638,7 @@ function hyrRenderL2(grp){
       const div=document.createElement('div');
       if(slot&&slot.isCenter){
         div.className='hyr-cell hyr-center';div.style.background=HYR_ACC;
-        div.innerHTML=`<div style="font-size:10px;color:rgba(255,255,255,.7);margin-bottom:4px;">服務族群</div><div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:#fff;">${grp.label}</div><div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:8px;cursor:pointer;text-decoration:underline;" onclick="hyrRenderL1()">← 返回</div>`;
+        div.innerHTML=`<div style="font-size:10px;color:rgba(255,255,255,.7);margin-bottom:4px;">æåæç¾¤</div><div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:#fff;">${grp.label}</div><div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:8px;cursor:pointer;text-decoration:underline;" onclick="hyrRenderL1()">â è¿å</div>`;
       } else if(!slot){
         div.style.background='transparent';div.style.border='none';div.style.pointerEvents='none';
       } else {
@@ -850,9 +652,9 @@ function hyrRenderL2(grp){
 }
 
 
-/* ══════════════════════════════
-   GitHub 自動更新功能
-══════════════════════════════ */
+/* ââââââââââââââââââââââââââââââ
+   GitHub èªåæ´æ°åè½
+ââââââââââââââââââââââââââââââ */
 const GITHUB_CONFIG = {
   owner: 'iamrainchen',
   repo: 'jinan-report',
@@ -862,9 +664,9 @@ const GITHUB_CONFIG = {
 
 async function pushToGitHub(){
   const token = document.getElementById('gh-token-input').value.trim();
-  if(!token){ alert('請先輸入 GitHub Token'); return; }
+  if(!token){ alert('è«åè¼¸å¥ GitHub Token'); return; }
   const btn = document.getElementById('gh-push-btn');
-  btn.textContent = '上傳中...';
+  btn.textContent = 'ä¸å³ä¸­...';
   btn.disabled = true;
 
   try {
@@ -887,7 +689,7 @@ async function pushToGitHub(){
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          message: '更新會員資料',
+          message: 'æ´æ°æå¡è³æ',
           content: encoded,
           sha: sha,
           branch: GITHUB_CONFIG.branch
@@ -897,16 +699,16 @@ async function pushToGitHub(){
     const _token = token; // avoid lint
 
     if(putRes.ok){
-      btn.textContent = '✓ 已更新！';
+      btn.textContent = 'â å·²æ´æ°ï¼';
       btn.style.background = '#4CAF98';
-      setTimeout(()=>{ btn.textContent='推送到 GitHub'; btn.disabled=false; btn.style.background=''; }, 3000);
+      setTimeout(()=>{ btn.textContent='æ¨éå° GitHub'; btn.disabled=false; btn.style.background=''; }, 3000);
     } else {
       const err = await putRes.json();
-      btn.textContent = '失敗：' + (err.message||'未知錯誤');
+      btn.textContent = 'å¤±æï¼' + (err.message||'æªç¥é¯èª¤');
       btn.disabled = false;
     }
   } catch(e) {
-    btn.textContent = '錯誤：' + e.message;
+    btn.textContent = 'é¯èª¤ï¼' + e.message;
     btn.disabled = false;
   }
 }
@@ -916,9 +718,9 @@ function toggleAdminBar(){
   bar.style.display = bar.style.display === 'none' ? 'flex' : 'none';
 }
 
-/* ══════════════════════════════
-   編輯介面
-══════════════════════════════ */
+/* ââââââââââââââââââââââââââââââ
+   ç·¨è¼¯ä»é¢
+ââââââââââââââââââââââââââââââ */
 function openEditor(){
   document.getElementById('editor-overlay').style.display='flex';
   renderEditorList();
@@ -929,7 +731,7 @@ function closeEditor(){
 
 function renderEditorList(){
   const panel=document.getElementById('editor-panel');
-  let html=`<div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:14px;">選擇要編輯的會員</div>`;
+  let html=`<div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:14px;">é¸æè¦ç·¨è¼¯çæå¡</div>`;
   DATA.forEach(ind=>{
     if(!ind)return;
     const pl=PAL[ind.pal];
@@ -941,7 +743,7 @@ function renderEditorList(){
         html+=`<div onclick="openMemberEditor('${ind.id}','${sub.t.replace(/'/g,"\'")}','${m.n}')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
           <div style="width:32px;height:32px;border-radius:50%;background:${pl.bg};color:${pl.dark};display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">${m.n[0]}</div>
           <div><div style="font-size:13px;font-weight:500;color:var(--ink);">${m.n}</div><div style="font-size:11px;color:var(--ink-soft);">${sub.t}</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
         </div>`;
       });
     });
@@ -958,32 +760,32 @@ function openMemberEditor(indId,subT,memberName){
   const panel=document.getElementById('editor-panel');
   panel.innerHTML=`
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-      <button onclick="renderEditorList()" style="background:var(--paper);border:1px solid #E8E4DC;border-radius:6px;padding:5px 10px;font-size:12px;cursor:pointer;font-family:inherit;">← 返回</button>
-      <div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;">${memberName} · 編輯</div>
+      <button onclick="renderEditorList()" style="background:var(--paper);border:1px solid #E8E4DC;border-radius:6px;padding:5px 10px;font-size:12px;cursor:pointer;font-family:inherit;">â è¿å</button>
+      <div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;">${memberName} Â· ç·¨è¼¯</div>
     </div>
     <div style="background:${pl.bg};border-radius:10px;padding:14px;margin-bottom:16px;border-left:3px solid ${pl.acc};">
-      <div style="font-size:11px;color:${pl.dark};font-weight:500;margin-bottom:8px;">基本資料</div>
+      <div style="font-size:11px;color:${pl.dark};font-weight:500;margin-bottom:8px;">åºæ¬è³æ</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
         <div>
-          <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">姓名</div>
+          <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">å§å</div>
           <input id="edit-name" value="${memberName}" style="width:100%;padding:7px 10px;border:1px solid #E8E4DC;border-radius:6px;font-size:13px;font-family:inherit;outline:none;" />
         </div>
         <div>
-          <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">子項名稱（第二層）</div>
+          <div style="font-size:11px;color:var(--ink-soft);margin-bottom:4px;">å­é åç¨±ï¼ç¬¬äºå±¤ï¼</div>
           <input id="edit-sub" value="${subT}" style="width:100%;padding:7px 10px;border:1px solid #E8E4DC;border-radius:6px;font-size:13px;font-family:inherit;outline:none;" />
         </div>
       </div>
     </div>
     <div style="margin-bottom:16px;">
-      <div style="font-size:11px;color:var(--ink-soft);font-weight:500;margin-bottom:8px;">合作產業（第三層 · 共8格）</div>
+      <div style="font-size:11px;color:var(--ink-soft);font-weight:500;margin-bottom:8px;">åä½ç¢æ¥­ï¼ç¬¬ä¸å±¤ Â· å±8æ ¼ï¼</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
         ${svcsPadded.map((s,i)=>`<div>
-          <div style="font-size:10px;color:var(--ink-faint);margin-bottom:3px;">第 ${i+1} 格</div>
-          <input class="svc-input" value="${s.replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;border:1px solid #E8E4DC;border-radius:6px;font-size:12px;font-family:inherit;outline:none;" placeholder="合作產業" />
+          <div style="font-size:10px;color:var(--ink-faint);margin-bottom:3px;">ç¬¬ ${i+1} æ ¼</div>
+          <input class="svc-input" value="${s.replace(/"/g,'&quot;')}" style="width:100%;padding:7px 10px;border:1px solid #E8E4DC;border-radius:6px;font-size:12px;font-family:inherit;outline:none;" placeholder="åä½ç¢æ¥­" />
         </div>`).join('')}
       </div>
     </div>
-    <button onclick="saveMemberEdit('${indId}','${subT.replace(/'/g,"\'")}','${memberName}')" style="width:100%;background:${pl.acc};color:#fff;font-size:13px;font-weight:500;padding:10px;border-radius:8px;cursor:pointer;border:none;font-family:inherit;">✓ 儲存</button>
+    <button onclick="saveMemberEdit('${indId}','${subT.replace(/'/g,"\'")}','${memberName}')" style="width:100%;background:${pl.acc};color:#fff;font-size:13px;font-weight:500;padding:10px;border-radius:8px;cursor:pointer;border:none;font-family:inherit;">â å²å­</button>
   `;
 }
 
@@ -991,7 +793,7 @@ function saveMemberEdit(indId,oldSubT,oldName){
   const newName=document.getElementById('edit-name').value.trim();
   const newSubT=document.getElementById('edit-sub').value.trim();
   const newSvcs=[...document.querySelectorAll('.svc-input')].map(i=>i.value.trim()).filter(s=>s);
-  if(!newName||!newSubT){alert('姓名和子項名稱不能為空');return;}
+  if(!newName||!newSubT){alert('å§ååå­é åç¨±ä¸è½çºç©º');return;}
   const ind=DATA.find(d=>d&&d.id===indId);
   const sub=ind.subs.find(s=>s.t===oldSubT);
   const member=sub&&sub.members.find(m=>m.n===oldName);
@@ -1003,7 +805,7 @@ function saveMemberEdit(indId,oldSubT,oldName){
   SVC[newSubT]=newSvcs;
   Object.keys(MLOOKUP).forEach(k=>delete MLOOKUP[k]);
   DATA.forEach(d=>{if(!d)return;d.subs.forEach(s=>{if(s.members.length>0)MLOOKUP[s.t]=s.members.map(m=>m.n);});});
-  alert('✓ 已更新！記得按推送到 GitHub。');
+  alert('â å·²æ´æ°ï¼è¨å¾ææ¨éå° GitHubã');
   renderEditorList();
 }
 
@@ -1015,195 +817,195 @@ window.addEventListener('resize',()=>{
 </script>
 
 
-<!-- 編輯介面 Overlay -->
+<!-- ç·¨è¼¯ä»é¢ Overlay -->
 <div id="editor-overlay" style="display: none; position: fixed; inset: 0px; background: rgba(0, 0, 0, 0.5); z-index: 2000; align-items: center; justify-content: center; padding: 1rem;">
   <div style="background:var(--paper);border-radius:14px;width:100%;max-width:560px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.2);">
     <div style="display:flex;align-items:center;padding:14px 16px;background:var(--surface);border-bottom:1px solid #E8E4DC;flex-shrink:0;">
-      <div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;">✏️ 編輯會員資料</div>
-      <span onclick="closeEditor()" style="margin-left:auto;font-size:20px;cursor:pointer;color:var(--ink-soft);">✕</span>
+      <div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;">âï¸ ç·¨è¼¯æå¡è³æ</div>
+      <span onclick="closeEditor()" style="margin-left:auto;font-size:20px;cursor:pointer;color:var(--ink-soft);">â</span>
     </div>
-    <div id="editor-panel" style="padding:16px;overflow-y:auto;flex:1;"><div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:14px;">選擇要編輯的會員</div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#1C4A72;padding:4px 8px;background:#EDF4FB;border-radius:6px;margin-bottom:6px;border-left:3px solid #6BA0CC;">企業服務類</div><div onclick="openMemberEditor('biz','律師','李赫茗')" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--surface); border: 1px solid rgb(232, 228, 220); border-radius: 8px; margin-bottom: 5px; cursor: pointer; box-shadow: none;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">李</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">李赫茗</div><div style="font-size:11px;color:var(--ink-soft);">律師</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('biz','會計師','洪佑宜')" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--surface); border: 1px solid rgb(232, 228, 220); border-radius: 8px; margin-bottom: 5px; cursor: pointer; box-shadow: none;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">洪</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">洪佑宜</div><div style="font-size:11px;color:var(--ink-soft);">會計師</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('biz','包材容器','何英銘')" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--surface); border: 1px solid rgb(232, 228, 220); border-radius: 8px; margin-bottom: 5px; cursor: pointer; box-shadow: none;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">何</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">何英銘</div><div style="font-size:11px;color:var(--ink-soft);">包材容器</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('biz','國際包裹集運','廖羿為')" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--surface); border: 1px solid rgb(232, 228, 220); border-radius: 8px; margin-bottom: 5px; cursor: pointer; box-shadow: none;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">廖</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">廖羿為</div><div style="font-size:11px;color:var(--ink-soft);">國際包裹集運</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('biz','商用不動產','劉芯怡')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">劉</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">劉芯怡</div><div style="font-size:11px;color:var(--ink-soft);">商用不動產</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('biz','系統建置','賴佩伶')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">賴</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">賴佩伶</div><div style="font-size:11px;color:var(--ink-soft);">系統建置</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#1A4A18;padding:4px 8px;background:#EDF7EC;border-radius:6px;margin-bottom:6px;border-left:3px solid #6AAF64;">營建裝修類</div><div onclick="openMemberEditor('build','商空設計','朱世祺')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">朱</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">朱世祺</div><div style="font-size:11px;color:var(--ink-soft);">商空設計</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('build','住家設計','吳宗恆')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">吳</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">吳宗恆</div><div style="font-size:11px;color:var(--ink-soft);">住家設計</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('build','系統廚具','許哲文')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">許</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">許哲文</div><div style="font-size:11px;color:var(--ink-soft);">系統廚具</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('build','系統傢俱','林楷鈞')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">林</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">林楷鈞</div><div style="font-size:11px;color:var(--ink-soft);">系統傢俱</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('build','油漆工程','洪梓承')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">洪</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">洪梓承</div><div style="font-size:11px;color:var(--ink-soft);">油漆工程</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('build','木工工程','羅美淇')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">羅</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">羅美淇</div><div style="font-size:11px;color:var(--ink-soft);">木工工程</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('build','漏水檢測工程','練羿岑')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">練</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">練羿岑</div><div style="font-size:11px;color:var(--ink-soft);">漏水檢測工程</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#5A3C08;padding:4px 8px;background:#FDF5E8;border-radius:6px;margin-bottom:6px;border-left:3px solid #C89840;">機電建材類</div><div onclick="openMemberEditor('mep','水電承包','胡哲維')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDF5E8;color:#5A3C08;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">胡</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">胡哲維</div><div style="font-size:11px;color:var(--ink-soft);">水電承包</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('mep','冷氣空調','王博翰')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDF5E8;color:#5A3C08;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">王</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">王博翰</div><div style="font-size:11px;color:var(--ink-soft);">冷氣空調</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('mep','磁磚工程','林穎宏')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDF5E8;color:#5A3C08;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">林</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">林穎宏</div><div style="font-size:11px;color:var(--ink-soft);">磁磚工程</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#40186A;padding:4px 8px;background:#F5EEF8;border-radius:6px;margin-bottom:6px;border-left:3px solid #9E6EC0;">顧問培訓類</div><div onclick="openMemberEditor('con','理財顧問','陳芊妤')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#F5EEF8;color:#40186A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">陳</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">陳芊妤</div><div style="font-size:11px;color:var(--ink-soft);">理財顧問</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('con','殯葬業顧問','張睿样')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#F5EEF8;color:#40186A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">張</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">張睿样</div><div style="font-size:11px;color:var(--ink-soft);">殯葬業顧問</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#6A1C14;padding:4px 8px;background:#FDEEED;border-radius:6px;margin-bottom:6px;border-left:3px solid #D06050;">廣告行銷類</div><div onclick="openMemberEditor('adv','整合行銷','蕭淑蓉')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">蕭</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">蕭淑蓉</div><div style="font-size:11px;color:var(--ink-soft);">整合行銷</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('adv','活動形象攝影','劉鎧霆')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">劉</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">劉鎧霆</div><div style="font-size:11px;color:var(--ink-soft);">活動形象攝影</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('adv','數位媒體行銷','李佳家')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">李</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">李佳家</div><div style="font-size:11px;color:var(--ink-soft);">數位媒體行銷</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('adv','活動策展','劉耿逢')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">劉</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">劉耿逢</div><div style="font-size:11px;color:var(--ink-soft);">活動策展</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('adv','展場規劃','邱瑞瑋')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">邱</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">邱瑞瑋</div><div style="font-size:11px;color:var(--ink-soft);">展場規劃</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('adv','影音動畫','林文偉')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">林</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">林文偉</div><div style="font-size:11px;color:var(--ink-soft);">影音動畫</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('adv','大圖輸出','謝佳恩')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">謝</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">謝佳恩</div><div style="font-size:11px;color:var(--ink-soft);">大圖輸出</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('adv','視覺設計','趙翊帆')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">趙</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">趙翊帆</div><div style="font-size:11px;color:var(--ink-soft);">視覺設計</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('adv','網站設計','陳宥寧')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">陳</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">陳宥寧</div><div style="font-size:11px;color:var(--ink-soft);">網站設計</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('adv','波力IP授權','陳鳳琴')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">陳</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">陳鳳琴</div><div style="font-size:11px;color:var(--ink-soft);">波力IP授權</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#0A4A3A;padding:4px 8px;background:#EAF7F4;border-radius:6px;margin-bottom:6px;border-left:3px solid #4CAF98;">健康美麗類</div><div onclick="openMemberEditor('hlt','女性健康物理治療','邱雅鈴')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">邱</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">邱雅鈴</div><div style="font-size:11px;color:var(--ink-soft);">女性健康物理治療</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('hlt','物理治療','洪岳裕')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">洪</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">洪岳裕</div><div style="font-size:11px;color:var(--ink-soft);">物理治療</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('hlt','抗老化訓練','黃奕甫')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">黃</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">黃奕甫</div><div style="font-size:11px;color:var(--ink-soft);">抗老化訓練</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('hlt','健康管理師','邱致憲')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">邱</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">邱致憲</div><div style="font-size:11px;color:var(--ink-soft);">健康管理師</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('hlt','國際認證泌乳顧問','林澐薪')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">林</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">林澐薪</div><div style="font-size:11px;color:var(--ink-soft);">國際認證泌乳顧問</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('hlt','美容儀器設備','許宏暐')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">許</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">許宏暐</div><div style="font-size:11px;color:var(--ink-soft);">美容儀器設備</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#504010;padding:4px 8px;background:#FEFAE8;border-radius:6px;margin-bottom:6px;border-left:3px solid #C0A030;">休閒生活類</div><div onclick="openMemberEditor('lif','旅遊規劃師','簡茹瑩')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FEFAE8;color:#504010;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">簡</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">簡茹瑩</div><div style="font-size:11px;color:var(--ink-soft);">旅遊規劃師</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('lif','客製化餐點','殷如蒔')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FEFAE8;color:#504010;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">殷</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">殷如蒔</div><div style="font-size:11px;color:var(--ink-soft);">客製化餐點</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('lif','國際沙龍師','周聖強')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FEFAE8;color:#504010;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">周</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">周聖強</div><div style="font-size:11px;color:var(--ink-soft);">國際沙龍師</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('lif','旅行攝影','陳炯霖')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#FEFAE8;color:#504010;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">陳</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">陳炯霖</div><div style="font-size:11px;color:var(--ink-soft);">旅行攝影</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#1A2460;padding:4px 8px;background:#EEF1F7;border-radius:6px;margin-bottom:6px;border-left:3px solid #6070A8;">金融保險類</div><div onclick="openMemberEditor('fin','退休規劃','彭欣如')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EEF1F7;color:#1A2460;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">彭</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">彭欣如</div><div style="font-size:11px;color:var(--ink-soft);">退休規劃</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('fin','人壽保險','曹雅茲')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EEF1F7;color:#1A2460;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">曹</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">曹雅茲</div><div style="font-size:11px;color:var(--ink-soft);">人壽保險</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('fin','產險','陳庭漢')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EEF1F7;color:#1A2460;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">陳</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">陳庭漢</div><div style="font-size:11px;color:var(--ink-soft);">產險</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
-        </div><div onclick="openMemberEditor('fin','國際理財','徐凡雅')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
-          <div style="width:32px;height:32px;border-radius:50%;background:#EEF1F7;color:#1A2460;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">徐</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">徐凡雅</div><div style="font-size:11px;color:var(--ink-soft);">國際理財</div></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">編輯 ›</div>
+    <div id="editor-panel" style="padding:16px;overflow-y:auto;flex:1;"><div style="font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:14px;">é¸æè¦ç·¨è¼¯çæå¡</div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#1C4A72;padding:4px 8px;background:#EDF4FB;border-radius:6px;margin-bottom:6px;border-left:3px solid #6BA0CC;">ä¼æ¥­æåé¡</div><div onclick="openMemberEditor('biz','å¾å¸«','æèµ«è')" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--surface); border: 1px solid rgb(232, 228, 220); border-radius: 8px; margin-bottom: 5px; cursor: pointer; box-shadow: none;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">æèµ«è</div><div style="font-size:11px;color:var(--ink-soft);">å¾å¸«</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('biz','æè¨å¸«','æ´ªä½å®')" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--surface); border: 1px solid rgb(232, 228, 220); border-radius: 8px; margin-bottom: 5px; cursor: pointer; box-shadow: none;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ´ª</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">æ´ªä½å®</div><div style="font-size:11px;color:var(--ink-soft);">æè¨å¸«</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('biz','åæå®¹å¨','ä½è±é')" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--surface); border: 1px solid rgb(232, 228, 220); border-radius: 8px; margin-bottom: 5px; cursor: pointer; box-shadow: none;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">ä½</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">ä½è±é</div><div style="font-size:11px;color:var(--ink-soft);">åæå®¹å¨</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('biz','åéåè£¹éé','å»ç¾¿çº')" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--surface); border: 1px solid rgb(232, 228, 220); border-radius: 8px; margin-bottom: 5px; cursor: pointer; box-shadow: none;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">å»</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">å»ç¾¿çº</div><div style="font-size:11px;color:var(--ink-soft);">åéåè£¹éé</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('biz','åç¨ä¸åç¢','åè¯æ¡')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">å</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">åè¯æ¡</div><div style="font-size:11px;color:var(--ink-soft);">åç¨ä¸åç¢</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('biz','ç³»çµ±å»ºç½®','è³´ä½©ä¼¶')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF4FB;color:#1C4A72;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">è³´</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">è³´ä½©ä¼¶</div><div style="font-size:11px;color:var(--ink-soft);">ç³»çµ±å»ºç½®</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#1A4A18;padding:4px 8px;background:#EDF7EC;border-radius:6px;margin-bottom:6px;border-left:3px solid #6AAF64;">çå»ºè£ä¿®é¡</div><div onclick="openMemberEditor('build','åç©ºè¨­è¨','æ±ä¸ç¥º')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ±</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">æ±ä¸ç¥º</div><div style="font-size:11px;color:var(--ink-soft);">åç©ºè¨­è¨</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('build','ä½å®¶è¨­è¨','å³å®æ')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">å³</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">å³å®æ</div><div style="font-size:11px;color:var(--ink-soft);">ä½å®¶è¨­è¨</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('build','ç³»çµ±å»å·','è¨±å²æ')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">è¨±</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">è¨±å²æ</div><div style="font-size:11px;color:var(--ink-soft);">ç³»çµ±å»å·</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('build','ç³»çµ±å¢ä¿±','ææ¥·é')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">ææ¥·é</div><div style="font-size:11px;color:var(--ink-soft);">ç³»çµ±å¢ä¿±</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('build','æ²¹æ¼å·¥ç¨','æ´ªæ¢æ¿')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ´ª</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">æ´ªæ¢æ¿</div><div style="font-size:11px;color:var(--ink-soft);">æ²¹æ¼å·¥ç¨</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('build','æ¨å·¥å·¥ç¨','ç¾ç¾æ·')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">ç¾</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">ç¾ç¾æ·</div><div style="font-size:11px;color:var(--ink-soft);">æ¨å·¥å·¥ç¨</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('build','æ¼æ°´æª¢æ¸¬å·¥ç¨','ç·´ç¾¿å²')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EDF7EC;color:#1A4A18;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">ç·´</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">ç·´ç¾¿å²</div><div style="font-size:11px;color:var(--ink-soft);">æ¼æ°´æª¢æ¸¬å·¥ç¨</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#5A3C08;padding:4px 8px;background:#FDF5E8;border-radius:6px;margin-bottom:6px;border-left:3px solid #C89840;">æ©é»å»ºæé¡</div><div onclick="openMemberEditor('mep','æ°´é»æ¿å','è¡å²ç¶­')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDF5E8;color:#5A3C08;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">è¡</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">è¡å²ç¶­</div><div style="font-size:11px;color:var(--ink-soft);">æ°´é»æ¿å</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('mep','å·æ°£ç©ºèª¿','çåç¿°')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDF5E8;color:#5A3C08;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">ç</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">çåç¿°</div><div style="font-size:11px;color:var(--ink-soft);">å·æ°£ç©ºèª¿</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('mep','ç£ç£å·¥ç¨','æç©å®')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDF5E8;color:#5A3C08;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">æç©å®</div><div style="font-size:11px;color:var(--ink-soft);">ç£ç£å·¥ç¨</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#40186A;padding:4px 8px;background:#F5EEF8;border-radius:6px;margin-bottom:6px;border-left:3px solid #9E6EC0;">é¡§åå¹è¨é¡</div><div onclick="openMemberEditor('con','çè²¡é¡§å','é³èå¦¤')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#F5EEF8;color:#40186A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">é³</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">é³èå¦¤</div><div style="font-size:11px;color:var(--ink-soft);">çè²¡é¡§å</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('con','æ®¯è¬æ¥­é¡§å','å¼µç¿æ ·')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#F5EEF8;color:#40186A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">å¼µ</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">å¼µç¿æ ·</div><div style="font-size:11px;color:var(--ink-soft);">æ®¯è¬æ¥­é¡§å</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#6A1C14;padding:4px 8px;background:#FDEEED;border-radius:6px;margin-bottom:6px;border-left:3px solid #D06050;">å»£åè¡é·é¡</div><div onclick="openMemberEditor('adv','æ´åè¡é·','è­æ·è')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">è­</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">è­æ·è</div><div style="font-size:11px;color:var(--ink-soft);">æ´åè¡é·</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('adv','æ´»åå½¢è±¡æå½±','åé§é')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">å</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">åé§é</div><div style="font-size:11px;color:var(--ink-soft);">æ´»åå½¢è±¡æå½±</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('adv','æ¸ä½åªé«è¡é·','æä½³å®¶')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">æä½³å®¶</div><div style="font-size:11px;color:var(--ink-soft);">æ¸ä½åªé«è¡é·</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('adv','æ´»åç­å±','åè¿é¢')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">å</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">åè¿é¢</div><div style="font-size:11px;color:var(--ink-soft);">æ´»åç­å±</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('adv','å±å ´è¦å','é±çç')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">é±</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">é±çç</div><div style="font-size:11px;color:var(--ink-soft);">å±å ´è¦å</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('adv','å½±é³åç«','ææå')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">ææå</div><div style="font-size:11px;color:var(--ink-soft);">å½±é³åç«</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('adv','å¤§åè¼¸åº','è¬ä½³æ©')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">è¬</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">è¬ä½³æ©</div><div style="font-size:11px;color:var(--ink-soft);">å¤§åè¼¸åº</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('adv','è¦è¦ºè¨­è¨','è¶ç¿å¸')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">è¶</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">è¶ç¿å¸</div><div style="font-size:11px;color:var(--ink-soft);">è¦è¦ºè¨­è¨</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('adv','ç¶²ç«è¨­è¨','é³å®¥å¯§')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">é³</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">é³å®¥å¯§</div><div style="font-size:11px;color:var(--ink-soft);">ç¶²ç«è¨­è¨</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('adv','æ³¢åIPææ¬','é³é³³ç´')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FDEEED;color:#6A1C14;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">é³</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">é³é³³ç´</div><div style="font-size:11px;color:var(--ink-soft);">æ³¢åIPææ¬</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#0A4A3A;padding:4px 8px;background:#EAF7F4;border-radius:6px;margin-bottom:6px;border-left:3px solid #4CAF98;">å¥åº·ç¾éºé¡</div><div onclick="openMemberEditor('hlt','å¥³æ§å¥åº·ç©çæ²»ç','é±éé´')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">é±</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">é±éé´</div><div style="font-size:11px;color:var(--ink-soft);">å¥³æ§å¥åº·ç©çæ²»ç</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('hlt','ç©çæ²»ç','æ´ªå²³è£')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ´ª</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">æ´ªå²³è£</div><div style="font-size:11px;color:var(--ink-soft);">ç©çæ²»ç</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('hlt','æèåè¨ç·´','é»å¥ç«')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">é»</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">é»å¥ç«</div><div style="font-size:11px;color:var(--ink-soft);">æèåè¨ç·´</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('hlt','å¥åº·ç®¡çå¸«','é±è´æ²')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">é±</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">é±è´æ²</div><div style="font-size:11px;color:var(--ink-soft);">å¥åº·ç®¡çå¸«</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('hlt','åéèªè­æ³ä¹³é¡§å','ææ¾èª')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">ææ¾èª</div><div style="font-size:11px;color:var(--ink-soft);">åéèªè­æ³ä¹³é¡§å</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('hlt','ç¾å®¹åå¨è¨­å','è¨±å®æ')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EAF7F4;color:#0A4A3A;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">è¨±</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">è¨±å®æ</div><div style="font-size:11px;color:var(--ink-soft);">ç¾å®¹åå¨è¨­å</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#504010;padding:4px 8px;background:#FEFAE8;border-radius:6px;margin-bottom:6px;border-left:3px solid #C0A030;">ä¼éçæ´»é¡</div><div onclick="openMemberEditor('lif','æéè¦åå¸«','ç°¡è¹ç©')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FEFAE8;color:#504010;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">ç°¡</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">ç°¡è¹ç©</div><div style="font-size:11px;color:var(--ink-soft);">æéè¦åå¸«</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('lif','å®¢è£½åé¤é»','æ®·å¦è')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FEFAE8;color:#504010;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ®·</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">æ®·å¦è</div><div style="font-size:11px;color:var(--ink-soft);">å®¢è£½åé¤é»</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('lif','åéæ²é¾å¸«','å¨èå¼·')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FEFAE8;color:#504010;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">å¨</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">å¨èå¼·</div><div style="font-size:11px;color:var(--ink-soft);">åéæ²é¾å¸«</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('lif','æè¡æå½±','é³ç¯é')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#FEFAE8;color:#504010;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">é³</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">é³ç¯é</div><div style="font-size:11px;color:var(--ink-soft);">æè¡æå½±</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div></div><div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:500;color:#1A2460;padding:4px 8px;background:#EEF1F7;border-radius:6px;margin-bottom:6px;border-left:3px solid #6070A8;">éèä¿éªé¡</div><div onclick="openMemberEditor('fin','éä¼è¦å','å½­æ¬£å¦')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EEF1F7;color:#1A2460;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">å½­</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">å½­æ¬£å¦</div><div style="font-size:11px;color:var(--ink-soft);">éä¼è¦å</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('fin','äººå£½ä¿éª','æ¹éè²')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EEF1F7;color:#1A2460;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">æ¹</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">æ¹éè²</div><div style="font-size:11px;color:var(--ink-soft);">äººå£½ä¿éª</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('fin','ç¢éª','é³åº­æ¼¢')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EEF1F7;color:#1A2460;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">é³</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">é³åº­æ¼¢</div><div style="font-size:11px;color:var(--ink-soft);">ç¢éª</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
+        </div><div onclick="openMemberEditor('fin','åéçè²¡','å¾å¡é')" style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface);border:1px solid #E8E4DC;border-radius:8px;margin-bottom:5px;cursor:pointer;" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.08)'" onmouseout="this.style.boxShadow='none'">
+          <div style="width:32px;height:32px;border-radius:50%;background:#EEF1F7;color:#1A2460;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;flex-shrink:0;">å¾</div>
+          <div><div style="font-size:13px;font-weight:500;color:var(--ink);">å¾å¡é</div><div style="font-size:11px;color:var(--ink-soft);">åéçè²¡</div></div>
+          <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">ç·¨è¼¯ âº</div>
         </div></div></div>
   </div>
 </div>
 
-<!-- 管理工具列 -->
-<div id="admin-trigger" onclick="toggleAdminBar()" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;background:#2A2218;color:#C9A84C;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.2);z-index:1000;user-select:none;">⚙️</div>
+<!-- ç®¡çå·¥å·å -->
+<div id="admin-trigger" onclick="toggleAdminBar()" style="position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;background:#2A2218;color:#C9A84C;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.2);z-index:1000;user-select:none;">âï¸</div>
 
 <div id="admin-bar" style="display: flex; position: fixed; bottom: 0px; left: 0px; right: 0px; background: rgb(42, 34, 24); padding: 12px 16px; z-index: 1001; align-items: center; gap: 10px; flex-wrap: wrap; border-top: 2px solid rgb(201, 168, 76);">
-  <span style="color:#C9A84C;font-size:13px;font-weight:500;">管理模式</span>
-  <input id="gh-token-input" type="password" placeholder="貼上 GitHub Token" style="flex:1;min-width:180px;max-width:280px;background:#3D2E10;color:#F2EAD3;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #5A4E3A;font-family:inherit;outline:none;" data-listener-added_5bfff31a="true">
-  <button onclick="openEditor()" style="background:#5A4E3A;color:#F2EAD3;font-size:12px;padding:6px 14px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;font-weight:500;">✏️ 編輯會員</button>
-  <button id="gh-push-btn" onclick="pushToGitHub()" style="color: rgb(26, 18, 8); font-size: 12px; padding: 6px 16px; border-radius: 6px; cursor: pointer; border: none; font-family: inherit; font-weight: 500;" disabled="">上傳中...</button>
-  <span style="color:#9A8E78;font-size:11px;">更新後約 1-2 分鐘生效</span>
-  <span onclick="toggleAdminBar()" style="color:#9A8E78;font-size:20px;cursor:pointer;margin-left:auto;">✕</span>
+  <span style="color:#C9A84C;font-size:13px;font-weight:500;">ç®¡çæ¨¡å¼</span>
+  <input id="gh-token-input" type="password" placeholder="è²¼ä¸ GitHub Token" style="flex:1;min-width:180px;max-width:280px;background:#3D2E10;color:#F2EAD3;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #5A4E3A;font-family:inherit;outline:none;" data-listener-added_5bfff31a="true">
+  <button onclick="openEditor()" style="background:#5A4E3A;color:#F2EAD3;font-size:12px;padding:6px 14px;border-radius:6px;cursor:pointer;border:none;font-family:inherit;font-weight:500;">âï¸ ç·¨è¼¯æå¡</button>
+  <button id="gh-push-btn" onclick="pushToGitHub()" style="color: rgb(26, 18, 8); font-size: 12px; padding: 6px 16px; border-radius: 6px; cursor: pointer; border: none; font-family: inherit; font-weight: 500;" disabled="">ä¸å³ä¸­...</button>
+  <span style="color:#9A8E78;font-size:11px;">æ´æ°å¾ç´ 1-2 åéçæ</span>
+  <span onclick="toggleAdminBar()" style="color:#9A8E78;font-size:20px;cursor:pointer;margin-left:auto;">â</span>
 </div>
 
 
