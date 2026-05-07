@@ -870,16 +870,26 @@ async function pushToGitHub(){
 
     // 從 GitHub 拿原始 HTML，用標記定位替換 DATA/SVC
     const rawContent = atob(getJson.content.replace(/\n/g,''));
+    console.log('[DEBUG] rawContent length:', rawContent.length);
+    console.log('[DEBUG] DATA_START in raw:', rawContent.includes('/*DATA_START*/'));
+    console.log('[DEBUG] SVC_START in raw:', rawContent.includes('/*SVC_START*/'));
+    
     const dataStr = JSON.stringify(DATA);
     const svcStr = JSON.stringify(SVC);
+    console.log('[DEBUG] DATA members count:', DATA.filter(d=>d).reduce((a,d)=>a+d.subs.reduce((b,s)=>b+s.members.length,0),0));
+    
     let updatedHTML = rawContent.replace(
       /\/\*DATA_START\*\/const DATA=[\s\S]*?\/\*DATA_END\*\//,
       '/*DATA_START*/const DATA='+dataStr+';/*DATA_END*/'
     );
+    console.log('[DEBUG] DATA replaced:', updatedHTML !== rawContent);
+    
     updatedHTML = updatedHTML.replace(
       /\/\*SVC_START\*\/const SVC=[\s\S]*?\/\*SVC_END\*\//,
       '/*SVC_START*/const SVC='+svcStr+';/*SVC_END*/'
     );
+    console.log('[DEBUG] SVC replaced:', updatedHTML.includes(dataStr.substring(0,20)));
+    console.log('[DEBUG] updatedHTML length:', updatedHTML.length);
 
     const encoded = btoa(unescape(encodeURIComponent(updatedHTML)));
 
