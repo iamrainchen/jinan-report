@@ -82,7 +82,7 @@ h1{font-size:20px;font-weight:500;margin-bottom:4px}
 </head>
 <body>
 <h1>會員紅綠燈分析 — 金安</h1>
-<div class="sub">2025-11-01 ~ 2026-04-30（6個月）｜綠燈目標：70分｜共43位會員</div>
+<div class="sub">2025-11-01 ~ 2026-04-30（6個月）｜綠燈目標：70分｜共42位會員</div>
 
 <div style="background:#FDF6E3;border-radius:10px;padding:14px 1.25rem;margin-bottom:10px;text-align:center;border:1px solid #E8C96B;">
   <div style="font-size:11px;color:#9A7B2E;letter-spacing:2px;margin-bottom:6px">🏆 分會終極目標</div>
@@ -102,7 +102,7 @@ h1{font-size:20px;font-weight:500;margin-bottom:4px}
 <div class="sec">分會整體統計</div>
 <div class="sum-row">
   <div class="sum-card"><div class="sum-n" style="color:#3B6D11">11</div><div class="sum-l">🟢 綠燈</div><div class="sum-p" style="color:#3B6D11">26%</div></div>
-  <div class="sum-card"><div class="sum-n" style="color:#854F0B">13</div><div class="sum-l">🟡 黃燈</div><div class="sum-p" style="color:#854F0B">30%</div></div>
+  <div class="sum-card"><div class="sum-n" style="color:#854F0B">12</div><div class="sum-l">🟡 黃燈</div><div class="sum-p" style="color:#854F0B">29%</div></div>
   <div class="sum-card"><div class="sum-n" style="color:#993C1D">11</div><div class="sum-l">🔴 紅燈</div><div class="sum-p" style="color:#993C1D">26%</div></div>
   <div class="sum-card"><div class="sum-n" style="color:#333">8</div><div class="sum-l">⚫ 黑燈</div><div class="sum-p" style="color:#333">19%</div></div>
 </div>
@@ -113,7 +113,7 @@ h1{font-size:20px;font-weight:500;margin-bottom:4px}
     <div style="position:relative;height:200px"><canvas id="dc"></canvas></div>
     <div class="leg">
       <span><span class="ld" style="background:#639922"></span>綠燈 26%</span>
-      <span><span class="ld" style="background:#EF9F27"></span>黃燈 30%</span>
+      <span><span class="ld" style="background:#EF9F27"></span>黃燈 29%</span>
       <span><span class="ld" style="background:#E24B4A"></span>紅燈 26%</span>
       <span><span class="ld" style="background:#555"></span>黑燈 19%</span>
     </div>
@@ -141,29 +141,57 @@ h1{font-size:20px;font-weight:500;margin-bottom:4px}
 
 <div class="sr">
   <div class="sc"><div class="sn" style="color:#3B6D11">11</div><div class="sl">🟢 綠燈</div></div>
-  <div class="sc"><div class="sn" style="color:#854F0B">13</div><div class="sl">🟡 黃燈</div></div>
+  <div class="sc"><div class="sn" style="color:#854F0B">12</div><div class="sl">🟡 黃燈</div></div>
   <div class="sc"><div class="sn" style="color:#993C1D">11</div><div class="sl">🔴 紅燈</div></div>
   <div class="sc"><div class="sn" style="color:#333">8</div><div class="sl">⚫ 黑燈</div></div>
-  <div class="sc"><div class="sn">43</div><div class="sl">總會員</div></div>
+  <div class="sc"><div class="sn">42</div><div class="sl">總會員</div></div>
 </div>
 
 <div class="ctrl">
-  <button class="fb active" id="btn-all" onclick="sf('all')">全部 (43)</button>
+  <button class="fb active" id="btn-all" onclick="sf('all')">全部 (42)</button>
   <button class="fb" id="btn-green" onclick="sf('green')">🟢 綠燈 (11)</button>
-  <button class="fb" id="btn-yellow" onclick="sf('yellow')">🟡 黃燈 (13)</button>
+  <button class="fb" id="btn-yellow" onclick="sf('yellow')">🟡 黃燈 (12)</button>
   <button class="fb" id="btn-red" onclick="sf('red')">🔴 紅燈 (11)</button>
   <button class="fb" id="btn-black" onclick="sf('black')">⚫ 黑燈 (8)</button>
   <button class="eb" onclick="ta()">全部展開 / 收合</button>
 </div>
+
+<div style="margin-bottom:1rem">
+  <div style="font-size:12px;color:#888;margin-bottom:8px">依小組篩選</div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap">
+    <button class="fb gb active" data-g="all" onclick="sg('all')">全部小組</button>
+    <button class="fb gb" data-g="第1組" onclick="sg('第1組')">第1組</button>
+    <button class="fb gb" data-g="第2組" onclick="sg('第2組')">第2組</button>
+    <button class="fb gb" data-g="第3組" onclick="sg('第3組')">第3組</button>
+    <button class="fb gb" data-g="第4組" onclick="sg('第4組')">第4組</button>
+    <button class="fb gb" data-g="第5組" onclick="sg('第5組')">第5組</button>
+    <button class="fb gb" data-g="第6組" onclick="sg('第6組')">第6組</button>
+    <button class="fb gb" data-g="第7組" onclick="sg('第7組')">第7組</button>
+    <button class="fb gb" data-g="第8組" onclick="sg('第8組')">第8組</button>
+  </div>
+</div>
+
+<div id="group-summary" style="margin-bottom:1rem"></div>
 <input class="si" type="text" placeholder="搜尋會員姓名..." oninput="ds(this.value)"/>
 <div id="list"></div>
 
 <script>
-new Chart(document.getElementById('dc'),{type:'doughnut',data:{labels:['綠燈','黃燈','紅燈','黑燈'],datasets:[{data:[11,13,11,8],backgroundColor:['#639922','#EF9F27','#E24B4A','#555555'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.label+': '+c.raw+'人';}}}}}});
+new Chart(document.getElementById('dc'),{type:'doughnut',data:{labels:['綠燈','黃燈','紅燈','黑燈'],datasets:[{data:[11,12,11,8],backgroundColor:['#639922','#EF9F27','#E24B4A','#555555'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.label+': '+c.raw+'人';}}}}}});
 new Chart(document.getElementById('bc'),{type:'bar',data:{labels:['一對一','出席/缺席','分會教育','每周引荐','來賓','交易價值'],datasets:[{data:[76,74,61,49,9,21],backgroundColor:['#639922','#639922','#EF9F27','#EF9F27','#E24B4A','#D85A30'],borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.raw+'%';}}}},scales:{x:{min:0,max:100,ticks:{callback:function(v){return v+'%';},font:{size:11}},grid:{color:'#f0f0f0'}},y:{ticks:{font:{size:11}},grid:{display:false}}}}});
 new Chart(document.getElementById('tc'),{type:'line',data:{labels:['2月','3月','4月'],datasets:[{label:'🟢 綠燈率',data:[34,31,26],borderColor:'#639922',backgroundColor:'rgba(99,153,34,0.1)',borderWidth:2.5,pointRadius:6,pointBackgroundColor:'#639922',tension:0.3,fill:true},{label:'🟡 黃燈率',data:[30,29,30],borderColor:'#EF9F27',backgroundColor:'rgba(239,159,39,0.08)',borderWidth:2,pointRadius:5,pointBackgroundColor:'#EF9F27',tension:0.3,fill:true},{label:'🔴 紅燈率',data:[28,33,26],borderColor:'#E24B4A',backgroundColor:'rgba(226,75,74,0.08)',borderWidth:2,pointRadius:5,pointBackgroundColor:'#E24B4A',tension:0.3,fill:true},{label:'⚫ 黑燈率',data:[8,7,19],borderColor:'#555',backgroundColor:'rgba(85,85,85,0.08)',borderWidth:2,pointRadius:5,pointBackgroundColor:'#555',tension:0.3,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:12,font:{size:11},padding:12}},tooltip:{callbacks:{label:function(c){return ' '+c.dataset.label+': '+c.raw+'%';}}}},scales:{y:{min:0,max:50,ticks:{callback:function(v){return v+'%';},font:{size:11}},grid:{color:'#f0f0f0'}},x:{ticks:{font:{size:12}},grid:{display:false}}}}});
 
-var ae=false,cf='all',cs2='';
+var ae=false,cf='all',cs2='',cg='all';
+var groups={
+  '第1組':['胡哲維','吳宗恆','何英銘','洪梓承'],
+  '第2組':['彭欣如','陳宥寧','洪岳裕','殷如蒔','李赫茗','許宏暐'],
+  '第3組':['徐凡雅','李佳家','陳芊妤','羅美淇','陳炯霖'],
+  '第4組':['王博翰','劉芯怡','朱世祺','陳庭漢','洪佑宜'],
+  '第5組':['簡茹瑩','邱瑞瑋','蕭淑蓉','林穎宏','謝佳恩'],
+  '第6組':['賴佩玲','廖羿為','林楷鈞','劉耿逢','林文偉','陳鳳琴'],
+  '第7組':['許哲文','練羿岑','黃奕甫','邱致憲','曹雅茲','邱雅鈴'],
+  '第8組':['張睿样','趙翊帆','周聖強','林澐薪','劉鎧霆']
+};
+function getGroup(name){for(var g in groups){if(groups[g].indexOf(name)>=0)return g;}return '';}
 var M=[
   // 綠燈
   {name:'洪岳裕',light:'green',score:80,need:0,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:10,max:15,tip:'可再增加來賓至每4周≥2位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'交易價值仍有15分空間'}],actions:['表現優異！提升交易價值可再得15分','持續增加來賓帶入']},
@@ -181,7 +209,7 @@ var M=[
   {name:'廖羿為',light:'yellow',score:65,need:5,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:5,max:20,tip:'現0.71/周 需≥1.5/周，再給出17個'},{name:'來賓',cur:10,max:15,tip:'每4周需≥2位，再帶2位可達滿分'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$194,615 需≥$2,000,000'}],actions:['最快：再帶2位來賓即+5分達綠燈！','增加引荐至1.5/周可補+15分']},
   {name:'邱雅鈴',light:'yellow',score:65,need:5,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:5,max:20,tip:'現0.83/周 需≥1.5/周，再給出17個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶12位'},{name:'一對一',cur:10,max:15,tip:'一對一仍有5分空間'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:15,max:15,tip:''}],actions:['最快：增加一對一(+5)即達綠燈！','增加引荐至1.5/周可補+15分','來賓帶入仍有提升空間']},
   {name:'王博翰',light:'yellow',score:60,need:10,cats:[{name:'出席/缺席',cur:20,max:20,tip:''},{name:'每周引荐',cur:5,max:20,tip:'現0.83/周 需≥1.5/周，再給出17個'},{name:'來賓',cur:10,max:15,tip:'每4周需≥2位，再帶2位可達滿分'},{name:'一對一',cur:10,max:15,tip:'現1.25/周 需>2/周，再做14次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$7,551 需≥$2,000,000'}],actions:['最快：再帶2位來賓(+5)+增一對一(+5)=達70分','增加引荐至1.5/周可補+15分']},
-  {name:'高翊峯',light:'yellow',score:60,need:10,cats:[{name:'出席/缺席',cur:0,max:20,tip:'缺席3次，改善至0次可補+20分'},{name:'每周引荐',cur:10,max:20,tip:'現1.08/周 需≥1.5/周，再給出13個'},{name:'來賓',cur:10,max:15,tip:'每4周需≥2位，再帶2位可達滿分'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:10,max:15,tip:'$1,242,273 需≥$2,000,000'}],actions:['關鍵：缺席3次是主要扣分，改善出席最有效','增加引荐+再帶2位來賓可各補分']},
+
   {name:'趙翊帆',light:'yellow',score:60,need:10,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:15,max:20,tip:'現1.17/周 需≥1.5/周，再給出9個'},{name:'來賓',cur:0,max:15,tip:'共3位，每4周需≥2位，再帶9位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$55,105 需≥$2,000,000'}],actions:['最快：避免缺席(+5)+增引荐補9個(+5)=達70分','每4周至少帶2位來賓']},
   {name:'林澐薪',light:'yellow',score:60,need:10,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'共2位，每4周需≥2位，再帶9位'},{name:'一對一',cur:10,max:15,tip:'現1.50/周 需>2/周，再做13次'},{name:'分會教育',cur:15,max:15,tip:''},{name:'交易價值',cur:0,max:15,tip:'$271,906 需≥$2,000,000'}],actions:['最快：避免缺席(+5)+增一對一>2/周(+5)=達70分','每4周至少帶2位來賓']},
   {name:'陳芊妤',light:'yellow',score:60,need:10,cats:[{name:'出席/缺席',cur:15,max:20,tip:'缺席1次，零缺席可補+5分'},{name:'每周引荐',cur:20,max:20,tip:''},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≥2位，需帶13位'},{name:'一對一',cur:15,max:15,tip:''},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:5,max:15,tip:'$503,539 需≥$2,000,000'}],actions:['最快：避免缺席(+5)+再3次教育(+10)=達70分','每4周至少帶2位來賓']},
@@ -214,12 +242,49 @@ var M=[
   {name:'劉耿逢',light:'black',score:10,need:60,cats:[{name:'出席/缺席',cur:0,max:20,tip:'缺席3次，改善至0次可補+20分'},{name:'每周引荐',cur:0,max:20,tip:'現0.15/周 需≥1.5/周，再給出36個'},{name:'來賓',cur:0,max:15,tip:'共0位，每4周需≅2位，需帶13位'},{name:'一對一',cur:0,max:15,tip:'現0.35/周 需>2/周，再做28次'},{name:'分會教育',cur:5,max:15,tip:'現3次 需≥6次，再參加3次'},{name:'交易價值',cur:5,max:15,tip:'$548,864 需≥$2,000,000'}],actions:['需全面改善：改善出席(+20)+增引荐(+20)+增一對一(+15)','同時參加教育+帶來賓，方向全面']}
 ];
 
-function sf(f){cf=f;['all','green','yellow','red','black'].forEach(function(k){var b=document.getElementById('btn-'+k);if(b)b.className='fb'+(k===f?' active':'');});render();}
+function renderGroupSummary(){
+  var html='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">';
+  Object.keys(groups).forEach(function(g){
+    var ms=M.filter(function(m){return getGroup(m.name)===g;});
+    var green=ms.filter(function(m){return m.light==='green';}).length;
+    var yellow=ms.filter(function(m){return m.light==='yellow';}).length;
+    var red=ms.filter(function(m){return m.light==='red';}).length;
+    var black=ms.filter(function(m){return m.light==='black';}).length;
+    var total=ms.length;
+    var pct=total>0?Math.round(green/total*100):0;
+    var barColor=pct>=50?'#639922':pct>=30?'#EF9F27':'#E24B4A';
+    var isSelected=cg===g;
+    var border=isSelected?'2px solid #1E2761':'0.5px solid #e0e0e0';
+    var shadow=isSelected?'box-shadow:0 2px 8px rgba(30,39,97,0.15)':'';
+    html+='<div onclick="sg(\''+g+'\')" style="background:#fff;border-radius:10px;border:'+border+';padding:12px;cursor:pointer;'+shadow+';transition:all .15s">'
+      +'<div style="font-size:13px;font-weight:'+(isSelected?'700':'500')+';color:'+(isSelected?'#1E2761':'#111')+';margin-bottom:8px">'+g+'</div>'
+      +'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px">'
+      +(green?'<span style="background:#EAF3DE;color:#3B6D11;padding:2px 6px;border-radius:8px;font-size:11px">🟢'+green+'</span>':'')
+      +(yellow?'<span style="background:#FAEEDA;color:#854F0B;padding:2px 6px;border-radius:8px;font-size:11px">🟡'+yellow+'</span>':'')
+      +(red?'<span style="background:#FAECE7;color:#993C1D;padding:2px 6px;border-radius:8px;font-size:11px">🔴'+red+'</span>':'')
+      +(black?'<span style="background:#f0f0f0;color:#333;padding:2px 6px;border-radius:8px;font-size:11px">⚫'+black+'</span>':'')
+      +'</div>'
+      +'<div style="height:4px;background:#e0e0e0;border-radius:2px">'
+      +'<div style="height:100%;width:'+pct+'%;background:'+barColor+';border-radius:2px"></div></div>'
+      +'<div style="font-size:11px;color:#888;margin-top:4px">綠燈率 '+pct+'%</div>'
+      +'</div>';
+  });
+  html+='</div>';
+  document.getElementById('group-summary').innerHTML=html;
+}
+
+function sf(f){cf=f;['all','green','yellow','red','black'].forEach(function(k){var b=document.getElementById('btn-'+k);if(b)b.className='fb'+(k===f?' active':'');});renderGroupSummary();render();}
+function sg(g){cg=g;document.querySelectorAll('.gb').forEach(function(b){b.className='fb gb'+(b.dataset.g===g?' active':'');});renderGroupSummary();render();}
 function ds(v){cs2=v.trim();render();}
 function ta(){ae=!ae;document.querySelectorAll('.det').forEach(function(d){d.className='det'+(ae?' open':'');});document.querySelectorAll('.cv').forEach(function(c){c.textContent=ae?'▲':'▼';});}
 function tc(i){var d=document.getElementById('d'+i),c=document.getElementById('c'+i);if(!d)return;var o=d.className.indexOf('open')>=0;d.className='det'+(o?'':' open');c.textContent=o?'▼':'▲';}
 function render(){
-  var list=M.filter(function(m){if(cf!=='all'&&m.light!==cf)return false;if(cs2&&m.name.indexOf(cs2)<0)return false;return true;});
+  var list=M.filter(function(m){
+    if(cf!=='all'&&m.light!==cf)return false;
+    if(cg!=='all'&&getGroup(m.name)!==cg)return false;
+    if(cs2&&m.name.indexOf(cs2)<0)return false;
+    return true;
+  });
   var el=document.getElementById('list');
   if(!list.length){el.innerHTML='<p style="color:#888;font-size:14px;padding:1rem 0;">沒有符合的會員</p>';return;}
   el.innerHTML=list.map(function(m,i){
@@ -228,11 +293,13 @@ function render(){
     var ic=ig?'🟢 綠燈':m.light==='yellow'?'🟡 黃燈':m.light==='red'?'🔴 紅燈':'⚫ 黑燈';
     var s2c=ig?'s2g':'s2';
     var s2t=ig?'已達標':'需+'+m.need+'分';
+    var grp=getGroup(m.name);
     var cats=m.cats.map(function(c){var ok=c.cur>=c.max,p=Math.round(c.cur/c.max*100),col=ok?'#639922':c.cur>0?'#EF9F27':'#E24B4A';return '<div class="ci '+(ok?'cok':'cgp')+'"><div class="cn">'+c.name+'</div><div class="cs">'+c.cur+' / '+c.max+' 分</div><div class="pb"><div class="pf" style="width:'+p+'%;background:'+col+'"></div></div>'+(c.tip?'<div class="ct">'+c.tip+'</div>':'<div class="con">已達標</div>')+'</div>';}).join('');
     var acts=m.actions.map(function(a){return '<div class="ai"><div class="'+(ig?'adg':'ad')+'"></div><div>'+a+'</div></div>';}).join('');
-    return '<div class="mc"><div class="mh" onclick="tc('+i+')"><div class="bd '+bc+'">'+ic+'</div><div class="mn">'+m.name+'</div><div class="s1">'+m.score+'分</div><div class="'+s2c+'">'+s2t+'</div><div class="cv" id="c'+i+'">▼</div></div><div class="det" id="d'+i+'"><div class="catg">'+cats+'</div><div class="'+(ig?'abg':'ab')+'"><div class="at">'+(ig?'繼續保持 / 可提升方向':'建議行動方向')+'</div>'+acts+'</div></div></div>';
+    return '<div class="mc"><div class="mh" onclick="tc('+i+')"><div class="bd '+bc+'">'+ic+'</div><div class="mn">'+m.name+'<span style="font-size:11px;color:#aaa;font-weight:400;margin-left:6px">'+grp+'</span></div><div class="s1">'+m.score+'分</div><div class="'+s2c+'">'+s2t+'</div><div class="cv" id="c'+i+'">▼</div></div><div class="det" id="d'+i+'"><div class="catg">'+cats+'</div><div class="'+(ig?'abg':'ab')+'"><div class="at">'+(ig?'繼續保持 / 可提升方向':'建議行動方向')+'</div>'+acts+'</div></div></div>';
   }).join('');
 }
+renderGroupSummary();
 render();
 </script>
 </body>
