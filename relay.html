@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -283,6 +284,32 @@
     height: 100%; background: var(--success); border-radius: 2px;
     transition: width 0.4s;
   }
+
+  /* Popup */
+  .popup-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000; padding: 24px;
+  }
+  .popup-box {
+    background: #fff; border-radius: 16px;
+    padding: 28px 24px; max-width: 360px; width: 100%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+  .popup-icon { font-size: 36px; margin-bottom: 12px; }
+  .popup-title { font-size: 16px; font-weight: 700; color: var(--gold-dark); margin-bottom: 8px; }
+  .popup-body { font-size: 14px; color: var(--ink-soft); line-height: 1.8; margin-bottom: 20px; }
+  .popup-close {
+    width: 100%; padding: 12px;
+    background: var(--ink); color: #fff;
+    border: none; border-radius: 10px;
+    font-size: 14px; font-weight: 500;
+    font-family: "Noto Sans TC", sans-serif;
+    cursor: pointer;
+  }
+  .popup-close:hover { background: var(--ink-soft); }
 </style>
 </head>
 <body>
@@ -441,7 +468,7 @@ const groups = {
   '第1組': ['胡哲維','吳宗恒','何英銘','洪梓承','廖郁琪'],
   '第2組': ['彭欣如','陳宥寧','洪岳裕','殷如蒔','李赫茗','許宏暐'],
   '第3組': ['徐凡雅','李佳家','陳芊妤','羅美淇','陳炯霖','陳萬裕'],
-  '第4組': ['王博翰','劉芯怡','朱世祺','陳庭漢','洪佑宜'],
+  '第4組': ['王博翰','劉芯怡','朱世祺','陳庭漢','洪佑宜','張舜文'],
   '第5組': ['邱瑞瑋','蕭淑蓉','林穎宏','謝佳恩','張森雄'],
   '第6組': ['賴佩玲','廖羿為','林楷鈞','劉耿逢','林文偉','陳鳳琴'],
   '第7組': ['許哲文','練羿岑','邱致憲','曹雅茲','邱雅鈴'],
@@ -706,5 +733,18 @@ async function submitForm() {
   }
 }
 </script>
+<div class="popup-overlay" id="noticePopup">
+  <div class="popup-box">
+    <div class="popup-icon">📍</div>
+    <div class="popup-title">6/12 會議地點異動</div>
+    <div class="popup-body">
+      蘆洲 Two Tails Hotel<br>
+      蘆洲區中山一路 8 號 8 樓<br>
+      <span style="font-size:12px; color:var(--ink-muted);">(至 6 樓轉乘電梯)</span>
+    </div>
+    <button class="popup-close" onclick="document.getElementById('noticePopup').style.display='none'">知道了</button>
+  </div>
+</div>
+
 </body>
 </html>
