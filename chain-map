@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>金安分會 · 全產業鏈圖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#15191B;--ink-2:#4A5257;--ink-3:#868E93;
+  --paper:#FBFAF7;--card:#FFFFFF;--rule:#E2E0DA;
+  --break:#C0392B;--break-soft:#FBEAE8;
+  --talk:#A67C00;--taken:#146B67;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:44px 28px 96px}
+
+header{border-bottom:2px solid var(--ink);padding-bottom:20px}
+.eyebrow{font-size:12px;letter-spacing:.22em;color:var(--ink-3);font-weight:500}
+h1{font-family:"Noto Serif TC",serif;font-weight:700;font-size:38px;letter-spacing:.02em;margin-top:6px;line-height:1.2}
+.sub{color:var(--ink-2);font-size:14px;margin-top:10px;max-width:58ch}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 10px}
+.btn{font-family:inherit;font-size:13px;color:var(--ink-2);background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:8px 13px;cursor:pointer}
+.btn:hover{border-color:var(--ink);color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.tally{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);margin-left:auto}
+.tally b{font-weight:500;font-variant-numeric:tabular-nums}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+
+nav{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 4px;border-top:1px solid var(--rule);padding-top:16px}
+nav button{font-family:inherit;font-size:13px;background:none;border:1px solid transparent;border-radius:2px;padding:6px 11px;cursor:pointer;color:var(--ink-2)}
+nav button:hover{background:var(--card);border-color:var(--rule)}
+nav button.on{background:var(--ink);color:#fff}
+nav button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+nav .brkdot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--break);margin-left:6px;vertical-align:2px}
+nav button.on .brkdot{background:#FF8A7A}
+
+.chain{margin-top:48px}
+.chain.hide{display:none}
+.chain > h2{font-family:"Noto Serif TC",serif;font-size:22px;font-weight:600;color:var(--accent);letter-spacing:.04em}
+.chain > .lede{font-size:13px;color:var(--ink-3);margin:3px 0 4px;letter-spacing:.04em}
+.hint{font-size:12px;color:var(--ink-3);margin-bottom:16px}
+
+.track{display:flex;overflow-x:auto;padding-bottom:14px;scrollbar-width:thin}
+.stage{flex:0 0 206px;background:var(--card);border:1px solid var(--rule);border-top:3px solid var(--accent);padding:13px 14px 15px;position:relative}
+.stage + .stage{margin-left:22px}
+.stage + .stage::before{content:"";position:absolute;left:-19px;top:26px;width:16px;height:1px;background:var(--ink-3)}
+.stage + .stage::after{content:"";position:absolute;left:-8px;top:22px;border:4px solid transparent;border-left-color:var(--ink-3)}
+.stage.brk{border-color:var(--break);border-top-color:var(--break);background:var(--break-soft)}
+.cluster .track{flex-wrap:wrap;gap:18px;overflow:visible}
+.cluster .stage{flex:0 0 calc(33.333% - 12px)}
+.cluster .stage + .stage{margin-left:0}
+.cluster .stage + .stage::before,.cluster .stage + .stage::after{display:none}
+
+.st-n{font-size:11px;letter-spacing:.14em;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.st-name{font-size:15px;font-weight:500;margin:1px 0 3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.flag{font-size:10px;letter-spacing:.08em;color:#fff;background:var(--break);padding:1px 5px;border-radius:2px;font-weight:400}
+.trigger{font-size:11px;color:var(--ink-3);border-bottom:1px dashed var(--rule);padding-bottom:8px;margin-bottom:9px;line-height:1.45}
+.fill{font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-bottom:8px}
+
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-family:inherit;font-size:12.5px;line-height:1.4;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink-2);padding:4px 9px 4px 18px;cursor:pointer;position:relative}
+.chip::before{content:"";position:absolute;left:8px;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:var(--break)}
+.chip:hover{border-color:var(--ink-3);color:var(--ink)}
+.chip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.chip[data-s=talk]{background:#FDF6E0;border-color:#EBD9A0;color:#6B5200}
+.chip[data-s=talk]::before{background:var(--talk)}
+.chip[data-s=taken]{background:#E3F0EE;border-color:#B9D9D5;color:#0C4B48}
+.chip[data-s=taken]::before{background:var(--taken)}
+
+.supply{margin-top:16px;background:var(--card);border:1px dashed var(--ink-3);padding:13px 16px}
+.supply h4{font-size:13px;font-weight:500;margin-bottom:3px}
+.supply p{font-size:11.5px;color:var(--ink-3);margin-bottom:9px}
+.loop{margin-top:12px;font-size:12.5px;color:var(--ink-2);display:flex;gap:8px;align-items:flex-start;max-width:78ch}
+.loop span:first-child{color:var(--accent);font-size:15px;line-height:1.2;flex:0 0 auto}
+
+.cross{margin-top:56px;padding:24px 26px;background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--ink)}
+.cross h4{font-family:"Noto Serif TC",serif;font-size:17px;font-weight:600;margin-bottom:11px}
+.cross p{font-size:14px;color:var(--ink-2);margin-bottom:8px}
+.cross code{font-family:inherit;background:var(--paper);padding:1px 6px;border:1px solid var(--rule);font-size:13px}
+
+@media(max-width:900px){.cluster .stage{flex:0 0 calc(50% - 9px)}}
+@media(max-width:820px){
+  .wrap{padding:30px 18px 72px}h1{font-size:28px}
+  .track{display:block;overflow:visible}
+  .stage,.cluster .stage{width:100%}
+  .stage + .stage{margin-left:0;margin-top:26px}
+  .stage + .stage::before{left:50%;top:-20px;width:1px;height:14px}
+  .stage + .stage::after{left:calc(50% - 4px);top:-8px;border-color:transparent;border-top-color:var(--ink-3)}
+  .cluster .stage + .stage{margin-top:18px}
+}
+@media print{body{background:#fff}.toolbar,nav,.cross,.hint{display:none}.chain.hide{display:block}.track{display:block}.stage{page-break-inside:avoid;margin:0 0 12px!important}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">BNI 金安分會</div>
+  <h1>全產業鏈圖</h1>
+  <p class="sub">八個大類，七條鏈加一個場景群。每條鏈的軸都不同——有的走工序，有的走生命週期。點席次切換 空缺 → 洽談中 → 已佔，整段沒人時自動標為斷點。</p>
+</header>
+
+<div class="toolbar">
+  <button class="btn" id="reset">全部歸零</button>
+  <button class="btn" id="copyBreak">複製斷點清單</button>
+  <div class="tally">
+    <span><span class="dot" style="background:var(--break)"></span>空缺 <b id="n-open">0</b></span>
+    <span><span class="dot" style="background:var(--talk)"></span>洽談中 <b id="n-talk">0</b></span>
+    <span><span class="dot" style="background:var(--taken)"></span>已佔 <b id="n-taken">0</b></span>
+    <span>斷點 <b id="n-brk">0</b> 段</span>
+  </div>
+</div>
+
+<nav id="nav"></nav>
+<div id="chains"></div>
+
+<div class="cross">
+  <h4>跨鏈的交會點</h4>
+  <p><strong>所有鏈都通往企業服務。</strong>每一條鏈上的節點本身都是一家公司，也就是企業服務鏈的客戶。一位<code>營造廠</code>會員，同時是<code>記帳士</code>、<code>人資顧問</code>、<code>ISO 輔導</code>的潛在客戶——這是分會最高價值的引薦交會。</p>
+  <p><strong>三條鏈共用同一批客戶。</strong><code>不動產</code>成交 → <code>營建裝修</code>進場 → <code>金融保險</code>房貸 → <code>生活服務</code>搬家清潔。四類會員可以共享同一組名單，這是最容易設計的聯合活動主題。</p>
+  <p><strong>段位相鄰 = 一級引薦；跨 2 段以上 = 二級引薦。</strong>這條界線可以直接拿來定義分會獎項的計算標準。</p>
+</div>
+
+</div>
+
+<script>
+const CHAINS=[
+{k:"build",n:"營建裝修",c:"#B4552F",t:"工序鏈 · 一個案子往前推進",
+ loop:"第 7 段的抓漏師傅發現壁癌嚴重，案子回流到第 2 段重新設計。這個回流是分會最常漏掉的引薦來源。",
+ sup:{t:"橫向供應層",p:"不屬於任何一段，同時餵養第 3–5 段",i:["建材通路","衛浴設備","廚具","門窗五金","石材","塗料"]},
+ s:[["案源","成交那一刻",["房仲","代銷","都更危老","估價師","地政士"]],
+    ["規劃設計","屋主拿到鑰匙",["建築師","室內設計","結構技師","景觀設計","照明設計","3D 繪圖"]],
+    ["發包營造","圖說定案",["營造廠","統包工程","拆除工程","基礎工程","結構補強"]],
+    ["隱蔽工程","拆除完成",["水電工程","消防設備","空調冷凍","弱電監控","防水工程"]],
+    ["表面裝修","隱蔽驗收",["泥作瓷磚","木作裝潢","系統櫃","油漆粉刷","地板工程","玻璃鋁窗","輕鋼架天花"]],
+    ["完工交付","工程尾款",["窗簾軟裝","家電","清潔消毒","除蟲","搬家"]],
+    ["售後維護","交屋後 1–5 年",["防水抓漏","壁癌處理","外牆拉皮","屋頂修繕","結構鑑定","智能家居","淨水設備"]]]},
+
+{k:"biz",n:"企業服務",c:"#146B67",t:"生命週期鏈 · 一家公司往前長",
+ loop:"第 8 段擴廠或接班後，公司等於重開一輪：回到第 2 段重建基礎、第 3 段重組人才。老客戶的第二輪需求比新客開發便宜得多。",
+ s:[["創業設立","決定創業",["公司登記","記帳士","會計師","商標註冊","資金貸款"]],
+    ["基礎建置","拿到統編",["商用空間","辦公設備","辦公家具","系統開發","網路設備"]],
+    ["人才組建","第一位員工",["人資顧問","獵才","勞健保服務","薪資外包","外籍勞務","教育訓練"]],
+    ["品牌成形","準備開賣",["品牌策略","平面設計","包裝設計","網站設計","商業攝影","印刷"]],
+    ["客戶拓展","有產品沒訂單",["數位行銷","廣告代理","社群經營","公關媒體","活動企劃","企業贈品"]],
+    ["營運擴張","訂單超過人力",["ERP 導入","流程優化","物流倉儲","清潔外包","雲端服務","AI 導入","翻譯"]],
+    ["風險治理","第一次被告或被駭",["律師","企業法務","合約審閱","資安服務","ISO 輔導","債權處理"]],
+    ["資本傳承","準備擴廠或交棒",["財務顧問","稅務規劃","企業融資","策略顧問","政府補助申請","接班傳承"]]]},
+
+{k:"health",n:"健康醫療",c:"#2E6DA4",t:"照護鏈 · 一個人從健康到失能",
+ loop:"第 4 段復健完成後回到第 1 段做預防，避免二次受傷。這是健康產業最穩定的回購路徑，卻最少人主動引薦。",
+ sup:{t:"橫向供應層",p:"服務所有段位的後勤",i:["醫材通路","藥局","醫療耗材","診所設備","醫療資訊系統"]},
+ s:[["預防保健","健檢報告出現紅字",["健康檢查","營養師","保健食品","中醫調理","疫苗接種"]],
+    ["診斷檢測","身體出狀況",["家醫診所","影像檢查","檢驗所","專科醫師","基因檢測"]],
+    ["治療處置","確診",["牙醫","眼科","皮膚科","骨科","婦產科","身心科"]],
+    ["復健修復","療程結束",["物理治療","職能治療","整復推拿","運動防護","輔具"]],
+    ["長期照護","失能或高齡",["居家照護","日照中心","看護仲介","無障礙改造","安養機構"]],
+    ["生命規劃","面對終點",["生前契約","禮儀服務","遺物整理","悲傷輔導"]]]},
+
+{k:"food",n:"食品餐飲",c:"#8A6D1F",t:"供應鏈 · 一份食材從產地到餐桌",
+ loop:"第 5 段門店的暢銷品，回頭找第 2 段代工做成商品上架。這是餐飲最常見的擴張路線，也是最好談的一級引薦。",
+ sup:{t:"橫向供應層",p:"跨段供應，第 2 段與第 5 段需求最重",i:["餐飲設備","包裝材料","清潔用品","POS 系統","菜單設計"]},
+ s:[["生產源頭","產季到",["農產","漁產","畜產","有機農場","進口貿易"]],
+    ["加工製造","原料進廠",["食品加工","烘焙工廠","冷凍調理","釀造","代工 OEM"]],
+    ["物流冷鏈","成品出廠",["冷鏈物流","倉儲","宅配","配送車隊"]],
+    ["通路批發","需要鋪貨",["食材批發","電商平台","量販通路","團購主"]],
+    ["餐飲門店","決定開店",["餐廳","咖啡","手搖飲","早餐","烘焙門市","外燴"]],
+    ["品牌擴張","單店開始賺錢",["加盟總部","店務顧問","中央廚房","品牌授權"]]]},
+
+{k:"fin",n:"金融保險",c:"#4A3F8F",t:"財富週期鏈 · 一筆錢從賺到傳",
+ loop:"第 6 段傳承完成，下一代回到第 1 段重啟。金融是唯一能跨世代續約的鏈——經營好一個家庭等於經營三十年。",
+ s:[["收入起點","第一份薪水",["銀行開戶","記帳理財","信用建立"]],
+    ["風險保障","成家或創業",["壽險","醫療險","意外險","產險","企業團保"]],
+    ["資產累積","開始有結餘",["基金","股票","定存","儲蓄險","外幣"]],
+    ["槓桿運用","要買房或擴張",["房貸","信貸","企業融資","設備租賃"]],
+    ["資產配置","資產具規模",["財富管理","不動產投資","海外資產","稅務規劃"]],
+    ["傳承移轉","面對下一代",["信託","遺產規劃","保單傳承","家族辦公室"]]]},
+
+{k:"auto",n:"汽車運輸",c:"#1F6B4A",t:"車主週期鏈 · 一台車從買到報廢",
+ loop:"第 6 段轉手後回到第 1 段換車。掌握第 3 段保養廠的會員，等於握住整條鏈的入口名單——他知道每一台車的年份與里程。",
+ sup:{t:"橫向供應層",p:"主要供應第 3–5 段",i:["零件通路","機油","汽車電子","保養廠設備"]},
+ s:[["購車","決定買車",["新車銷售","中古車","車貸","營業租賃"]],
+    ["領牌上路","交車",["車險","驗車代辦","監理代辦","新車美容"]],
+    ["日常養護","里程數到",["保養廠","輪胎","汽車百貨","洗車","鍍膜"]],
+    ["改裝升級","想要更好",["音響","車體包膜","避震","行車紀錄器","隔熱紙"]],
+    ["事故處理","碰撞",["板金烤漆","道路救援","理賠協助","代步車"]],
+    ["汰換轉手","車齡到了",["中古收購","報廢回收","寄賣"]]]},
+
+{k:"edu",n:"教育文創",c:"#9B4A6E",t:"學習歷程鏈 · 一個人從啟蒙到產出",
+ loop:"第 6 段的創作者回頭成為第 3 段的老師、第 5 段的講師。教育鏈的末端會自己長回中段，這是其他鏈沒有的特性。",
+ s:[["學前啟蒙","孩子出生",["托嬰","幼兒園","親子課程","教具"]],
+    ["學齡輔助","入學",["課後照顧","補習班","家教","學習診斷"]],
+    ["才藝發展","找到興趣",["音樂","美術","舞蹈","體育","程式"]],
+    ["升學銜接","面臨考試",["升學輔導","留學代辦","語言學校","志願諮詢"]],
+    ["職涯技能","進入職場",["證照培訓","專業進修","企業內訓","職涯教練"]],
+    ["文創產出","有作品要發表",["出版","影音創作","展演策劃","IP 授權","文創商品"]]]},
+
+{k:"life",n:"生活服務",c:"#6B6B6B",t:"場景群 · 沒有固定順序，靠場景聯想",cluster:true,
+ loop:"這一類刻意不排成鏈。客戶需求是散進來的——搬家跟寵物美容之間沒有先後關係。引薦靠的是聽出對方生活裡發生了什麼事，不是記住工序。",
+ s:[["居家維運","家裡出狀況",["家事清潔","水電修繕","家電維修","搬家","收納整理"]],
+    ["個人形象","要見重要的人",["美髮","美容","美甲","按摩紓壓","形象顧問","服飾訂製"]],
+    ["人生禮俗","人生大事",["婚顧","婚攝","喜餅","命理","彌月","節慶禮品"]],
+    ["寵物家庭","養了寵物",["寵物美容","獸醫","寵物食品","寵物旅館","寵物殯葬"]],
+    ["休閒旅遊","想放鬆",["旅行社","民宿","票務","戶外活動","健身"]],
+    ["安全法務","需要保障",["保全","徵信","鎖匠","代書","公證"]]]}
+];
+
+const CYCLE={open:"talk",talk:"taken",taken:"open"};
+const LABEL={open:"空缺",talk:"洽談中",taken:"已佔"};
+const root=document.getElementById("chains"),navEl=document.getElementById("nav");
+
+function mkChip(label){
+  const el=document.createElement("button");
+  el.className="chip";el.dataset.s="open";el.textContent=label;
+  el.setAttribute("aria-label",label+"，狀態：空缺");
+  el.addEventListener("click",()=>{
+    el.dataset.s=CYCLE[el.dataset.s];
+    el.setAttribute("aria-label",label+"，狀態："+LABEL[el.dataset.s]);
+    refresh();
+  });
+  return el;
+}
+
+CHAINS.forEach((ch,idx)=>{
+  const sec=document.createElement("section");
+  sec.className="chain"+(ch.cluster?" cluster":"")+(idx?" hide":"");
+  sec.dataset.k=ch.k;
+  sec.style.setProperty("--accent",ch.c);
+  sec.innerHTML='<h2>'+ch.n+'</h2><p class="lede">'+ch.t+'</p>'+
+    (ch.cluster?'':'<p class="hint">左右捲動查看完整鏈條</p>');
+
+  const track=document.createElement("div");
+  track.className="track";
+  ch.s.forEach(([name,trig,items],i)=>{
+    const box=document.createElement("div");
+    box.className="stage";
+    box.innerHTML='<div class="st-n">'+(ch.cluster?"群組":String(i+1).padStart(2,"0"))+'</div>'+
+      '<div class="st-name">'+name+'</div>'+
+      '<div class="trigger">觸發：'+trig+'</div><div class="fill"></div>';
+    const chips=document.createElement("div");
+    chips.className="chips";
+    items.forEach(x=>chips.appendChild(mkChip(x)));
+    box.appendChild(chips);
+    track.appendChild(box);
+  });
+  sec.appendChild(track);
+
+  if(ch.sup){
+    const sup=document.createElement("div");
+    sup.className="supply";
+    sup.innerHTML='<h4>'+ch.sup.t+'</h4><p>'+ch.sup.p+'</p>';
+    const chips=document.createElement("div");
+    chips.className="chips";
+    ch.sup.i.forEach(x=>chips.appendChild(mkChip(x)));
+    sup.appendChild(chips);
+    sec.appendChild(sup);
+  }
+
+  const lp=document.createElement("div");
+  lp.className="loop";
+  lp.innerHTML='<span>'+(ch.cluster?"※":"↻")+'</span><span>'+ch.loop+'</span>';
+  sec.appendChild(lp);
+  root.appendChild(sec);
+
+  const b=document.createElement("button");
+  b.textContent=ch.n;
+  b.className=idx?"":"on";
+  b.dataset.k=ch.k;
+  b.addEventListener("click",()=>{
+    navEl.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));
+    root.querySelectorAll(".chain").forEach(x=>x.classList.toggle("hide",x.dataset.k!==ch.k));
+  });
+  navEl.appendChild(b);
+});
+
+const allChips=()=>Array.from(document.querySelectorAll(".chip"));
+
+function refresh(){
+  const c={open:0,talk:0,taken:0};
+  allChips().forEach(el=>c[el.dataset.s]++);
+  n("n-open",c.open);n("n-talk",c.talk);n("n-taken",c.taken);
+
+  let brk=0;
+  document.querySelectorAll(".chain").forEach(ch=>{
+    let cb=0;
+    ch.querySelectorAll(".stage").forEach(st=>{
+      const taken=st.querySelectorAll('.chip[data-s=taken]').length;
+      const total=st.querySelectorAll('.chip').length;
+      const isBrk=taken===0;
+      st.classList.toggle("brk",isBrk);
+      if(isBrk){brk++;cb++}
+      st.querySelector(".fill").textContent="在席 "+taken+" / "+total;
+      const nm=st.querySelector(".st-name"),old=nm.querySelector(".flag");
+      if(isBrk&&!old){const f=document.createElement("span");f.className="flag";f.textContent="斷點";nm.appendChild(f)}
+      else if(!isBrk&&old){old.remove()}
+    });
+    const btn=navEl.querySelector('button[data-k="'+ch.dataset.k+'"]');
+    if(btn){
+      const d=btn.querySelector(".brkdot");
+      if(cb&&!d){const s=document.createElement("span");s.className="brkdot";btn.appendChild(s)}
+      else if(!cb&&d){d.remove()}
+    }
+  });
+  n("n-brk",brk);
+}
+function n(id,v){document.getElementById(id).textContent=v}
+refresh();
+
+document.getElementById("reset").addEventListener("click",()=>{
+  allChips().forEach(el=>{el.dataset.s="open";el.setAttribute("aria-label",el.textContent+"，狀態：空缺")});
+  refresh();
+});
+
+document.getElementById("copyBreak").addEventListener("click",async()=>{
+  const btn=document.getElementById("copyBreak"),lines=[];
+  document.querySelectorAll(".chain").forEach(ch=>{
+    const name=ch.querySelector("h2").textContent,hit=[];
+    ch.querySelectorAll(".stage").forEach(st=>{
+      if(!st.classList.contains("brk"))return;
+      const num=st.querySelector(".st-n").textContent;
+      const sn=st.querySelector(".st-name").firstChild.textContent;
+      const seats=Array.from(st.querySelectorAll(".chip")).map(c=>c.textContent);
+      hit.push("  "+num+" "+sn+"：待補 "+seats.join("、"));
+    });
+    if(hit.length)lines.push(name+" 斷點 "+hit.length+" 段",...hit,"");
+  });
+  const text=lines.length?lines.join("\n"):"目前沒有斷點，所有鏈都完整。";
+  try{await navigator.clipboard.writeText(text);btn.textContent="已複製"}
+  catch{btn.textContent="複製失敗"}
+  setTimeout(()=>{btn.textContent="複製斷點清單"},1600);
+});
+</script>
+</body>
+</html>
