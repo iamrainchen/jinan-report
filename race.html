@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -432,7 +433,7 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
      ============================================================ */
 
   // Apps Script 網址，留白則顯示示範資料
-  var API = "";
+  var API = "https://script.google.com/macros/s/AKfycbzNS8QVntl0LmZ64z2F7Bf9DV9MyOFueo37ZJDz_qnnWgR8UybV8brPZY0KTa3FPNogrQ/exec?action=race";
 
   var SEASON = { start:"2026-10-01", end:"2027-03-31" };
 
@@ -559,12 +560,22 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
   }
   var lapUnit = 12;          // 實際使用的一圈分數，載入資料後由 computeLapUnit() 決定
   var lapAuto = true;
+  // 只有「已完成」的站才拿來算一圈幾分，否則進行中的那站會把基準一直往下拉
+  function weekDone(wk){
+    var live = 0;
+    wk.rows.forEach(function(r){
+      if((r.report||0) + (r.attend||0) + (r.o2o||0) + (r.refIn||0) + (r.refOut||0)
+         + (r.biz||0) + (r.train||0) + (r.guest||0) > 0){ live++; }
+    });
+    return wk.rows.length > 0 && live * 2 >= wk.rows.length;
+  }
   function computeLapUnit(data){
     if(LAP_POINTS){ lapAuto = false; lapUnit = LAP_POINTS; return; }
     lapAuto = true;
     var sum = 0, n = 0, sizes = {};
     data.teams.forEach(function(t){ sizes[t.id] = t.size; });
     data.weeks.forEach(function(wk){
+      if(!weekDone(wk)){ return; }
       wk.rows.forEach(function(r){
         var s = scoreRow(r, sizes[r.team] || 0, wk.date);
         sum += s.avg; n++;
@@ -951,7 +962,8 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     });
 
     document.getElementById("pWeek").textContent =
-      lastWeek ? "第 " + lastWeek.week + " 站 · " + fmt(parseD(lastWeek.date)) : "—";
+      lastWeek ? "第 " + lastWeek.week + " 站 · " + fmt(parseD(lastWeek.date))
+                 + (weekDone(lastWeek) ? "" : "（進行中）") : "—";
   }
 
   /* ---------- 規則 ---------- */
