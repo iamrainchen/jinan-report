@@ -257,6 +257,29 @@
     font-family: 'Noto Sans TC', sans-serif; transition: all 0.15s;
   }
   .tab-btn.active { color: var(--gold-dark); border-bottom-color: var(--gold); }
+
+  /* 小組競賽入口 */
+  .race-entry {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 15px; margin-bottom: 20px;
+    background: linear-gradient(100deg, var(--paper-warm), #FCFAF5);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    color: var(--ink); text-decoration: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .race-entry:hover { border-color: var(--gold); }
+  .race-entry .re-flag { font-size: 22px; line-height: 1; flex-shrink: 0; }
+  .race-entry .re-text { flex: 1; min-width: 0; }
+  .race-entry .re-title { display: block; font-size: 15px; font-weight: 500; }
+  .race-entry .re-sub { display: block; font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+  .race-entry .re-go { font-size: 13px; font-weight: 500; color: var(--gold-dark); white-space: nowrap; }
+  .race-entry.done {
+    background: var(--success-bg); border-color: var(--success);
+    box-shadow: 0 2px 14px rgba(45,106,79,.18);
+  }
+  .race-entry.done .re-title,
+  .race-entry.done .re-go { color: var(--success); }
+  .race-entry.done .re-sub { color: #3F7A5E; }
   .group-status-card {
     background: #fff; border: 1px solid var(--border);
     border-radius: var(--radius); margin-bottom: 12px;
@@ -301,6 +324,15 @@
     <button class="tab-btn active" id="tabFill" onclick="switchTab('fill')">填寫接龍</button>
     <button class="tab-btn" id="tabStatus" onclick="switchTab('status')">本週狀況</button>
   </div>
+
+  <a class="race-entry" id="raceEntry" href="race.html">
+    <span class="re-flag">🏁</span>
+    <span class="re-text">
+      <span class="re-title" id="raceTitle">金安小組競賽</span>
+      <span class="re-sub" id="raceSub">看看你這組目前跑到第幾名</span>
+    </span>
+    <span class="re-go">前往 →</span>
+  </a>
 
   <!-- Status page -->
   <div id="pageStatus" class="hidden">
@@ -654,6 +686,15 @@ async function loadStatus() {
   }
 }
 
+function markRaceEntryDone() {
+  const box = document.getElementById('raceEntry');
+  if (!box) { return; }
+  box.classList.add('done');
+  document.getElementById('raceTitle').textContent = '回報完成！';
+  document.getElementById('raceSub').textContent = '看看你這組跑到第幾名';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 async function submitForm() {
   if (!selGroup || !selMember) return showToast('請先選擇小組與姓名', true);
   if (!attendStatus) return showToast('請選擇出席狀況', true);
@@ -692,6 +733,7 @@ async function submitForm() {
       body: JSON.stringify(payload)
     });
     showToast('✓ 回報成功！', false);
+    markRaceEntryDone();
     setTimeout(() => {
       resetForm();
       goStep(1);
