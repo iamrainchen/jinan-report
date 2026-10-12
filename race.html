@@ -220,6 +220,7 @@ td.money i{font-style:normal;display:block;font-size:11px;color:var(--mist)}
 tbody tr.dim td{opacity:.7}
 .tablescroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tablescroll table{min-width:820px}
+.tablescroll thead th:first-child{padding-left:24px}   /* 讓開色塊，對齊下方組別 */
 
 /* ---------- stage: circuit + timing ---------- */
 .stage{display:grid;grid-template-columns:1fr;gap:20px;margin-top:20px;align-items:start}
@@ -264,7 +265,8 @@ td.tpos .mv{font-style:normal;font-size:10px;font-weight:600;letter-spacing:.02e
 td.tpos .mv.up{color:var(--green)}
 td.tpos .mv.dn{color:var(--red)}
 td.tpos .mv.eq{color:#C3CBD3}
-td.tname{text-align:left;font-size:14px;font-weight:500;white-space:nowrap}
+td.tname{font-size:14px;font-weight:500;white-space:nowrap}
+.tower tbody td.tpos,.tower tbody td.tname{text-align:left}
 td.tnum{font-family:"Saira Condensed",sans-serif;font-weight:600;font-size:15px;font-variant-numeric:tabular-nums}
 td.tnum.big{font-size:19px;font-weight:700}
 td.tnum.gap{color:var(--mist);font-size:13px;letter-spacing:.04em}
@@ -303,6 +305,7 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
   .tablescroll table td:first-child{position:sticky;left:0;z-index:2;
     background:var(--card);box-shadow:1px 0 0 var(--rule)}
   .tablescroll thead th{padding:0 5px 8px;font-size:10.5px;letter-spacing:.06em}
+  .tablescroll thead th:first-child{padding-left:19px}
   .tablescroll tbody td{padding:5px 5px;font-size:13px}
   .tablescroll .teamcell{gap:6px}
   .tablescroll .chip{width:8px;height:19px}
@@ -408,7 +411,7 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
         <ul class="rules" id="ruleList"></ul>
         <p class="meta" id="ruleMeta"></p>
 
-        <h2 style="margin:18px -16px 0;padding-left:0;border-top:1px solid var(--line)">賽事日誌</h2>
+        <h2 style="margin:18px -16px 0;border-top:1px solid var(--line)">賽事日誌</h2>
         <ul class="log" id="log"></ul>
         <p class="empty" id="logEmpty" hidden>還沒有任何一站的資料。</p>
       </div>
