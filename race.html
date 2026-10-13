@@ -277,6 +277,105 @@ td.tnum.last.purple{color:var(--purple)}
 td.tnum.lap{color:var(--mist);letter-spacing:.06em}
 
 
+/* ---------- 組員紅綠燈 ---------- */
+.lightpick{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.lightpick.setpick{margin-bottom:10px}
+.lightpick.setpick button{border-color:#C9D2DA;color:var(--mist);font-size:12.5px;padding:4px 10px}
+.lightpick.setpick button.on{background:var(--red);border-color:var(--red);color:#FFF}
+.lightpick button{
+  font-family:"Noto Sans TC",sans-serif;font-size:13px;padding:5px 11px;cursor:pointer;
+  background:#FFF;border:1px solid var(--line);color:var(--ink);border-radius:0;line-height:1.4}
+.lightpick button:hover{border-color:var(--mist)}
+.lightpick button.on{background:var(--ink);border-color:var(--ink);color:#FFF;font-weight:500}
+.lightsum{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin:0 0 10px;font-size:12px;color:var(--mist)}
+.lightsum b{font-family:"Saira Condensed",sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none;margin-right:5px;vertical-align:-1px}
+.dot.g{background:var(--green)} .dot.y{background:var(--amber)} .dot.r{background:var(--red)}
+.dot.b{background:#1B2026} .dot.n{background:#C8D0D8}
+td.nm{text-align:left;font-size:14px;white-space:nowrap}
+tr.clicky{cursor:pointer}
+.tower tbody tr.clicky:hover td{background:#F2F6FA}
+.teamcell.clicky:hover{text-decoration:underline;text-underline-offset:3px}
+td.lt{text-align:left;white-space:nowrap;font-size:12px;color:var(--mist)}
+td.sc{font-family:"Saira Condensed",sans-serif;font-weight:700;font-size:17px}
+td.sc.g{color:var(--green)} td.sc.y{color:var(--amber)} td.sc.r{color:var(--red)}
+td.sc.b{color:#1B2026} td.sc.n{color:#A9B4BE}
+tbody tr.newbie td{color:var(--mist)}
+
+
+/* ---------- 直線賽道 ---------- */
+.lanebox{padding:14px 16px 6px;background:linear-gradient(170deg,#F7FAFC 0%,#EDF2F6 100%)}
+.axis{position:relative;height:16px;margin-left:68px;margin-right:52px}
+.axis i{position:absolute;top:0;transform:translateX(-50%);
+  font-family:"Saira Condensed",sans-serif;font-size:11px;color:var(--mist);font-style:normal}
+.lanes{display:flex;flex-direction:column;gap:5px}
+.lrow{display:grid;grid-template-columns:68px minmax(0,1fr) 52px;align-items:center;gap:0}
+.lname{font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.lname i{width:4px;height:17px;flex:none;display:block}
+.lscore{font-family:"Saira Condensed",sans-serif;font-weight:700;font-size:16px;
+  text-align:right;font-variant-numeric:tabular-nums;padding-left:7px}
+.strip{position:relative;height:30px;background:var(--asphalt-2);
+  border-top:2px solid #FFF;border-bottom:2px solid #FFF;overflow:visible}
+.strip::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;
+  background:repeating-linear-gradient(90deg,#FFF 0 14px,transparent 14px 30px);opacity:.85}
+.strip .grid{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.55)}
+.strip .startline{position:absolute;left:0;top:0;bottom:0;width:7px;
+  background:repeating-conic-gradient(#1B2026 0 25%, #FFF 0 50%) 0 0/7px 7px}
+.strip .pcar{position:absolute;top:50%;width:46px;height:21px;margin-top:-11px;transform:translateX(-50%)}
+.strip .pcar svg{width:100%;height:100%;display:block}
+.strip.lead{background:#D4DBE2}
+@media (prefers-reduced-motion:no-preference){ .strip .pcar{transition:left .9s cubic-bezier(.22,.75,.3,1)} }
+@media (max-width:620px){
+  .lanebox{padding:12px 12px 6px}
+  .axis{margin-left:60px;margin-right:46px}
+  .lrow{grid-template-columns:60px minmax(0,1fr) 46px}
+  .lname{font-size:13px;gap:5px}
+  .lscore{font-size:15px}
+  .strip{height:26px}
+  .strip .pcar{width:40px;height:18px;margin-top:-9px}
+}
+
+
+/* ---------- 紅綠燈：點名字展開的分析 ---------- */
+tbody tr.person{cursor:pointer}
+tbody tr.person:hover td{background:#F2F6FA}
+tbody tr.person.open td{background:#F7FAFD}
+td.nm .caret{display:inline-block;width:12px;color:var(--mist);font-size:10px;margin-right:3px}
+.detailbox{margin-top:12px;border:1px solid var(--line);background:#FBFCFD}
+.dhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding:12px 14px 8px}
+.dhead b{font-size:15px}
+.dhead .dlight{font-size:12.5px;color:var(--mist)}
+.dhead .dgap{font-size:12.5px;color:var(--mist);margin-left:auto}
+.dhead .dgap b{font-family:"Saira Condensed",sans-serif;font-size:16px;color:var(--red)}
+table.dtable{width:100%;border-collapse:collapse;margin:0 0 2px}
+table.dtable th{text-align:left;font-weight:500;font-size:13px;padding:6px 14px;width:76px;white-space:nowrap;border:none}
+table.dtable td{padding:6px 10px;border:none;font-size:13px;text-align:left}
+table.dtable tr+tr th,table.dtable tr+tr td{border-top:1px solid var(--rule)}
+table.dtable td.dnow{color:var(--mist);white-space:nowrap;width:100%}
+table.dtable td.dpt{font-family:"Saira Condensed",sans-serif;font-weight:700;font-size:15px;
+  text-align:right;width:52px;white-space:nowrap}
+table.dtable td.dpt em{font-style:normal;font-weight:400;font-size:11px;color:var(--mist)}
+table.dtable td.dtip{color:var(--red);font-weight:500;white-space:nowrap;text-align:right;padding-right:14px}
+table.dtable tr.ok td.dpt{color:var(--green)}
+table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
+.dnote{margin:0;padding:2px 14px 12px;font-size:11.5px;color:var(--mist);line-height:1.7}
+@media (max-width:620px){
+  .dhead{padding:10px 12px 4px}
+  .dhead .dgap{margin-left:0;flex-basis:100%}
+  /* 手機改成一項一塊：項目＋得分一行，目前值一行，建議一行 */
+  table.dtable tr{display:grid;grid-template-columns:1fr auto;gap:1px 10px;
+    padding:9px 12px;border-top:1px solid var(--rule)}
+  table.dtable tr:first-child{border-top:none}
+  table.dtable tr+tr th,table.dtable tr+tr td{border-top:none}
+  table.dtable th{grid-row:1;grid-column:1;width:auto;padding:0;font-size:13.5px}
+  table.dtable td{padding:0}
+  table.dtable td.dpt{grid-row:1;grid-column:2;text-align:right;font-size:15px}
+  table.dtable td.dnow{grid-row:2;grid-column:1/-1;white-space:normal;width:auto;font-size:12.5px}
+  table.dtable td.dtip{grid-row:3;grid-column:1/-1;text-align:left;white-space:normal;
+    padding-right:0;font-size:12.5px;margin-top:1px}
+  .dnote{padding:4px 12px 12px}
+}
+
 /* ---------- rule list ---------- */
 .rules{margin:0;padding:0;list-style:none;font-size:13px}
 .rules li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--rule)}
@@ -290,32 +389,43 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
   /* 手機：儀表板隱藏 GAP／INT，整張表直接塞進畫面 */
   .tower table{min-width:0}
   .tower th.g,.tower th.i,.tower td.gap,.tower td.int{display:none}
-  .tower thead th{padding:8px 6px;letter-spacing:.06em}
-  .tower tbody td{padding:9px 6px}
+  .tower thead th{padding:8px 6px;letter-spacing:.04em;font-size:11.5px}
+  .tower tbody td{padding:10px 6px}
   td.tpos{width:58px}
-  td.tpos .pwrap{gap:5px;font-size:16px}
-  td.tname{font-size:13px}
-  td.tnum{font-size:14px}
-  td.tnum.big{font-size:18px}
+  td.tpos .pwrap{gap:5px;font-size:17px}
+  td.tname{font-size:14.5px}
+  td.tnum{font-size:15px}
+  td.tnum.big{font-size:19px}
 
   .tablescroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
   .tablescroll table{min-width:640px}
 
-  /* 手機：本站數據左欄固定，橫向滑動時看得到是哪一組 */
+  /* 手機：本週數據左欄固定，橫向滑動時看得到是哪一組 */
   .tablescroll table th:first-child,
   .tablescroll table td:first-child{position:sticky;left:0;z-index:2;
     background:var(--card);box-shadow:1px 0 0 var(--rule)}
-  .tablescroll thead th{padding:0 5px 8px;font-size:10.5px;letter-spacing:.06em}
-  .tablescroll thead th:first-child{padding-left:19px}
-  .tablescroll tbody td{padding:5px 5px;font-size:13px}
+  .tablescroll thead th{padding:0 5px 8px;font-size:11.5px;letter-spacing:.04em}
+  .tablescroll thead th:first-child{padding-left:20px}
+  .tablescroll tbody td{padding:6px 5px;font-size:14px}
   .tablescroll .teamcell{gap:6px}
-  .tablescroll .chip{width:8px;height:19px}
-  .tablescroll td.money{font-size:12px}
-  .tablescroll td.money i{font-size:10px}
-  .tablescroll td.n{font-size:14px}
-  .tablescroll td.avg{font-size:16px}
+  .tablescroll .chip{width:9px;height:20px}
+  .tablescroll td.money{font-size:13px}
+  .tablescroll td.money i{font-size:11px}
+  .tablescroll td.n{font-size:15px}
+  .tablescroll td.avg{font-size:17px}
+  .tablescroll td.nm{font-size:14.5px}
+  .tablescroll td.lt{font-size:13px}
+  .tablescroll td.sc{font-size:17px}
   .board h2{padding:12px 14px}
-  .scrollhint{display:block}
+  .scrollhint{display:block;font-size:12px}
+  .gridlegend{font-size:12px;gap:10px}
+  .chipitem{font-size:12.5px}
+  .chipitem b{font-size:12.5px}
+  .lightsum{font-size:12.5px}
+  .lightpick button{font-size:13.5px;padding:6px 12px}
+  .rules{font-size:13.5px}
+  .log{font-size:13.5px}
+  .meta,.srcline,footer{font-size:12.5px}
 }
 </style>
 </head>
@@ -326,11 +436,11 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     <div class="brand">
       <p class="eyebrow">BNI 金安分會 · 出席接龍競賽</p>
       <h1>金安<span class="gp">小組競賽</span></h1>
-      <p class="sub">每週一站，資料從接龍表單自動帶入、自動計分，車子往前開。賽期結束時總分最高的那一組拿下年度冠軍。<br>
-        <span id="seasonLine">賽期 2026/10/01 – 2027/03/31，共 26 站</span></p>
+      <p class="sub">每週計分一次，資料從接龍表單自動帶入，車子往前開。26 週結束時總分最高的那一組拿下年度冠軍。<br>
+        <span id="seasonLine">賽期 2026/10/01 – 2027/03/31，共 26 週</span></p>
     </div>
     <div class="headstat">
-      <div><div class="k">Round</div><div class="v num" id="hRound">0</div></div>
+      <div><div class="k">Week</div><div class="v num" id="hRound">0</div></div>
       <div><div class="k">領先</div><div class="v" id="hLead" style="font-size:22px;font-family:'Noto Sans TC',sans-serif;font-weight:700">—</div></div>
       <div><div class="k">最高分</div><div class="v num" id="hLap">0.0<small>分</small></div></div>
     </div>
@@ -355,7 +465,7 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
           <thead>
             <tr>
               <th class="l">POS</th><th class="l">車隊</th>
-              <th>總分</th><th class="g">GAP</th><th class="i">INT</th><th>本站</th><th>圈數</th>
+              <th>總分</th><th class="g">GAP</th><th class="i">INT</th><th>本週</th>
             </tr>
           </thead>
           <tbody id="towerRows"></tbody>
@@ -364,24 +474,12 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     </div>
     <div class="circuit">
       <h2>賽道 <em id="lapInfo">—</em></h2>
-      <div class="circuitbox">
-        <svg id="track" viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid meet" role="img" aria-label="八組在賽道上的位置">
-          <defs>
-            <linearGradient id="infield" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#F3F7FA"/>
-              <stop offset="1" stop-color="#E8EEF3"/>
-            </linearGradient>
-          </defs>
-          <path id="circuitPath" fill="none" d=""/>
-          <g id="trackLayers"></g>
-          <g id="lapTicks"></g>
-          <g id="sfLine"></g>
-          <g id="carsLayer"></g>
-        </svg>
+      <div class="lanebox">
+        <div class="axis" id="axis"></div>
+        <div class="lanes" id="lanes"></div>
       </div>
-      <div class="chiprow" id="chipRow"></div>
       <div class="gridlegend">
-        <span><i class="sw" style="background:var(--purple)"></i>紫標 ＝ 本站得分最高</span>
+        <span><i class="sw" style="background:var(--purple)"></i>紫標 ＝ 本週得分最高</span>
         <span id="goalNote">—</span>
       </div>
     </div>
@@ -390,7 +488,7 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
 
   <section class="panels">
     <div class="panel">
-      <h2>本站數據 <em id="pWeek">—</em></h2>
+      <h2>本週數據 <em id="pWeek">—</em></h2>
       <div class="body">
         <p class="scrollhint">← 表格可左右滑動</p>
         <div class="tablescroll">
@@ -400,9 +498,30 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
           </table>
         </div>
         <div class="actions">
-          <button type="button" id="btnCopy">複製本站戰報</button>
+          <button type="button" id="btnCopy">複製本週戰報</button>
           <button type="button" class="quiet" id="btnReload">重新整理資料</button>
         </div>
+      </div>
+    </div>
+
+    <div class="panel" id="lightPanel">
+      <h2>組員紅綠燈 <em id="lightPeriod">—</em></h2>
+      <div class="body">
+        <div class="lightpick setpick" id="lightSetPick"></div>
+        <div class="lightpick" id="lightPick"></div>
+        <div class="lightsum" id="lightSum"></div>
+        <p class="scrollhint">← 表格可左右滑動</p>
+        <div class="tablescroll">
+          <table>
+            <thead><tr>
+              <th class="l">姓名</th><th class="l">燈號</th><th>得分</th><th>出席率</th>
+              <th>一對一</th><th>提供引薦</th><th>收到引薦</th><th>來賓</th><th>培訓</th><th>交易價值</th>
+            </tr></thead>
+            <tbody id="lightRows"></tbody>
+          </table>
+        </div>
+        <div class="detailbox" id="lightDetail" hidden></div>
+        <p class="meta">資料來自 BNI PALMS 紅綠燈報表，統計區間 <span id="lightPeriod2">—</span>，與賽道分數分開計算、不互相影響。點上方「計時儀表板」的任一組也可以切換。</p>
       </div>
     </div>
 
@@ -414,13 +533,13 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
 
         <h2 style="margin:18px -16px 0;border-top:1px solid var(--line)">賽事日誌</h2>
         <ul class="log" id="log"></ul>
-        <p class="empty" id="logEmpty" hidden>還沒有任何一站的資料。</p>
+        <p class="empty" id="logEmpty" hidden>還沒有任何一週的資料。</p>
       </div>
     </div>
   </section>
 
   <footer>
-    本站得分 ＝（各項數量 × 該項點數 ＋ 全組完成接龍加點）÷ 組員數，當月加權項的點數照倍率計算。除以組員數是為了讓人數不同的組條件相同。每站得分累加，賽期結束時總分最高的那一組獲勝。賽道上的位置就是名次，愈接近方格旗的愈前面。起點與終點是賽道上同一條格旗線：繞完一圈就回到它。一圈的分數由系統自動取「全場一站的平均得分」，所以表現持平的組差不多一週跑一圈、整季 26 站跑完 26 圈，跑得好的一週不只一圈。資料由接龍表單自動帶入，畫面上不需要手動填寫。
+    本週得分 ＝（各項數量 × 該項點數 ＋ 全組完成接龍加點）÷ 組員數，當月加權項的點數照倍率計算。除以組員數是為了讓人數不同的組條件相同。每週得分累加，26 週結束時總分最高的那一組獲勝。賽道上車身的位置就是累計總分，愈靠右的組愈前面。資料由接龍表單自動帶入，畫面上不需要手動填寫。
   </footer>
 </div>
 
@@ -437,9 +556,6 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
 
   var SEASON = { start:"2026-10-01", end:"2027-03-31" };
 
-  // 一圈幾分。留 null 代表自動＝全場「一站的平均得分」，
-  // 所以表現持平的組剛好一週跑一圈，不用自己訂數字。要固定就填數字。
-  var LAP_POINTS = null;
 
   // 各項點數
   var POINTS = {
@@ -452,6 +568,9 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     train:  3,   // 培訓 ／人次
     guest:  5    // 來賓 ／位
   };
+  // 某一週要沿用當時的組員人數時才填，平常留空即可
+  // 例： { "2026-10-02": { "第三組":6 } }
+  var SIZE_AT = {};
   var FULL_RELAY = 5;   // 全組完成接龍加點
 
   // 每月加權項：該項點數乘以倍率，沒有就 null
@@ -476,39 +595,115 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     {k:"train",  label:"培訓"},
     {k:"guest",  label:"來賓"}
   ];
+  /* ---------- 個人紅綠燈（BNI PALMS 紅綠燈報表，每月更新一次） ----------
+     更新：拿到新的紅綠燈 xlsx 之後，把下面 LIGHTS 整塊換掉就好。
+     s=得分  att=出席率%  o2o=一對一  out=提供引薦  inn=收到引薦
+     gst=來賓  edu=培訓  biz=交易價值                                        */
+  var LIGHTS = {
+    green: 70, yellow: 50, red: 30,     // 綠≧70、黃≧50、紅≧30、黑<30
+    // sets 可放多個期間，排最前面的是預設顯示的那個。
+    // 拿到「近 1 個月」的紅綠燈表後，照同樣格式插在 m6 前面即可。
+    sets: [
+    { id:"m6", tab:"近 6 個月", period:"2026/04/01 – 2026/09/30（6 個月）",
+    teams: {
+      "第一組":[
+      {n:"徐凡雅", s:70, w:21, ab:0, att:100, o2o:55, out:22, inn:0, gst:6, edu:10, biz:25130},
+      {n:"陳宥寧", s:90, w:21, ab:0, att:100, o2o:77, out:36, inn:15, gst:9, edu:35, biz:1691565},
+      {n:"胡哲維", s:60, w:21, ab:1, att:95, o2o:40, out:44, inn:12, gst:5, edu:0, biz:16327664},
+      {n:"洪岳裕", s:80, w:21, ab:0, att:100, o2o:65, out:36, inn:182, gst:6, edu:25, biz:251209},
+      {n:"陳鳳琴", s:30, w:19, ab:1, att:94, o2o:27, out:0, inn:3, gst:3, edu:2, biz:0},
+      {n:"曹宗瑋", s:20, w:2, ab:0, att:100, o2o:0, out:0, inn:1, gst:0, edu:0, biz:0}
+      ],
+      "第二組":[
+      {n:"張舜文", s:50, w:13, ab:0, att:100, o2o:23, out:17, inn:24, gst:0, edu:0, biz:403500},
+      {n:"劉芯怡", s:70, w:21, ab:0, att:100, o2o:57, out:55, inn:23, gst:5, edu:25, biz:172272},
+      {n:"陳芊妤", s:65, w:21, ab:0, att:100, o2o:75, out:34, inn:32, gst:0, edu:0, biz:1221576},
+      {n:"陳炯霖", s:60, w:21, ab:0, att:100, o2o:50, out:51, inn:22, gst:3, edu:2, biz:279540},
+      {n:"許雯涵", s:20, w:2, ab:0, att:100, o2o:0, out:0, inn:0, gst:0, edu:0, biz:0}
+      ],
+      "第三組":[
+      {n:"邱瑞瑋", s:75, w:21, ab:0, att:100, o2o:100, out:41, inn:6, gst:0, edu:50, biz:607493},
+      {n:"張睿样", s:80, w:21, ab:1, att:95, o2o:88, out:40, inn:25, gst:6, edu:5, biz:808329},
+      {n:"邱雅鈴", s:50, w:21, ab:0, att:100, o2o:40, out:17, inn:3, gst:1, edu:6, biz:121005},
+      {n:"羅美淇", s:15, w:21, ab:1, att:95, o2o:8, out:0, inn:7, gst:0, edu:0, biz:0},
+      {n:"盧允之"}                                           // 新進，尚無半年資料
+      ],
+      "第四組":[
+      {n:"曹雅茲", s:55, w:21, ab:1, att:95, o2o:64, out:22, inn:9, gst:5, edu:11, biz:28078},
+      {n:"吳宗恒", s:90, w:21, ab:0, att:100, o2o:138, out:61, inn:26, gst:9, edu:11, biz:1120975},
+      {n:"邱致憲", s:25, w:21, ab:1, att:95, o2o:36, out:7, inn:54, gst:0, edu:0, biz:10715},
+      {n:"周聖強", s:45, w:21, ab:1, att:95, o2o:88, out:9, inn:34, gst:2, edu:26, biz:12690},
+      {n:"何英銘", s:35, w:21, ab:1, att:95, o2o:50, out:19, inn:49, gst:1, edu:0, biz:218000},
+      {n:"劉鎧霆", s:40, w:21, ab:2, att:90, o2o:45, out:13, inn:27, gst:0, edu:15, biz:282988}
+      ],
+      "第五組":[
+      {n:"趙翊帆", s:50, w:21, ab:1, att:95, o2o:97, out:17, inn:10, gst:0, edu:14, biz:121510},
+      {n:"彭欣如", s:70, w:21, ab:0, att:100, o2o:60, out:34, inn:12, gst:2, edu:20, biz:246585},
+      {n:"朱世祺", s:80, w:21, ab:0, att:100, o2o:49, out:52, inn:13, gst:4, edu:4, biz:3591235},
+      {n:"洪佑宜", s:45, w:21, ab:2, att:90, o2o:61, out:16, inn:11, gst:0, edu:4, biz:762510},
+      {n:"陳庭漢", s:45, w:21, ab:1, att:95, o2o:26, out:9, inn:38, gst:1, edu:8, biz:712453},
+      {n:"劉耿逢", s:25, w:10, ab:1, att:90, o2o:13, out:4, inn:2, gst:0, edu:0, biz:89644}
+      ],
+      "第六組":[
+      {n:"張森雄", s:40, w:16, ab:0, att:100, o2o:24, out:2, inn:6, gst:2, edu:4, biz:34500},
+      {n:"李佳家", s:85, w:21, ab:0, att:100, o2o:107, out:65, inn:36, gst:7, edu:42, biz:460763},
+      {n:"許宏暐", s:40, w:21, ab:1, att:95, o2o:47, out:9, inn:12, gst:1, edu:0, biz:1730640},
+      {n:"李赫茗", s:60, w:21, ab:0, att:100, o2o:56, out:26, inn:9, gst:1, edu:2, biz:546800},
+      {n:"顏瑋辰", s:35, w:8, ab:0, att:100, o2o:7, out:1, inn:10, gst:0, edu:4, biz:85180},
+      {n:"王博翰", s:60, w:21, ab:1, att:95, o2o:65, out:25, inn:44, gst:2, edu:2, biz:3711231}
+      ],
+      "第七組":[
+      {n:"練羿岑", s:55, w:21, ab:0, att:100, o2o:51, out:17, inn:20, gst:3, edu:7, biz:307630},
+      {n:"林楷鈞", s:80, w:21, ab:1, att:95, o2o:83, out:41, inn:21, gst:1, edu:18, biz:2407116},
+      {n:"許哲文", s:40, w:21, ab:2, att:90, o2o:59, out:11, inn:14, gst:5, edu:0, biz:2269500},
+      {n:"陳萬裕", s:35, w:16, ab:0, att:100, o2o:17, out:11, inn:20, gst:1, edu:2, biz:160146},
+      {n:"廖郁琪", s:40, w:14, ab:1, att:92, o2o:27, out:9, inn:8, gst:1, edu:14, biz:124680},
+      {n:"蕭淑蓉", s:70, w:21, ab:0, att:100, o2o:43, out:31, inn:6, gst:3, edu:15, biz:602258}
+      ],
+      "第八組":[
+      {n:"廖羿為", s:70, w:21, ab:0, att:100, o2o:58, out:49, inn:28, gst:3, edu:9, biz:352654},
+      {n:"謝佳恩", s:50, w:21, ab:2, att:90, o2o:80, out:31, inn:40, gst:2, edu:5, biz:150974},
+      {n:"殷如蒔", s:75, w:21, ab:0, att:100, o2o:43, out:39, inn:88, gst:2, edu:17, biz:436921},
+      {n:"洪梓承", s:30, w:21, ab:2, att:90, o2o:62, out:5, inn:27, gst:0, edu:2, biz:317103},
+      {n:"賴佩玲", s:40, w:21, ab:2, att:90, o2o:34, out:18, inn:10, gst:1, edu:20, biz:2700}
+      ]
+    } }
+    ]
+  };
+
   var COLORS = ["#D9871B","#12907C","#CE4A32","#3F63C4","#6E8F1F","#A24BAE","#1B87B8","#C9527F"];
 
-  /* ---------- 10 月前兩站：商機與出席取自 PALMS，回報一律視為全組完成（10/16 起照規則吃接龍） ---------- */
+  /* ---------- 10 月前兩週：商機與出席取自 PALMS，回報一律視為全組完成（10/16 起照規則吃接龍） ---------- */
   function demoData(){
     var teams = [
       {id:"第一組",name:"第一組",size:6},{id:"第二組",name:"第二組",size:5},
-      {id:"第三組",name:"第三組",size:6},{id:"第四組",name:"第四組",size:6},
+      {id:"第三組",name:"第三組",size:5},{id:"第四組",name:"第四組",size:6},
       {id:"第五組",name:"第五組",size:6},{id:"第六組",name:"第六組",size:6},
-      {id:"第七組",name:"第七組",size:5},{id:"第八組",name:"第八組",size:5}
+      {id:"第七組",name:"第七組",size:6},{id:"第八組",name:"第八組",size:5}
     ];
     return {
-      updated:"10 月前兩站（PALMS，回報全給分）",
+      updated:"10 月前兩週（PALMS，回報全給分）",
       teams:teams,
       weeks:[
         {week:1, date:"2026-10-02", rows:[
-          {team:"第一組", report:6, attend:6, o2o:14, refIn:0,  refOut:6, biz:2, train:0, guest:0, amount:4950},
-          {team:"第二組", report:5, attend:5, o2o:21, refIn:3,  refOut:4, biz:4, train:0, guest:0, amount:1888025},
-          {team:"第三組", report:6, attend:6, o2o:24, refIn:10, refOut:1, biz:3, train:0, guest:0, amount:426715},
-          {team:"第四組", report:6, attend:6, o2o:18, refIn:5,  refOut:2, biz:3, train:1, guest:0, amount:1275348},
-          {team:"第五組", report:6, attend:5, o2o:19, refIn:3,  refOut:2, biz:1, train:0, guest:0, amount:118530},
-          {team:"第六組", report:6, attend:6, o2o:24, refIn:5,  refOut:3, biz:5, train:0, guest:0, amount:27741},
-          {team:"第七組", report:5, attend:4, o2o:9,  refIn:0,  refOut:0, biz:1, train:0, guest:0, amount:1209},
-          {team:"第八組", report:5, attend:5, o2o:16, refIn:4,  refOut:8, biz:3, train:0, guest:0, amount:379476}
+          {team:"第一組", report:6, attend:6, o2o:14, refIn:0, refOut:6, biz:2, train:0, guest:0, amount:4950},
+          {team:"第二組", report:5, attend:5, o2o:21, refIn:3, refOut:4, biz:4, train:0, guest:0, amount:1888025},
+          {team:"第三組", report:5, attend:5, o2o:23, refIn:5, refOut:1, biz:2, train:0, guest:0, amount:7215},
+          {team:"第四組", report:6, attend:6, o2o:18, refIn:5, refOut:2, biz:3, train:1, guest:0, amount:1275348},
+          {team:"第五組", report:6, attend:5, o2o:19, refIn:3, refOut:2, biz:1, train:0, guest:0, amount:118530},
+          {team:"第六組", report:6, attend:6, o2o:24, refIn:5, refOut:3, biz:5, train:0, guest:0, amount:27741},
+          {team:"第七組", report:6, attend:5, o2o:10, refIn:5, refOut:0, biz:2, train:0, guest:0, amount:420709},
+          {team:"第八組", report:5, attend:5, o2o:16, refIn:4, refOut:8, biz:3, train:0, guest:0, amount:379476}
         ]},
         {week:2, date:"2026-10-09", rows:[
-          {team:"第一組", report:6, attend:6, o2o:5,  refIn:1, refOut:8, biz:2, train:8, guest:0, amount:4680},
+          {team:"第一組", report:6, attend:6, o2o:5, refIn:1, refOut:8, biz:2, train:8, guest:0, amount:4680},
           {team:"第二組", report:5, attend:5, o2o:12, refIn:1, refOut:3, biz:3, train:4, guest:0, amount:1759500},
-          {team:"第三組", report:6, attend:6, o2o:7,  refIn:3, refOut:0, biz:3, train:4, guest:0, amount:20206989},
+          {team:"第三組", report:5, attend:5, o2o:6, refIn:3, refOut:0, biz:2, train:4, guest:0, amount:5410},
           {team:"第四組", report:6, attend:6, o2o:13, refIn:3, refOut:5, biz:2, train:0, guest:0, amount:198340},
-          {team:"第五組", report:6, attend:6, o2o:8,  refIn:2, refOut:2, biz:0, train:0, guest:0, amount:0},
-          {team:"第六組", report:6, attend:6, o2o:9,  refIn:4, refOut:1, biz:2, train:2, guest:0, amount:10300},
-          {team:"第七組", report:5, attend:5, o2o:4,  refIn:0, refOut:1, biz:0, train:0, guest:0, amount:0},
-          {team:"第八組", report:5, attend:5, o2o:5,  refIn:0, refOut:0, biz:0, train:1, guest:0, amount:0}
+          {team:"第五組", report:6, attend:6, o2o:8, refIn:2, refOut:2, biz:0, train:0, guest:0, amount:0},
+          {team:"第六組", report:6, attend:6, o2o:9, refIn:4, refOut:1, biz:2, train:2, guest:0, amount:10300},
+          {team:"第七組", report:6, attend:6, o2o:5, refIn:0, refOut:1, biz:1, train:0, guest:0, amount:20201579},
+          {team:"第八組", report:5, attend:5, o2o:5, refIn:0, refOut:0, biz:0, train:1, guest:0, amount:0}
         ]}
       ]
     };
@@ -518,6 +713,10 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
   function ym(d){ return String(d).slice(0,7); }
   function weightFor(d){ return MONTHLY[ym(d)] || null; }
 
+  function sizeAt(teamId, dateStr, fallback){
+    var o = SIZE_AT[dateStr];
+    return (o && o[teamId]) ? o[teamId] : fallback;
+  }
   function scoreRow(row, size, dateStr){
     var w = weightFor(dateStr), raw = 0;
     FIELDS.forEach(function(f){
@@ -540,7 +739,7 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
       wk.rows.forEach(function(r){
         var e = byId[r.team];
         if(!e){ return; }
-        var s = scoreRow(r, e.t.size, wk.date);
+        var s = scoreRow(r, sizeAt(e.t.id, wk.date, e.t.size), wk.date);
         if(isLast){ e.prevTotal = e.total; }
         e.total = Math.round((e.total + s.avg)*10)/10;
         if(s.avg > e.best){ e.best = s.avg; }
@@ -558,9 +757,7 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     list.slice().sort(function(a,b){ return valueOf(b) - valueOf(a); })
       .forEach(function(e, i){ e[key] = i + 1; });
   }
-  var lapUnit = 12;          // 實際使用的一圈分數，載入資料後由 computeLapUnit() 決定
-  var lapAuto = true;
-  // 只有「已完成」的站才拿來算一圈幾分，否則進行中的那站會把基準一直往下拉
+  // 判斷某一週是否已經結束（半數以上的組有資料），用來標示「進行中」
   function weekDone(wk){
     var live = 0;
     wk.rows.forEach(function(r){
@@ -569,21 +766,6 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     });
     return wk.rows.length > 0 && live * 2 >= wk.rows.length;
   }
-  function computeLapUnit(data){
-    if(LAP_POINTS){ lapAuto = false; lapUnit = LAP_POINTS; return; }
-    lapAuto = true;
-    var sum = 0, n = 0, sizes = {};
-    data.teams.forEach(function(t){ sizes[t.id] = t.size; });
-    data.weeks.forEach(function(wk){
-      if(!weekDone(wk)){ return; }
-      wk.rows.forEach(function(r){
-        var s = scoreRow(r, sizes[r.team] || 0, wk.date);
-        sum += s.avg; n++;
-      });
-    });
-    lapUnit = n ? Math.max(1, Math.round(sum / n)) : 12;
-  }
-  function laps(total){ return Math.floor(total / lapUnit) + 1; }   // 目前跑在第幾圈
 
   /* ---------- 日期 ---------- */
   function parseD(s){ var p = String(s).split("-"); return new Date(+p[0], +p[1]-1, +p[2]); }
@@ -617,226 +799,70 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     return n;
   }
 
-  // 賽道外形：順時針的控制點，用封閉 Catmull-Rom 轉成平滑曲線
-  // 賽道外形：極座標的起伏閉合曲線，彎道多但保證不會自己交叉
-  var MOBILE = (window.innerWidth || 1200) <= 620;
-  var VBW = MOBILE ? 680 : 1200, VBH = MOBILE ? 900 : 540;   // 手機改直式賽道，字才看得清楚
-  var UIK = MOBILE ? 1.45 : 1;                                // 車號／標籤放大倍率
-  var ROADK = MOBILE ? 0.82 : 1;                              // 路面寬度
-  var CIRCUIT = (function(){
-    var N = 76, cx = VBW/2, cy = VBH/2, pad = MOBILE ? 40 : 44, rs = [], max = 0;
-    for(var i = 0; i < N; i++){
-      var th = i / N * Math.PI * 2;
-      var r = 1
-        + 0.215 * Math.sin(3 * th + 0.35)
-        + 0.155 * Math.sin(5 * th + 1.15)
-        + 0.105 * Math.sin(7 * th + 2.30)
-        + 0.060 * Math.sin(9 * th + 0.80);
-      rs.push(r);
-      if(r > max){ max = r; }
-    }
-    var raw = [];
-    for(var j = 0; j < N; j++){
-      var a = j / N * Math.PI * 2;
-      raw.push([rs[j] * Math.cos(a), rs[j] * Math.sin(a) * (MOBILE ? 1.45 : 0.60)]);
-    }
-    // 依實際外框等比攤開，確保填滿畫布又不超出
-    var x0 = Math.min.apply(null, raw.map(function(p){ return p[0]; }));
-    var x1 = Math.max.apply(null, raw.map(function(p){ return p[0]; }));
-    var y0 = Math.min.apply(null, raw.map(function(p){ return p[1]; }));
-    var y1 = Math.max.apply(null, raw.map(function(p){ return p[1]; }));
-    var sx = (cx * 2 - pad * 2) / (x1 - x0), sy = (cy * 2 - pad * 2) / (y1 - y0);
-    return raw.map(function(p){
-      return [ +(pad + (p[0] - x0) * sx).toFixed(1),
-               +(pad + (p[1] - y0) * sy).toFixed(1) ];
-    });
-  })();
-  var KERBS = (function(){
-    var k = [];
-    for(var i = 0; i < 14; i++){ k.push([i / 14 + 0.012, 0.028]); }
-    return k;
-  })();
-
-  function closedSpline(pts){
-    var n = pts.length, d = "M " + pts[0][0] + " " + pts[0][1];
-    for(var i = 0; i < n; i++){
-      var p0 = pts[(i - 1 + n) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
-      var c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6;
-      var c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
-      d += " C " + c1x.toFixed(1) + " " + c1y.toFixed(1) + ", "
-                 + c2x.toFixed(1) + " " + c2y.toFixed(1) + ", "
-                 + p2[0] + " " + p2[1];
-    }
-    return d + " Z";
-  }
-
-  function segDash(L, start, len, pattern){
-    // 只畫 path 上 [start, start+len] 這一段；pattern 可再把該段切成紅白格
-    var arr = [0, start * L];                 // 先空掉前段
-    if(pattern){
-      var drawn = 0;
-      while(drawn < len * L){ arr.push(pattern, pattern); drawn += pattern * 2; }
-      arr.push(0, L * 2);                     // 補一個 0 長度的 dash，讓 L*2 落在 gap 的位置
-    } else {
-      arr.push(len * L, L * 2);
-    }
-    return arr.join(" ");
-  }
-
-  function drawTrackBase(){
-    document.getElementById("track").setAttribute("viewBox", "0 0 " + VBW + " " + VBH);
-    var g = document.getElementById("trackLayers");
-    if(g.childNodes.length){ return; }
-    var pathEl = document.getElementById("circuitPath");
-    var d = closedSpline(CIRCUIT);
-    pathEl.setAttribute("d", d);
-    var L = pathEl.getTotalLength();
-
-    g.appendChild(el("path", {d:d, fill:"#EDF2F6", stroke:"none"}));                       // 內場
-    KERBS.forEach(function(k){                                                              // 紅白路肩
-      g.appendChild(el("path", {d:d, fill:"none", stroke:"#FFFFFF", "stroke-width":String(56*ROADK),
-        "stroke-dasharray":segDash(L, k[0], k[1], null)}));
-      g.appendChild(el("path", {d:d, fill:"none", stroke:"#C8102E", "stroke-width":String(56*ROADK),
-        "stroke-dasharray":segDash(L, k[0], k[1], 9)}));
-    });
-    g.appendChild(el("path", {d:d, fill:"none", stroke:"#9FACB8", "stroke-width":String(48*ROADK), "stroke-linejoin":"round"}));
-    g.appendChild(el("path", {d:d, fill:"none", stroke:"#C4CDD6", "stroke-width":String(42*ROADK), "stroke-linejoin":"round"}));
-    g.appendChild(el("path", {d:d, fill:"none", stroke:"#FFFFFF", "stroke-width":"1.8",
-                              "stroke-dasharray":"14 17", opacity:".85"}));
-  }
-
-  function ptAt(path, t){
-    var L = path.getTotalLength();
-    var l = ((t % 1) + 1) % 1 * L;
-    var p = path.getPointAtLength(l);
-    var q = path.getPointAtLength((l + 2) % L);
-    return { x:p.x, y:p.y, a: Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI };
-  }
-
-  // 把標籤往賽道外側推，避免壓到路面
-  function outwardLabel(p, dist, text, color, bg, strong){
-    var cx = VBW/2, cy = VBH/2;
-    var rad = p.a * Math.PI / 180;
-    var nx = -Math.sin(rad), ny = Math.cos(rad);         // 賽道的法線
-    if(nx * (p.x - cx) + ny * (p.y - cy) < 0){ nx = -nx; ny = -ny; }   // 取朝外的那一側
-    var w = (text.length * (strong ? 13 : 11.5) + 14) * UIK, h = (strong ? 23 : 19) * UIK;
-    var x = p.x + nx * dist, y = p.y + ny * dist;
-    x = Math.min(VBW - w/2 - 6, Math.max(w/2 + 6, x));
-    y = Math.min(VBH - h/2 - 6, Math.max(h/2 + 6, y));
-    var g = el("g", {});
-    g.appendChild(el("rect", {x:x - w/2, y:y - h/2, width:w, height:h, rx:strong ? 3 : 2,
-      fill:bg, stroke:color, "stroke-width":strong ? "1.4" : "1", opacity:strong ? "1" : ".95"}));
-    var t = el("text", {x:x, y:y + (strong ? 5.5 : 4.5) * UIK, "text-anchor":"middle", fill:color,
-      "font-family":"Noto Sans TC, sans-serif", "font-size":String((strong ? 14 : 12) * UIK),
-      "font-weight":strong ? "700" : "500"});
-    t.textContent = text;
-    g.appendChild(t);
-    return g;
-  }
-
   function renderGrid(list, lastWeek){
-    drawTrackBase();
-    var path = document.getElementById("circuitPath");
-
     var best = -1, maxTotal = 0;
     list.forEach(function(e){
       if(e.last && e.last.s.avg > best){ best = e.last.s.avg; }
       if(e.total > maxTotal){ maxTotal = e.total; }
     });
-    var scaleLaps = Math.max(1, Math.ceil(maxTotal / lapUnit));
-    var scaleMax  = scaleLaps * lapUnit;
 
-    /* 起點／終點 —— 同一條線，格旗加標示 */
-    var sf = document.getElementById("sfLine");
-    sf.textContent = "";
-    var sp = ptAt(path, 0);
-    var sg = el("g", {transform:"translate(" + sp.x + "," + sp.y + ") rotate(" + sp.a + ")"});
-    var CW = 5 * ROADK, ROWS = 3, COLS = 9, H = ROWS * CW;
-    sg.appendChild(el("rect", {x:-H/2, y:-COLS*CW/2, width:H, height:COLS*CW, fill:"#FFFFFF"}));
-    for(var r = 0; r < ROWS; r++){
-      for(var cI = 0; cI < COLS; cI++){
-        if((r + cI) % 2 === 0){ continue; }
-        sg.appendChild(el("rect", {x:-H/2 + r*CW, y:-COLS*CW/2 + cI*CW, width:CW, height:CW, fill:"#1B2026"}));
-      }
+    // 刻度：每 10 分一格，右邊留一格餘裕
+    var step = 10;
+    var top  = Math.max(step * 2, (Math.floor(maxTotal / step) + 1) * step);
+    var pct  = function(v){ return Math.max(0, Math.min(100, v / top * 100)); };
+
+    var axis = document.getElementById("axis");
+    axis.textContent = "";
+    for(var v = 0; v <= top; v += step){
+      var t = document.createElement("i");
+      t.style.left = pct(v) + "%";
+      t.textContent = v;
+      axis.appendChild(t);
     }
-    sg.appendChild(el("rect", {x:-H/2, y:-COLS*CW/2, width:H, height:COLS*CW,
-      fill:"none", stroke:"#1B2026", "stroke-width":"1.2"}));
-    sf.appendChild(sg);
-    sf.appendChild(outwardLabel(sp, 46, "起點／終點", "#1B2026", "#FFFFFF", true));
-
-    /* 圈線 */
-    var ticks = document.getElementById("lapTicks");
-    ticks.textContent = "";
-    for(var k = 1; k < scaleLaps; k++){
-      var tp = ptAt(path, k / scaleLaps);
-      var tg = el("g", {transform:"translate(" + tp.x + "," + tp.y + ") rotate(" + tp.a + ")"});
-      tg.appendChild(el("rect", {x:-2, y:-21*ROADK, width:4, height:42*ROADK, fill:"#FFFFFF"}));
-      ticks.appendChild(tg);
-      ticks.appendChild(outwardLabel(tp, 36, "第 " + k + " 圈", "#7D8B97", "#FFFFFF", false));
-    }
-
-    /* 車 */
-    var cars = document.getElementById("carsLayer");
-    cars.textContent = "";
-    var ordered = list.slice().sort(function(a,b){ return a.total - b.total; });
-    var prevT = -1, stack = 0;
-    ordered.forEach(function(e){
-      var t = scaleMax > 0 ? e.total / scaleMax : 0;
-      stack = (prevT >= 0 && Math.abs(t - prevT) < 0.018) ? stack + 1 : 0;
-      prevT = t;
-      var p = ptAt(path, t);
-      var off = (stack % 2 === 0 ? 1 : -1) * Math.ceil(stack / 2) * 13 * UIK;
-      var c = COLORS[e.i % COLORS.length];
-
-      var g = el("g", {transform:"translate(" + p.x + "," + p.y + ") rotate(" + p.a + ")", class:"climber"});
-      var cg = el("g", {transform:"translate(0," + off + ")"});
-      cg.appendChild(el("rect", {x:-13, y:-7.5, width:4, height:15, rx:"1", fill:"#2B3138"}));
-      cg.appendChild(el("rect", {x:-8, y:-10, width:7, height:4, rx:"1", fill:"#2B3138"}));
-      cg.appendChild(el("rect", {x:-8, y:6, width:7, height:4, rx:"1", fill:"#2B3138"}));
-      cg.appendChild(el("rect", {x:4, y:-10, width:7, height:4, rx:"1", fill:"#2B3138"}));
-      cg.appendChild(el("rect", {x:4, y:6, width:7, height:4, rx:"1", fill:"#2B3138"}));
-      cg.appendChild(el("path", {d:"M-9 0 L-6 -4 L6 -4.6 L12 -2 L14 0 L12 2 L6 4.6 L-6 4 Z", fill:c}));
-      cg.appendChild(el("rect", {x:13, y:-6, width:4, height:12, rx:"1", fill:"#2B3138"}));
-      cg.appendChild(el("circle", {cx:1, cy:0, r:"2.4", fill:"#FFFFFF"}));
-      g.appendChild(cg);
-
-      var lab = el("g", {transform:"translate(0," + (off - 17 - 5*(UIK-1)) + ") rotate(" + (-p.a) + ")"});
-      lab.appendChild(el("circle", {r:String(9.5*UIK), fill:"#FFFFFF", stroke:c, "stroke-width":String(2*UIK)}));
-      var tx = el("text", {x:0, y:4*UIK, "text-anchor":"middle", fill:c, class:"carlabel",
-        "font-size":String(13*UIK)});
-      tx.textContent = e.rank;
-      lab.appendChild(tx);
-      g.appendChild(lab);
-
-      cars.appendChild(g);
-    });
-
-    /* 組別固定順序的色票列 */
-    var chips = document.getElementById("chipRow");
-    chips.textContent = "";
-    list.forEach(function(e){
-      var d = document.createElement("div");
-      d.className = "chipitem" + (e.rank === 1 && e.total > 0 ? " lead" : "");
-      var i = document.createElement("i");
-      i.style.background = COLORS[e.i % COLORS.length];
-      var n = document.createElement("span"); n.textContent = e.t.name;
-      var b = document.createElement("b"); b.textContent = "P" + e.rank;
-      d.appendChild(i); d.appendChild(n); d.appendChild(b);
-      chips.appendChild(d);
-    });
 
     var leader = list.slice().sort(function(a,b){ return b.total - a.total; })[0];
+    var box = document.getElementById("lanes");
+    box.textContent = "";
+    list.forEach(function(e){
+      var c = COLORS[e.i % COLORS.length];
+      var row = document.createElement("div"); row.className = "lrow clicky";
+      row.title = "看 " + e.t.name + " 的組員紅綠燈";
+      row.onclick = function(){ showTeamLights(e.t.id); };
+
+      var nm = document.createElement("div"); nm.className = "lname";
+      var sw = document.createElement("i"); sw.style.background = c;
+      var tx = document.createElement("span"); tx.textContent = e.t.name;
+      nm.appendChild(sw); nm.appendChild(tx);
+
+      var st = document.createElement("div");
+      st.className = "strip" + (leader && e.t.id === leader.t.id && e.total > 0 ? " lead" : "");
+      for(var g = step; g < top; g += step){
+        var gl = document.createElement("span"); gl.className = "grid";
+        gl.style.left = pct(g) + "%"; st.appendChild(gl);
+      }
+      var sl = document.createElement("span"); sl.className = "startline"; st.appendChild(sl);
+      var car = document.createElement("span"); car.className = "pcar";
+      car.style.left = "calc(" + pct(e.total) + "% + 16px)";
+      car.innerHTML = carSVG(c);
+      st.appendChild(car);
+
+      var sc = document.createElement("div"); sc.className = "lscore";
+      sc.textContent = e.total.toFixed(1);
+      sc.style.color = (e.last && e.last.s.avg === best && best > 0) ? "var(--purple)" : "var(--ink)";
+
+      row.appendChild(nm); row.appendChild(st); row.appendChild(sc);
+      box.appendChild(row);
+    });
+
     document.getElementById("hRound").textContent = lastWeek ? lastWeek.week : 0;
     document.getElementById("hLead").textContent = (leader && leader.total > 0) ? leader.t.name : "—";
     document.getElementById("hLap").innerHTML = (leader ? leader.total.toFixed(1) : "0.0") + "<small>分</small>";
     document.getElementById("lapInfo").textContent =
-      "第 " + (lastWeek ? lastWeek.week : 0) + " / " + totalWeeks() + " 站";
-    document.getElementById("goalNote").textContent =
-      (lapAuto ? "一圈 " + lapUnit + " 分（系統取全場一站的平均得分）"
-               : "一圈 " + lapUnit + " 分") + "　目前跑到第 " + scaleLaps + " 圈";
+      "第 " + (lastWeek ? lastWeek.week : 0) + " / " + totalWeeks() + " 週";
+    document.getElementById("goalNote").textContent = "車身位置 ＝ 累計總分，起跑線在最左邊";
     document.getElementById("seasonLine").textContent =
       "賽期 " + fmtFull(parseD(SEASON.start)) + " – " + fmtFull(parseD(SEASON.end))
-      + "，共 " + totalWeeks() + " 站";
+      + "，共 " + totalWeeks() + " 週";
   }
 
   /* ---------- 計時儀表板 ---------- */
@@ -851,6 +877,9 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     sorted.forEach(function(e, idx){
       var tr = document.createElement("tr");
       if(idx === 0 && e.total > 0){ tr.className = "lead"; }
+      tr.className += " clicky";
+      tr.title = "看 " + e.t.name + " 的組員紅綠燈";
+      tr.onclick = function(){ showTeamLights(e.t.id); };
 
       var tdp = document.createElement("td");
       tdp.className = "tpos";
@@ -879,7 +908,6 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
       tr.appendChild(cell("tnum int", idx === 0 ? "—" : "-" + (sorted[idx-1].total - e.total).toFixed(1)));
       tr.appendChild(cell("tnum last" + (e.last && e.last.s.avg === bestAvg && bestAvg > 0 ? " purple" : ""),
         e.last ? e.last.s.avg.toFixed(1) : "—"));
-      tr.appendChild(cell("tnum lap", "L" + laps(e.total)));
 
       tb.appendChild(tr);
     });
@@ -910,7 +938,7 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
       var hit = w && w.key === f.k;
       addTh(hit ? f.label + " " + (POINTS[f.k] * w.mult) + "點" : f.label, hit ? "wt" : "");
     });
-    addTh("全組接龍"); addTh("本站得分");
+    addTh("全組接龍"); addTh("本週得分");
 
     var tb = document.getElementById("rows");
     tb.textContent = "";
@@ -920,7 +948,9 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
 
       var td0 = document.createElement("td");
       td0.className = "team";
-      var cell = document.createElement("div"); cell.className = "teamcell";
+      var cell = document.createElement("div"); cell.className = "teamcell clicky";
+      cell.title = "看 " + e.t.name + " 的組員紅綠燈";
+      cell.onclick = function(){ showTeamLights(e.t.id); };
       var chip = document.createElement("span"); chip.className = "chip";
       chip.style.background = COLORS[e.i % COLORS.length];
       var nm = document.createElement("span"); nm.textContent = e.t.name;
@@ -962,8 +992,187 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     });
 
     document.getElementById("pWeek").textContent =
-      lastWeek ? "第 " + lastWeek.week + " 站 · " + fmt(parseD(lastWeek.date))
+      lastWeek ? "第 " + lastWeek.week + " 週 · " + fmt(parseD(lastWeek.date))
                  + (weekDone(lastWeek) ? "" : "（進行中）") : "—";
+  }
+
+
+  /* ---------- 組員紅綠燈 ---------- */
+  var lightTeam = null, lightSet = 0;
+  function curSet(){ return LIGHTS.sets[lightSet] || LIGHTS.sets[0]; }
+  function lightOf(m){
+    if(!m || typeof m.s !== "number"){ return {k:"n", label:"尚無資料"}; }
+    if(m.s >= LIGHTS.green){ return {k:"g", label:"綠燈"}; }
+    if(m.s >= LIGHTS.yellow){ return {k:"y", label:"黃燈"}; }
+    if(m.s >= LIGHTS.red){ return {k:"r", label:"紅燈"}; }
+    return {k:"b", label:"黑燈"};
+  }
+  function renderLights(teamId){
+    var set = curSet();
+    var names = Object.keys(set.teams);
+    if(!names.length){ return; }
+    lightTeam = (teamId && set.teams[teamId]) ? teamId : (lightTeam || names[0]);
+
+    document.getElementById("lightPeriod").textContent = set.tab;
+    document.getElementById("lightPeriod2").textContent = set.period;
+
+    var sp = document.getElementById("lightSetPick");
+    sp.textContent = "";
+    if(LIGHTS.sets.length > 1){
+      LIGHTS.sets.forEach(function(st, i){
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = st.tab;
+        if(i === lightSet){ b.className = "on"; }
+        b.onclick = function(){ lightSet = i; renderLights(lightTeam); };
+        sp.appendChild(b);
+      });
+    }
+
+    var pick = document.getElementById("lightPick");
+    pick.textContent = "";
+    names.forEach(function(id, i){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = id;
+      if(id === lightTeam){ b.className = "on"; }
+      b.onclick = function(){ renderLights(id); };
+      pick.appendChild(b);
+    });
+
+    var list = set.teams[lightTeam].slice().sort(function(a,b){
+      return (typeof b.s === "number" ? b.s : -1) - (typeof a.s === "number" ? a.s : -1);
+    });
+    var cnt = {g:0, y:0, r:0, b:0, n:0};
+    list.forEach(function(m){ cnt[lightOf(m).k]++; });
+
+    var sum = document.getElementById("lightSum");
+    sum.innerHTML =
+        '<span><i class="dot g"></i>綠燈 <b>' + cnt.g + '</b></span>'
+      + '<span><i class="dot y"></i>黃燈 <b>' + cnt.y + '</b></span>'
+      + '<span><i class="dot r"></i>紅燈 <b>' + cnt.r + '</b></span>'
+      + '<span><i class="dot b"></i>黑燈 <b>' + cnt.b + '</b></span>'
+      + (cnt.n ? '<span><i class="dot n"></i>尚無資料 <b>' + cnt.n + '</b></span>' : '')
+      + '<span>綠 ' + LIGHTS.green + '↑　黃 ' + LIGHTS.yellow
+      + '↑　紅 ' + LIGHTS.red + '↑　黑 ' + LIGHTS.red + ' 以下</span>';
+
+    var dbox = document.getElementById("lightDetail");
+    if(dbox){ dbox.hidden = true; dbox.innerHTML = ""; }
+    var tb = document.getElementById("lightRows");
+    tb.textContent = "";
+    list.forEach(function(m){
+      var L = lightOf(m), tr = document.createElement("tr");
+      if(L.k === "n"){ tr.className = "newbie"; }
+      function td(cls, html){
+        var d = document.createElement("td");
+        d.className = cls; d.innerHTML = html; tr.appendChild(d);
+      }
+      if(L.k !== "n"){
+        tr.className += " person";
+        tr.title = "看 " + m.n + " 的紅綠燈分析";
+        tr.onclick = function(){
+          var box = document.getElementById("lightDetail");
+          var open = tr.classList.contains("open");
+          [].forEach.call(tb.querySelectorAll("tr.open"), function(x){ x.classList.remove("open"); });
+          if(open){ box.hidden = true; box.innerHTML = ""; return; }
+          tr.classList.add("open");
+          box.innerHTML = detailHTML(m);
+          box.hidden = false;
+        };
+        td("nm", '<i class="caret">\u25B8</i>' + m.n);
+      } else {
+        td("nm", '<i class="caret"></i>' + m.n);
+      }
+      td("lt", '<i class="dot ' + L.k + '"></i>' + L.label);
+      td("sc " + L.k, L.k === "n" ? "—" : m.s);
+      td("n", L.k === "n" ? "—" : m.att + "%");
+      td("n", L.k === "n" ? "—" : m.o2o);
+      td("n", L.k === "n" ? "—" : (m.out >= 999 ? "∞" : m.out));
+      td("n", L.k === "n" ? "—" : (m.inn >= 999 ? "∞" : m.inn));
+      td("n", L.k === "n" ? "—" : m.gst);
+      td("n", L.k === "n" ? "—" : m.edu);
+      td("money", L.k === "n" ? "—" : nf(m.biz));
+      tb.appendChild(tr);
+    });
+  }
+
+  /* ---------- 紅綠燈：單項配分與「再進一階要做什麼」 ----------
+     規則取自 PALMS 紅綠燈報表的「評分」分頁，已用全分會 44 人逐項驗算過，
+     七個分項加起來 100% 等於報表上的總分。                                  */
+  function band(v, cuts, pts){           // cuts 由小到大，回傳 [目前分, 下一階門檻, 下一階分]
+    var i = 0;
+    while(i < cuts.length && v >= cuts[i]){ i++; }
+    return { pt: pts[i], next: i < cuts.length ? cuts[i] : null, nextPt: i < cuts.length ? pts[i+1] : null };
+  }
+  function ceilN(x){ var n = Math.ceil(x - 1e-9); return n; }
+
+  function breakdown(m){
+    var W = m.w || 1, rows = [];
+
+    // 全勤：缺席 0 次 20 分、1 次 15、2 次 10、3 次以上 0
+    var ab = m.ab || 0;
+    var abPt = ab === 0 ? 20 : ab === 1 ? 15 : ab === 2 ? 10 : 0;
+    rows.push({ k:"全勤", now:"缺席 " + ab + " 次", pt:abPt, max:20,
+      tip: ab === 0 ? null : (ab > 2 ? "缺席降到 2 次 → 10 分" : "少缺席 1 次 → +5 分") });
+
+    // 提供引薦：每週張數
+    var g = m.out || 0, gc = [0.75, 1, 1.2, 1.5], gp = [0, 5, 10, 15, 20];
+    var gb = band(g / W, gc, gp);
+    rows.push({ k:"提供引薦", now: g + " 張（每週 " + (g/W).toFixed(1) + "）", pt:gb.pt, max:20,
+      tip: gb.next === null ? null : "再 " + Math.max(1, ceilN(gb.next * W) - g) + " 張 → " + gb.nextPt + " 分" });
+
+    // 來賓：每 4 週人數
+    var v = m.gst || 0, vb = band(v / (W/4), [1, 2], [0, 10, 15]);
+    rows.push({ k:"來賓", now: v + " 位（每 4 週 " + (v/(W/4)).toFixed(1) + "）", pt:vb.pt, max:15,
+      tip: vb.next === null ? null : "再 " + Math.max(1, ceilN(vb.next * W/4) - v) + " 位 → " + vb.nextPt + " 分" });
+
+    // 一對一：每週次數（>2 才拿滿分）
+    var o = m.o2o || 0, ob = band(o / W, [0.5, 1, 2.0001], [0, 5, 10, 15]);
+    rows.push({ k:"一對一", now: o + " 次（每週 " + (o/W).toFixed(1) + "）", pt:ob.pt, max:15,
+      tip: ob.next === null ? null : "再 " + Math.max(1, ceilN(ob.next * W) - o) + " 次 → " + ob.nextPt + " 分" });
+
+    // 分會培訓
+    var t = m.edu || 0, tb = band(t, [2, 4, 6], [0, 5, 10, 15]);
+    rows.push({ k:"分會培訓", now: t + " 次", pt:tb.pt, max:15,
+      tip: tb.next === null ? null : "再 " + (tb.next - t) + " 次 → " + tb.nextPt + " 分" });
+
+    // 交易價值
+    var bz = m.biz || 0, bb = band(bz, [400000, 800000, 2000000], [0, 5, 10, 15]);
+    rows.push({ k:"交易價值", now: nf(bz), pt:bb.pt, max:15,
+      tip: bb.next === null ? null : "再 " + nf(bb.next - bz) + " → " + bb.nextPt + " 分" });
+
+    return rows;
+  }
+
+  function detailHTML(m){
+    var rows = breakdown(m), L = lightOf(m);
+    var gap = LIGHTS.green - m.s;
+
+    var head = '<div class="dhead"><b>' + m.n + '</b>'
+      + '<span class="dlight ' + L.k + '"><i class="dot ' + L.k + '"></i>' + L.label + ' ' + m.s + ' 分</span>'
+      + '<span class="dgap">' + (gap > 0
+          ? "離綠燈還差 <b>" + gap + "</b> 分"
+          : "已達綠燈" + (m.s < 100 ? "，距滿分 " + (100 - m.s) + " 分" : "（滿分）")) + '</span></div>';
+
+    var body = '<table class="dtable"><tbody>';
+    rows.forEach(function(r){
+      var full = r.pt >= r.max;
+      body += '<tr' + (full ? ' class="ok"' : '') + '>'
+        + '<th>' + r.k + '</th>'
+        + '<td class="dnow">' + r.now + '</td>'
+        + '<td class="dpt">' + r.pt + '<em>/' + r.max + '</em></td>'
+        + '<td class="dtip">' + (full ? "已滿分" : (r.tip || "—")) + '</td></tr>';
+    });
+    body += '</tbody></table>';
+    body += '<p class="dnote">統計區間 ' + curSet().period + '，共 ' + m.w + ' 週。'
+          + '「再進一階」是照 BNI 紅綠燈的級距算出來的最小增量。</p>';
+
+    return head + body;
+  }
+
+  function showTeamLights(teamId){
+    renderLights(teamId);
+    var el = document.getElementById("lightPanel");
+    if(el){ el.scrollIntoView({behavior:"smooth", block:"start"}); }
   }
 
   /* ---------- 規則 ---------- */
@@ -1017,12 +1226,12 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     data.weeks.slice().reverse().forEach(function(wk){
       var top = null, bestAvg = -1;
       wk.rows.forEach(function(r){
-        var s = scoreRow(r, sizes[r.team] || 0, wk.date);
+        var s = scoreRow(r, sizeAt(r.team, wk.date, sizes[r.team] || 0), wk.date);
         if(s.avg > bestAvg){ bestAvg = s.avg; top = names[r.team]; }
       });
       var li = document.createElement("li");
       var a = document.createElement("span");
-      a.textContent = "第 " + wk.week + " 站 · " + fmt(parseD(wk.date));
+      a.textContent = "第 " + wk.week + " 週 · " + fmt(parseD(wk.date));
       var b = document.createElement("span");
       b.innerHTML = (top || "—") + " <b>" + (bestAvg < 0 ? 0 : bestAvg).toFixed(1) + "</b> 分";
       li.appendChild(a); li.appendChild(b); ul.appendChild(li);
@@ -1031,7 +1240,6 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
 
   /* ---------- 繪製 ---------- */
   function render(data, status){
-    computeLapUnit(data);
     var list = build(data);
     var lastWeek = data.weeks.length ? data.weeks[data.weeks.length - 1] : null;
     renderGrid(list, lastWeek);
@@ -1039,6 +1247,7 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     renderTable(list, lastWeek);
     renderRules(lastWeek);
     renderLog(data);
+    renderLights(lightTeam || (list.slice().sort(function(a,b){ return b.total-a.total; })[0] || {t:{}}).t.id);
     var badge = document.getElementById("srcBadge");
     badge.className = "badge " + status.kind;
     badge.textContent = status.label;
@@ -1048,8 +1257,8 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
 
   function loadData(){
     if(!API){
-      render(demoData(), { kind:"demo", label:"10月前兩站",
-        text:"尚未填入接龍網址，目前顯示 10 月前兩站的實際成績（商機與出席取自 PALMS；10/2、10/9 回報一律全組給分，10/16 起照規則計算）。" });
+      render(demoData(), { kind:"demo", label:"10月前兩週",
+        text:"尚未填入接龍網址，目前顯示 10 月前兩週的實際成績（商機與出席取自 PALMS；10/2、10/9 回報一律全組給分，10/16 起照規則計算）。" });
       return;
     }
     document.getElementById("srcBadge").className = "badge";
@@ -1073,7 +1282,7 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
 
   document.getElementById("btnCopy").addEventListener("click", function(){
     var list = window.__list || [], wk = window.__lastWeek;
-    var lines = ["【金安小組競賽】第 " + (wk ? wk.week : "-") + " 站戰報　" + (wk ? fmt(parseD(wk.date)) : "")];
+    var lines = ["【金安小組競賽】第 " + (wk ? wk.week : "-") + " 週戰報　" + (wk ? fmt(parseD(wk.date)) : "")];
     var w = wk ? weightFor(wk.date) : null;
     if(w){
       var lb = "";
@@ -1083,29 +1292,18 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
     list.slice().sort(function(a,b){ return b.total - a.total; }).forEach(function(e, idx){
       var r = e.last ? e.last.row : null;
       lines.push("P" + (idx+1) + " " + e.t.name + "　總分 " + e.total.toFixed(1)
-        + "　本站 " + (e.last ? e.last.s.avg.toFixed(1) : "0") + " 分"
+        + "　本週 " + (e.last ? e.last.s.avg.toFixed(1) : "0") + " 分"
         + (r ? "｜回報 " + r.report + "/" + e.t.size + "、出席 " + r.attend
              + "、一對一 " + r.o2o + "、內部引薦 " + r.refIn + "、外部引薦 " + r.refOut
              + "、金額 " + nf(r.amount) + "、培訓 " + r.train + "、來賓 " + r.guest : ""));
     });
     var txt = lines.join("\n");
     var btn = this;
-    function done(){ btn.textContent = "已複製"; setTimeout(function(){ btn.textContent = "複製本站戰報"; }, 1600); }
+    function done(){ btn.textContent = "已複製"; setTimeout(function(){ btn.textContent = "複製本週戰報"; }, 1600); }
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(txt).then(done, function(){ window.prompt("複製戰報：", txt); });
     } else { window.prompt("複製戰報：", txt); }
   });
-
-  /* 轉成橫向／直向時，賽道版面重新套用 */
-  (function(){
-    var was = MOBILE, t;
-    window.addEventListener("resize", function(){
-      clearTimeout(t);
-      t = setTimeout(function(){
-        if(((window.innerWidth || 1200) <= 620) !== was){ location.reload(); }
-      }, 400);
-    });
-  })();
 
   loadData();
 })();
