@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -671,7 +670,8 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     ]
   };
 
-  var COLORS = ["#D9871B","#12907C","#CE4A32","#3F63C4","#6E8F1F","#A24BAE","#1B87B8","#C9527F"];
+  var COLORS = ["#D9871B","#12907C","#CE4A32","#F49AC1","#6E8F1F","#A24BAE","#1B87B8","#8A6243"];
+  //                                      ↑ 第四組：粉紅
 
   /* ---------- 10 月前兩週：商機與出席取自 PALMS，回報一律視為全組完成（10/16 起照規則吃接龍） ---------- */
   function demoData(){
@@ -808,7 +808,8 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
 
     // 刻度：每 10 分一格，右邊留一格餘裕
     var step = 10;
-    var top  = Math.max(step * 2, (Math.floor(maxTotal / step) + 1) * step);
+    // 讓領先者大約落在 75% 的位置，右邊永遠留一段路，才不會看起來像已經衝到終點
+    var top  = Math.max(step * 2, Math.ceil(maxTotal / 0.75 / step) * step);
     var pct  = function(v){ return Math.max(0, Math.min(100, v / top * 100)); };
 
     var axis = document.getElementById("axis");
