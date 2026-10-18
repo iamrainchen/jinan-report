@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -170,6 +169,10 @@
     font-family: 'Noto Sans TC', sans-serif;
   }
   .attend-btn:hover { border-color: var(--ink-muted); }
+  .field-hint{font-size:11.5px;color:var(--ink-muted);margin-top:5px;line-height:1.5}
+  .field-hint b{color:var(--danger);font-weight:500}
+  .amt-warn{font-size:12px;color:var(--warning);background:var(--warning-bg);
+    border-radius:4px;padding:7px 9px;margin-top:6px;line-height:1.6}
   .attend-btn.on-attend { background: var(--success-bg); border-color: var(--success); color: var(--success); font-weight: 500; }
   .attend-btn.on-proxy { background: var(--warning-bg); border-color: var(--warning); color: var(--warning); font-weight: 500; }
   .attend-btn.on-absent { background: var(--danger-bg); border-color: var(--danger); color: var(--danger); font-weight: 500; }
@@ -441,9 +444,12 @@
           </div>
         </div>
         <div class="field-row">
-          <div class="field-label">金額總計</div>
+          <div class="field-label">引薦金額</div>
           <div class="field-control">
-            <input type="text" id="f-amount" placeholder="輸入金額（選填）" style="width:160px;" />
+            <input type="text" id="f-amount" inputmode="numeric" autocomplete="off"
+                   placeholder="沒有就填 0" style="width:160px;" oninput="showAmountWarn()" />
+            <div class="field-hint"><b>必填</b>　本週累計金額，沒有請填 0</div>
+            <div class="amt-warn" id="amtWarn" style="display:none"></div>
           </div>
         </div>
         <div class="field-row">
@@ -473,12 +479,12 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzNS8QVntl0LmZ64z2F7B
 const groups = {
   '第1組': ['徐凡雅','陳宥寧','胡哲維','洪岳裕','陳鳳琴','曹宗瑋'],
   '第2組': ['張舜文','劉芯怡','陳芊妤','陳炯霖','許雯涵','周㤄忻'],
-  '第3組': ['邱瑞瑋','張睿样','邱雅鈴','蕭淑蓉','羅美淇','盧允之'],
+  '第3組': ['邱瑞瑋','張睿样','邱雅鈴','羅美淇','盧允之'],
   '第4組': ['曹雅茲','吳宗恒','邱致憲','周聖強','何英銘','劉鎧霆'],
   '第5組': ['趙翊帆','彭欣如','朱世祺','洪佑宜','陳庭漢','劉耿逢'],
   '第6組': ['張森雄','李佳家','許宏暐','李赫茗','顏瑋辰','王博翰'],
-  '第7組': ['練羿岑','林楷鈞','許哲文','陳萬裕','廖郁琪'],
-  '第8組': ['廖羿為','謝佳恩','殷如蒔','洪梓承','賴佩玲'],
+  '第7組': ['練羿岑','林楷鈞','許哲文','陳萬裕','廖郁琪','蕭淑蓉'],
+  '第8組': ['廖羿為','謝佳恩','殷如蒔','洪梓承','賴佩玲','邱相勳'],
 };
 
 let selGroup = '', selMember = '', attendStatus = '';
@@ -566,12 +572,29 @@ function setAttend(v) {
   document.getElementById('btn-' + v).className = 'attend-btn ' + cls;
 }
 
+let prevAmount = '';
+
+// 修改模式下，原本有金額卻被清空時，當場提醒
+function showAmountWarn(){
+  var box = document.getElementById('amtWarn');
+  if (!box) { return; }
+  var now = document.getElementById('f-amount').value.trim();
+  var wiped = editMode && prevAmount !== '' && prevAmount !== '0' && now === '';
+  box.textContent = wiped
+    ? '⚠ 你上次填的金額是 ' + Number(prevAmount).toLocaleString('en-US')
+      + '，現在是空白。直接送出會沿用原本的金額；真的要歸零請填 0。'
+    : '';
+  box.style.display = wiped ? 'block' : 'none';
+}
+
 function resetForm() {
   attendStatus = '';
   document.querySelectorAll('.attend-btn').forEach(b => b.className = 'attend-btn');
   ['f-oto','f-internal','f-external','f-amount','f-training','f-guest'].forEach(id => {
     document.getElementById(id).value = '';
   });
+  prevAmount = '';
+  showAmountWarn();
 }
 
 function showToast(msg, isError) {
@@ -618,6 +641,7 @@ let existingData = null;
 async function selectMode(mode) {
   if (mode === 'new') {
     editMode = false;
+    prevAmount = '';
     resetForm();
     goStep(3);
   } else {
@@ -629,6 +653,8 @@ async function selectMode(mode) {
     document.getElementById('f-internal').value = existingData.internal || '';
     document.getElementById('f-external').value = existingData.external || '';
     document.getElementById('f-amount').value = existingData.amount || '';
+    prevAmount = String(existingData.amount == null ? '' : existingData.amount).trim();
+    showAmountWarn();
     document.getElementById('f-training').value = existingData.training || '';
     document.getElementById('f-guest').value = existingData.guest || '';
     goStep(3);
@@ -699,6 +725,17 @@ async function submitForm() {
   if (!selGroup || !selMember) return showToast('請先選擇小組與姓名', true);
   if (!attendStatus) return showToast('請選擇出席狀況', true);
 
+  var amtEl = document.getElementById('f-amount');
+  var amtVal = amtEl.value.trim();
+  if (amtVal === '') {
+    var msg = (editMode && prevAmount !== '' && prevAmount !== '0')
+      ? '引薦金額是空白的。\n\n你上次填的是 ' + Number(prevAmount).toLocaleString('en-US')
+        + '，直接送出會沿用這個金額。\n\n要改成 0 請按「取消」回去填 0。'
+      : '引薦金額還沒填。\n\n本週沒有引薦金額請填 0，按「確定」我幫你填 0。';
+    if (!confirm(msg)) { amtEl.focus(); return; }
+    if (!(editMode && prevAmount !== '' && prevAmount !== '0')) { amtEl.value = '0'; }
+  }
+
   const payload = {
     week:     weekDate,
     editMode: editMode,
@@ -735,6 +772,8 @@ async function submitForm() {
     showToast('✓ 回報成功！', false);
     markRaceEntryDone();
     setTimeout(() => {
+      editMode = false;
+      prevAmount = '';
       resetForm();
       goStep(1);
       selGroup = ''; selMember = '';
