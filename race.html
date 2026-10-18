@@ -375,6 +375,10 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
   .dnote{padding:4px 12px 12px}
 }
 
+.briefbar{align-items:center}
+.briefnote{font-size:11.5px;color:var(--mist);line-height:1.6}
+@media (max-width:620px){ .briefnote{flex-basis:100%;margin-top:2px} }
+
 /* ---------- rule list ---------- */
 .rules{margin:0;padding:0;list-style:none;font-size:13px}
 .rules li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--rule)}
@@ -520,6 +524,11 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
           </table>
         </div>
         <div class="detailbox" id="lightDetail" hidden></div>
+        <div class="actions briefbar">
+          <button type="button" id="btnBrief">下載本週戰情</button>
+          <button type="button" class="quiet" id="btnBriefAll">八組一次下載</button>
+          <span class="briefnote">給組長的 PNG：誰還沒回報、每位組員本週做了什麼、誰該被關心</span>
+        </div>
         <p class="meta">資料來自 BNI PALMS 紅綠燈報表，統計區間 <span id="lightPeriod2">—</span>，與賽道分數分開計算、不互相影響。點上方「計時儀表板」的任一組也可以切換。</p>
       </div>
     </div>
@@ -1170,6 +1179,189 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     return head + body;
   }
 
+
+  /* ---------- 每週戰情（組長版）：畫在 canvas 上輸出 PNG ----------
+     只給組長看的三件事：誰還沒回報、每位組員本週做了什麼、誰該被關心。 */
+  var BRIEF = { w:760, pad:28, scale:2 };
+
+  function weekMembers(wk){
+    var out = {};
+    (wk && wk.members ? wk.members : []).forEach(function(m){ out[m.n] = m; });
+    return out;
+  }
+
+  function wan(n){
+    if(!n){ return "—"; }
+    return n >= 10000 ? (Math.round(n/1000)/10) + "萬" : nf(n);
+  }
+
+  // 得分率最低的那一項＝最該聊的缺口
+  function biggestGap(m){
+    if(!m || typeof m.s !== "number"){ return null; }
+    var rows = breakdown(m).filter(function(r){ return r.pt < r.max && r.tip; });
+    if(!rows.length){ return null; }
+    rows.sort(function(a,b){ return (a.pt/a.max) - (b.pt/b.max); });
+    var r = rows[0];
+    var nextPt = parseInt((r.tip.match(/→\s*\+?(\d+)/) || [0,0])[1], 10);
+    var gain = Math.max(0, nextPt - r.pt) || 5;
+    var tip = r.tip.replace(/\s*→.*$/, "");
+    if(r.k === "交易價值"){                       // 金額改成「萬」，一眼看得懂
+      tip = tip.replace(/[\d,]+/, function(v){ return wan(parseInt(v.replace(/,/g, ""), 10)); });
+    }
+    return { item:r.k, tip:tip, gain:"+" + gain };
+  }
+
+  function drawBrief(teamId){
+    var set = curSet(), roster = (set.teams[teamId] || []);
+    var lastWeek = window.__lastWeek, mem = weekMembers(lastWeek);
+    var ent = (window.__list || []).filter(function(e){ return e.t.id === teamId; })[0];
+    var color = ent ? COLORS[ent.i % COLORS.length] : "#14181D";
+    var miss = roster.filter(function(m){ return !mem[m.n]; });
+
+    // 直式、約 1080×1200，LINE 對話框裡看得清楚
+    var W = 540, P = 24, S = 2;
+    var headH = 104, bandH = 50, thH = 32, rowH = 54, noteH = 92;
+    var H = headH + bandH + thH + roster.length * rowH + noteH;
+
+    var cv = document.createElement("canvas");
+    cv.width = W * S; cv.height = H * S;
+    var x = cv.getContext("2d");
+    x.scale(S, S);
+    x.textBaseline = "alphabetic";
+    var TC = '"Noto Sans TC","Microsoft JhengHei",sans-serif';
+    var SC = '"Saira Condensed","Arial Narrow",sans-serif';
+    function txt(t, px, py, font, fill, align){
+      x.font = font; x.fillStyle = fill; x.textAlign = align || "left";
+      x.fillText(String(t), px, py);
+    }
+    function box(px, py, pw, ph, fill){ x.fillStyle = fill; x.fillRect(px, py, pw, ph); }
+    function dot(px, py, fill){
+      x.beginPath(); x.arc(px, py, 5, 0, Math.PI*2); x.fillStyle = fill; x.fill();
+    }
+
+    box(0, 0, W, H, "#FFFFFF");
+
+    // 標題
+    box(0, 0, W, 38, "#14181D");
+    txt("金安小組競賽 · 組長版", P, 24, "500 13.5px " + TC, "#FFFFFF");
+    txt("第 " + (lastWeek ? lastWeek.week : 0) + " 週 · "
+        + (lastWeek ? fmt(parseD(lastWeek.date)) : "—"), W - P, 24, "12.5px " + TC, "#B6C0C9", "right");
+
+    box(P, 58, 7, 26, color);
+    txt(teamId, P + 17, 81, "700 24px " + TC, "#14181D");
+    txt("組員 " + roster.length + " 人", W - P, 81, "12.5px " + TC, "#68747F", "right");
+    box(0, headH - 3, W, 3, color);
+
+    // 回報狀態
+    var ok = miss.length === 0;
+    box(0, headH, W, bandH, ok ? "#E7F6F1" : "#FDECEA");
+    var head = ok ? ("全組 " + roster.length + "/" + roster.length + " 完成回報")
+                  : ("還有 " + miss.length + " 位沒回報");
+    txt(head, P, headH + 23, "700 16px " + TC, ok ? "#0B6B55" : "#A32218");
+    txt(ok ? "＋5 分已入帳" : "全組完成可以 +5 分",
+        W - P, headH + 23, "12px " + TC, ok ? "#3F8C77" : "#C2645C", "right");
+    txt(ok ? "本週接龍已經收齊" : miss.map(function(m){ return m.n; }).join("、"),
+        P, headH + 41, "500 13px " + TC, ok ? "#3F8C77" : "#A32218");
+
+    // 表頭
+    var cx = { nm:P, wk:P + 80, lt:P + 236, gp:P + 296 };
+    var y0 = headH + bandH;
+    txt("姓名", cx.nm, y0 + 21, "11.5px " + TC, "#8D98A2");
+    txt("本週 1對1｜內／外｜金額", cx.wk, y0 + 21, "11.5px " + TC, "#8D98A2");
+    txt("燈號", cx.lt, y0 + 21, "11.5px " + TC, "#8D98A2");
+    txt("最大缺口", cx.gp, y0 + 21, "11.5px " + TC, "#8D98A2");
+    box(P, y0 + thH - 1, W - P*2, 1, "#D9DEE4");
+
+    var DOT = { g:"#0F8A6E", y:"#D2860F", r:"#C8102E", b:"#1B2026", n:"#C8D0D8" };
+    roster.forEach(function(m, i){
+      var ry = y0 + thH + i * rowH, d = mem[m.n], L = lightOf(m), g = biggestGap(m);
+      if(!d){ box(0, ry, W, rowH, "#FFF8F7"); }
+      if(i){ box(P, ry, W - P*2, 1, "#EBEFF3"); }
+      var base = ry + 34;
+      txt(m.n, cx.nm, base, "500 16px " + TC, "#14181D");
+      if(d){
+        txt(d.o2o, cx.wk, base, "700 16px " + SC, "#3C474F");
+        txt(d.refIn + "/" + d.refOut, cx.wk + 34, base, "700 16px " + SC, "#3C474F");
+        txt(wan(d.amount), cx.wk + 88, base, "700 16px " + SC, "#3C474F");
+      } else {
+        txt("尚未回報", cx.wk, base, "500 14px " + TC, "#C8102E");
+      }
+      dot(cx.lt + 5, base - 6, DOT[L.k]);
+      txt(typeof m.s === "number" ? m.s : "—", cx.lt + 17, base, "700 17px " + SC, "#14181D");
+      if(g){
+        txt(g.item + "　" + g.tip, cx.gp, base, "13px " + TC, "#3C474F");
+        txt(g.gain, W - P, base, "700 15px " + SC, "#C8102E", "right");
+      } else {
+        txt(typeof m.s === "number" ? "各項已達上限" : "新進，尚無資料",
+            cx.gp, base, "13px " + TC, "#8D98A2");
+      }
+    });
+
+    // 底部
+    var ny = y0 + thH + roster.length * rowH;
+    box(0, ny, W, noteH, "#FAFBFC");
+    box(P, ny, W - P*2, 1, "#D9DEE4");
+    var star = null, bestAmt = 0;
+    roster.forEach(function(m){
+      var d = mem[m.n];
+      if(d && d.amount > bestAmt){ bestAmt = d.amount; star = m.n; }
+    });
+    var care = roster.filter(function(m){ return typeof m.s === "number"; })
+                     .sort(function(a,b){ return a.s - b.s; })[0];
+    txt("本週亮點", P, ny + 32, "500 12.5px " + TC, "#68747F");
+    txt(star ? star + "　引薦金額 " + wan(bestAmt) : "本週尚無引薦金額",
+        P + 68, ny + 32, "13.5px " + TC, "#14181D");
+    if(care){
+      var cg = biggestGap(care);
+      txt("建議關心", P, ny + 64, "500 12.5px " + TC, "#68747F");
+      txt(care.n + "（" + lightOf(care).label + " " + care.s + " 分"
+          + (cg ? "，" + cg.item + " " + cg.tip : "") + "）",
+          P + 68, ny + 64, "13.5px " + TC, "#14181D");
+    }
+    return cv;
+  }
+
+  function saveCanvas(cv, name){
+    cv.toBlob(function(blob){
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = name;
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    }, "image/png");
+  }
+
+  function briefName(teamId){
+    // 檔名用半形英數，避免不同裝置／通訊軟體轉檔時變成亂碼或 download.png
+    var w = window.__lastWeek;
+    var ids = Object.keys(curSet().teams);
+    var g = ids.indexOf(teamId) + 1;
+    var d = w ? fmt(parseD(w.date)).replace("/", "") : "0000";
+    return "jinan-brief-" + d + "-g" + g + ".png";
+  }
+
+  function downloadBrief(){
+    var btn = document.getElementById("btnBrief");
+    saveCanvas(drawBrief(lightTeam), briefName(lightTeam));
+    btn.textContent = "已下載";
+    setTimeout(function(){ btn.textContent = "下載本週戰情"; }, 1600);
+  }
+
+  function downloadAllBriefs(){
+    var btn = document.getElementById("btnBriefAll");
+    var ids = Object.keys(curSet().teams);
+    btn.disabled = true;
+    ids.forEach(function(id, i){
+      setTimeout(function(){
+        saveCanvas(drawBrief(id), briefName(id));
+        if(i === ids.length - 1){
+          btn.textContent = "已下載 " + ids.length + " 張";
+          setTimeout(function(){ btn.textContent = "八組一次下載"; btn.disabled = false; }, 1800);
+        }
+      }, i * 500);
+    });
+  }
+
   function showTeamLights(teamId){
     renderLights(teamId);
     var el = document.getElementById("lightPanel");
@@ -1281,6 +1473,8 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
 
   document.getElementById("btnReload").addEventListener("click", loadData);
 
+  document.getElementById("btnBrief").addEventListener("click", downloadBrief);
+  document.getElementById("btnBriefAll").addEventListener("click", downloadAllBriefs);
   document.getElementById("btnCopy").addEventListener("click", function(){
     var list = window.__list || [], wk = window.__lastWeek;
     var lines = ["【金安小組競賽】第 " + (wk ? wk.week : "-") + " 週戰報　" + (wk ? fmt(parseD(wk.date)) : "")];
