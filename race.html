@@ -377,7 +377,29 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
 
 .briefbar{align-items:center}
 .briefnote{font-size:11.5px;color:var(--mist);line-height:1.6}
-@media (max-width:620px){ .briefnote{flex-basis:100%;margin-top:2px} }
+
+.briefgrid{margin-top:18px;border-top:1px solid var(--rule);padding-top:16px}
+.briefgrid .gtip{font-size:12.5px;color:var(--mist);line-height:1.7;margin:0 0 14px}
+.briefgrid .gtip b{color:var(--ink);font-weight:700}
+.briefcards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start}
+.briefcard{border:1px solid var(--rule);background:#FFF;display:flex;flex-direction:column}
+.briefcard img{width:100%;height:auto;display:block;cursor:pointer}
+.briefcard .cap{display:flex;align-items:center;justify-content:space-between;
+  gap:8px;padding:8px 10px;border-top:1px solid var(--rule)}
+.briefcard .cap span{font-size:13px;font-weight:700}
+.briefcard .cap a{font-size:12px;color:var(--red);text-decoration:none;
+  border:1px solid #C7D0D8;padding:5px 10px;white-space:nowrap}
+.briefcard .cap a:hover{background:#F1F5F8}
+.briefcard .cap .sharebtn{font-size:12px;padding:5px 10px;border:1px solid #C7D0D8;
+  background:#FFF;color:var(--red);font-weight:500;white-space:nowrap}
+@media (max-width:980px){ .briefcards{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:620px){
+  .briefnote{flex-basis:100%;margin-top:2px}
+  .briefcards{grid-template-columns:1fr;gap:18px}
+  .briefcard .cap{padding:10px 12px}
+  .briefcard .cap span{font-size:15px}
+  .briefcard .cap a,.briefcard .cap .sharebtn{font-size:13px;padding:7px 14px}
+}
 
 /* ---------- rule list ---------- */
 .rules{margin:0;padding:0;list-style:none;font-size:13px}
@@ -525,10 +547,11 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
         </div>
         <div class="detailbox" id="lightDetail" hidden></div>
         <div class="actions briefbar">
-          <button type="button" id="btnBrief">下載本週戰情</button>
-          <button type="button" class="quiet" id="btnBriefAll">八組一次下載</button>
+          <button type="button" id="btnBrief">下載本組戰報</button>
+          <button type="button" class="quiet" id="btnBriefAll">產生八組戰報</button>
           <span class="briefnote">給組長的 PNG：誰還沒回報、每位組員本週做了什麼、誰該被關心</span>
         </div>
+        <div class="briefgrid" id="briefGrid" hidden></div>
         <p class="meta">資料來自 BNI PALMS 紅綠燈報表，統計區間 <span id="lightPeriod2">—</span>，與賽道分數分開計算、不互相影響。點上方「計時儀表板」的任一組也可以切換。</p>
       </div>
     </div>
@@ -1321,14 +1344,41 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     return cv;
   }
 
+  // canvas → Blob，同步版本。
+  // toBlob 是非同步的，等它回來時「使用者剛剛按了按鈕」這件事已經過期，
+  // 手機的分享面板就會被擋掉，所以這裡用同步的 toDataURL 再自己轉。
+  function canvasBlob(cv){
+    var parts = cv.toDataURL("image/png").split(",");
+    var bin = atob(parts[1]);
+    var buf = new Uint8Array(bin.length);
+    for(var i = 0; i < bin.length; i++){ buf[i] = bin.charCodeAt(i); }
+    return new Blob([buf], { type:"image/png" });
+  }
+
+  // 手機（iOS Safari、LINE 內建瀏覽器）會忽略 a.download，按了完全沒反應。
+  // 順序：系統分享面板 → 傳統下載 → 把圖放到畫面上讓人長按儲存。
   function saveCanvas(cv, name){
-    cv.toBlob(function(blob){
-      var a = document.createElement("a");
+    var blob = canvasBlob(cv);
+
+    if(navigator.canShare){
+      try {
+        var file = new File([blob], name, { type:"image/png" });
+        if(navigator.canShare({ files:[file] })){
+          navigator.share({ files:[file] })["catch"](function(){});
+          return "share";
+        }
+      } catch(e){}
+    }
+
+    var a = document.createElement("a");
+    if(typeof a.download === "string"){
       a.href = URL.createObjectURL(blob);
       a.download = name;
       document.body.appendChild(a); a.click();
       setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-    }, "image/png");
+      return "download";
+    }
+    return "none";
   }
 
   function briefName(teamId){
@@ -1342,23 +1392,95 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
 
   function downloadBrief(){
     var btn = document.getElementById("btnBrief");
-    saveCanvas(drawBrief(lightTeam), briefName(lightTeam));
-    btn.textContent = "已下載";
-    setTimeout(function(){ btn.textContent = "下載本週戰情"; }, 1600);
+    var cv  = drawBrief(lightTeam);
+    var how = saveCanvas(cv, briefName(lightTeam));
+    // 不管哪條路走成功，都把圖留在畫面上：
+    // 分享面板被關掉、或瀏覽器根本不給下載時，長按這張圖就能存。
+    showOneBrief(cv, lightTeam);
+    btn.textContent = how === "share" ? "已開啟分享" : (how === "download" ? "已下載" : "請長按下方圖片");
+    setTimeout(function(){ btn.textContent = "下載本組戰報"; }, 2000);
   }
 
-  function downloadAllBriefs(){
-    var btn = document.getElementById("btnBriefAll");
+  function showOneBrief(cv, teamId){
+    var wrap = document.getElementById("briefGrid");
+    if(!wrap){ return; }
+    [].forEach.call(wrap.querySelectorAll("img"), function(im){
+      try { URL.revokeObjectURL(im.src); } catch(e){}
+    });
+    var url = URL.createObjectURL(canvasBlob(cv));
+    wrap.innerHTML = '<p class="gtip"><b>手機</b>：長按下面這張圖 →「儲存影像」，或直接分享到 LINE。</p>'
+      + '<div class="briefcards"><div class="briefcard">'
+      + '<img alt="' + teamId + ' 戰報"><div class="cap"><span></span><a>下載</a></div>'
+      + '</div></div>';
+    wrap.hidden = false;
+    wrap.querySelector("img").src = url;
+    wrap.querySelector(".cap span").textContent = teamId;
+    var a = wrap.querySelector(".cap a");
+    a.href = url; a.download = briefName(teamId);
+    wrap.scrollIntoView({ behavior:"smooth", block:"start" });
+  }
+
+  // 瀏覽器只允許一次點擊下載一個檔案，連續八次會被擋掉（只存到第一張）。
+  // 改成一次把八張畫出來排在頁面上，各自有下載鈕；手機長按圖片也能直接存檔或分享到 LINE。
+  function showAllBriefs(){
+    var btn  = document.getElementById("btnBriefAll");
+    var wrap = document.getElementById("briefGrid");
+    if(!wrap){ return; }
     var ids = Object.keys(curSet().teams);
     btn.disabled = true;
+    btn.textContent = "產生中…";
+    // 釋放上一輪的圖片，避免重複按住記憶體
+    [].forEach.call(wrap.querySelectorAll("img"), function(im){
+      try { URL.revokeObjectURL(im.src); } catch(e){}
+    });
+
+    wrap.innerHTML = '<p class="gtip">八張都畫好了。<b>電腦</b>：按各張下方的「下載」。'
+      + '<b>手機</b>：長按圖片 →「儲存影像」或直接分享到 LINE。</p>'
+      + '<div class="briefcards" id="briefCards"></div>';
+    wrap.hidden = false;
+    var box = document.getElementById("briefCards");
+
+    // 先照順序把八個位子排好，再逐一填圖；
+    // toBlob 是非同步的，先建位子才不會變成誰先畫完誰排前面。
+    var slots = ids.map(function(id){
+      var card = document.createElement("div");
+      card.className = "briefcard";
+      var img = document.createElement("img");
+      img.alt = id + " 戰報";
+      var cap = document.createElement("div");
+      cap.className = "cap";
+      var nm = document.createElement("span"); nm.textContent = id;
+      var a  = document.createElement("a");
+      a.download = briefName(id); a.textContent = "下載";
+      cap.appendChild(nm);
+      if(navigator.canShare){
+        var sh = document.createElement("button");
+        sh.type = "button"; sh.className = "sharebtn"; sh.textContent = "分享";
+        sh.addEventListener("click", function(){ saveCanvas(drawBrief(id), briefName(id)); });
+        cap.appendChild(sh);
+      }
+      cap.appendChild(a);
+      card.appendChild(img); card.appendChild(cap);
+      box.appendChild(card);
+      return { img:img, a:a };
+    });
+
     ids.forEach(function(id, i){
       setTimeout(function(){
-        saveCanvas(drawBrief(id), briefName(id));
+        drawBrief(id).toBlob(function(blob){
+          var url = URL.createObjectURL(blob);
+          slots[i].img.src = url;
+          slots[i].a.href  = url;
+        }, "image/png");
+
         if(i === ids.length - 1){
-          btn.textContent = "已下載 " + ids.length + " 張";
-          setTimeout(function(){ btn.textContent = "八組一次下載"; btn.disabled = false; }, 1800);
+          setTimeout(function(){
+            btn.textContent = "重新產生";
+            btn.disabled = false;
+            wrap.scrollIntoView({ behavior:"smooth", block:"start" });
+          }, 300);
         }
-      }, i * 500);
+      }, i * 60);
     });
   }
 
@@ -1474,7 +1596,7 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
   document.getElementById("btnReload").addEventListener("click", loadData);
 
   document.getElementById("btnBrief").addEventListener("click", downloadBrief);
-  document.getElementById("btnBriefAll").addEventListener("click", downloadAllBriefs);
+  document.getElementById("btnBriefAll").addEventListener("click", showAllBriefs);
   document.getElementById("btnCopy").addEventListener("click", function(){
     var list = window.__list || [], wk = window.__lastWeek;
     var lines = ["【金安小組競賽】第 " + (wk ? wk.week : "-") + " 週戰報　" + (wk ? fmt(parseD(wk.date)) : "")];
