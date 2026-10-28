@@ -285,6 +285,21 @@ td.tnum.lap{color:var(--mist);letter-spacing:.06em}
   font-family:"Noto Sans TC",sans-serif;font-size:13px;padding:5px 11px;cursor:pointer;
   background:#FFF;border:1px solid var(--line);color:var(--ink);border-radius:0;line-height:1.4}
 .lightpick button:hover{border-color:var(--mist)}
+.hslog{display:block;font-style:normal;font-size:11.5px;font-weight:400;
+  font-family:"Noto Sans TC",sans-serif;color:var(--mist);line-height:1.4;
+  margin-top:3px;max-width:190px;margin-left:auto;white-space:normal}
+@media (max-width:620px){ .hslog{max-width:130px;font-size:11px} }
+.lightpick:not(.setpick) button{display:flex;flex-direction:column;align-items:flex-start;
+  gap:1px;line-height:1.35;text-align:left}
+.lightpick:not(.setpick) button b{font-weight:700}
+.lightpick:not(.setpick) button em{font-style:normal;font-size:11px;color:var(--mist)}
+.lightpick:not(.setpick) button.on em{color:#B6C0C9}
+
+td.tname b{display:block;font-weight:700}
+td.tname em{display:block;font-style:normal;font-size:11px;color:var(--mist);
+  font-weight:400;line-height:1.4;margin-top:1px}
+.tcname b{display:block;font-weight:500}
+.tcname em{display:block;font-style:normal;font-size:11px;color:var(--mist);line-height:1.4}
 .lightpick button.on{background:var(--ink);border-color:var(--ink);color:#FFF;font-weight:500}
 .lightsum{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin:0 0 10px;font-size:12px;color:var(--mist)}
 .lightsum b{font-family:"Saira Condensed",sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
@@ -304,13 +319,19 @@ tbody tr.newbie td{color:var(--mist)}
 
 /* ---------- 直線賽道 ---------- */
 .lanebox{padding:14px 16px 6px;background:linear-gradient(170deg,#F7FAFC 0%,#EDF2F6 100%)}
-.axis{position:relative;height:16px;margin-left:68px;margin-right:52px}
+.axis{position:relative;height:16px;margin-left:10px;margin-right:52px}
 .axis i{position:absolute;top:0;transform:translateX(-50%);
   font-family:"Saira Condensed",sans-serif;font-size:11px;color:var(--mist);font-style:normal}
-.lanes{display:flex;flex-direction:column;gap:5px}
-.lrow{display:grid;grid-template-columns:68px minmax(0,1fr) 52px;align-items:center;gap:0}
-.lname{font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;white-space:nowrap}
-.lname i{width:4px;height:17px;flex:none;display:block}
+.lanes{display:flex;flex-direction:column;gap:7px}
+.lrow{display:grid;grid-template-columns:10px minmax(0,1fr) 52px;grid-template-rows:auto auto;
+  align-items:center;gap:0}
+.ltitle{grid-column:1/4;font-size:12px;font-weight:500;line-height:1.45;
+  display:flex;align-items:center;gap:6px;padding-bottom:3px}
+.ltitle i{width:4px;height:13px;flex:none;display:block}
+.ltitle b{font-weight:700}
+.ltitle span{color:var(--mist);font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lname{display:flex;align-items:center}
+.lname i{width:4px;height:30px;flex:none;display:block}
 .lscore{font-family:"Saira Condensed",sans-serif;font-weight:700;font-size:16px;
   text-align:right;font-variant-numeric:tabular-nums;padding-left:7px}
 .strip{position:relative;height:30px;background:var(--asphalt-2);
@@ -326,9 +347,10 @@ tbody tr.newbie td{color:var(--mist)}
 @media (prefers-reduced-motion:no-preference){ .strip .pcar{transition:left .9s cubic-bezier(.22,.75,.3,1)} }
 @media (max-width:620px){
   .lanebox{padding:12px 12px 6px}
-  .axis{margin-left:60px;margin-right:46px}
-  .lrow{grid-template-columns:60px minmax(0,1fr) 46px}
-  .lname{font-size:13px;gap:5px}
+  .axis{margin-left:10px;margin-right:46px}
+  .lrow{grid-template-columns:10px minmax(0,1fr) 46px}
+  .ltitle{font-size:11.5px}
+  .lname i{height:26px}
   .lscore{font-size:15px}
   .strip{height:26px}
   .strip .pcar{width:40px;height:18px;margin-top:-9px}
@@ -703,6 +725,19 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
   };
 
   var COLORS = ["#D9871B","#12907C","#CE4A32","#F49AC1","#6E8F1F","#A24BAE","#1B87B8","#8A6243"];
+
+  /* ---------- 各組車隊名稱（改這裡就全站一起換） ---------- */
+  var TEAM_LABEL = {
+    "第一組": "超速！就派波力來扣車",
+    "第二組": "安全駕駛\uD83D\uDE98等別人翻車\uD83D\uDE91",
+    "第三組": "車太炫，快到看不見！",
+    "第四組": "引薦爆單\u26A1\uFE0F絕不翻車\uD83C\uDFCE\uFE0F",
+    "第五組": "專業賽車，引薦超車\uD83D\uDE80",
+    "第六組": "\uD83C\uDFCE\uFE0F 車速無上限，引薦無極限",
+    "第七組": "車速在飆，引薦在燒",
+    "第八組": "車銀優，引薦我最優"
+  };
+  function slogan(id){ return TEAM_LABEL[id] || ""; }
   //                                      ↑ 第四組：粉紅
 
   /* ---------- 10 月前兩週：商機與出席取自 PALMS，回報一律視為全組完成（10/16 起照規則吃接龍） ---------- */
@@ -862,10 +897,18 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
       row.title = "看 " + e.t.name + " 的組員紅綠燈";
       row.onclick = function(){ showTeamLights(e.t.id); };
 
+      var ti = document.createElement("div"); ti.className = "ltitle";
+      var tsw = document.createElement("i"); tsw.style.background = c;
+      var tnm = document.createElement("b"); tnm.textContent = e.t.name;
+      ti.appendChild(tsw); ti.appendChild(tnm);
+      if(slogan(e.t.id)){
+        var tsl = document.createElement("span"); tsl.textContent = slogan(e.t.id);
+        ti.appendChild(tsl);
+      }
+
       var nm = document.createElement("div"); nm.className = "lname";
       var sw = document.createElement("i"); sw.style.background = c;
-      var tx = document.createElement("span"); tx.textContent = e.t.name;
-      nm.appendChild(sw); nm.appendChild(tx);
+      nm.appendChild(sw);
 
       var st = document.createElement("div");
       st.className = "strip" + (leader && e.t.id === leader.t.id && e.total > 0 ? " lead" : "");
@@ -883,12 +926,20 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
       sc.textContent = e.total.toFixed(1);
       sc.style.color = (e.last && e.last.s.avg === best && best > 0) ? "var(--purple)" : "var(--ink)";
 
-      row.appendChild(nm); row.appendChild(st); row.appendChild(sc);
+      row.appendChild(ti); row.appendChild(nm); row.appendChild(st); row.appendChild(sc);
       box.appendChild(row);
     });
 
     document.getElementById("hRound").textContent = lastWeek ? lastWeek.week : 0;
-    document.getElementById("hLead").textContent = (leader && leader.total > 0) ? leader.t.name : "—";
+    var hl = document.getElementById("hLead");
+    if(leader && leader.total > 0){
+      hl.textContent = leader.t.name;
+      if(slogan(leader.t.id)){
+        var hs = document.createElement("em"); hs.className = "hslog";
+        hs.textContent = slogan(leader.t.id);
+        hl.appendChild(hs);
+      }
+    } else { hl.textContent = "—"; }
     document.getElementById("hLap").innerHTML = (leader ? leader.total.toFixed(1) : "0.0") + "<small>分</small>";
     document.getElementById("lapInfo").textContent =
       "第 " + (lastWeek ? lastWeek.week : 0) + " / " + totalWeeks() + " 週";
@@ -933,7 +984,13 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
       tr.appendChild(tdp);
 
       var tdn = document.createElement("td");
-      tdn.className = "tname"; tdn.textContent = e.t.name;
+      tdn.className = "tname";
+      var tnb = document.createElement("b"); tnb.textContent = e.t.name;
+      tdn.appendChild(tnb);
+      if(slogan(e.t.id)){
+        var tns = document.createElement("em"); tns.textContent = slogan(e.t.id);
+        tdn.appendChild(tns);
+      }
       tr.appendChild(tdn);
 
       tr.appendChild(cell("tnum big", e.total.toFixed(1)));
@@ -986,7 +1043,13 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
       cell.onclick = function(){ showTeamLights(e.t.id); };
       var chip = document.createElement("span"); chip.className = "chip";
       chip.style.background = COLORS[e.i % COLORS.length];
-      var nm = document.createElement("span"); nm.textContent = e.t.name;
+      var nm = document.createElement("span"); nm.className = "tcname";
+      var nb = document.createElement("b"); nb.textContent = e.t.name;
+      nm.appendChild(nb);
+      if(slogan(e.t.id)){
+        var ns = document.createElement("em"); ns.textContent = slogan(e.t.id);
+        nm.appendChild(ns);
+      }
       cell.appendChild(chip); cell.appendChild(nm);
       td0.appendChild(cell); tr.appendChild(td0);
 
@@ -1066,7 +1129,12 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     names.forEach(function(id, i){
       var b = document.createElement("button");
       b.type = "button";
-      b.textContent = id;
+      var bb = document.createElement("b"); bb.textContent = id;
+      b.appendChild(bb);
+      if(slogan(id)){
+        var bs = document.createElement("em"); bs.textContent = slogan(id);
+        b.appendChild(bs);
+      }
       if(id === lightTeam){ b.className = "on"; }
       b.onclick = function(){ renderLights(id); };
       pick.appendChild(b);
@@ -1243,7 +1311,7 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
 
     // 直式、約 1080×1200，LINE 對話框裡看得清楚
     var W = 540, P = 24, S = 2;
-    var headH = 104, bandH = 50, thH = 32, rowH = 54, noteH = 92;
+    var headH = 118, bandH = 50, thH = 32, rowH = 54, noteH = 92;
     var H = headH + bandH + thH + roster.length * rowH + noteH;
 
     var cv = document.createElement("canvas");
@@ -1273,6 +1341,9 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     box(P, 58, 7, 26, color);
     txt(teamId, P + 17, 81, "700 24px " + TC, "#14181D");
     txt("組員 " + roster.length + " 人", W - P, 81, "12.5px " + TC, "#68747F", "right");
+    if(slogan(teamId)){
+      txt(slogan(teamId), P + 17, 99, "500 13px " + TC, "#68747F");
+    }
     box(0, headH - 3, W, 3, color);
 
     // 回報狀態
@@ -1608,7 +1679,8 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     }
     list.slice().sort(function(a,b){ return b.total - a.total; }).forEach(function(e, idx){
       var r = e.last ? e.last.row : null;
-      lines.push("P" + (idx+1) + " " + e.t.name + "　總分 " + e.total.toFixed(1)
+      lines.push("P" + (idx+1) + " " + e.t.name
+        + (slogan(e.t.id) ? "　" + slogan(e.t.id) : "") + "　總分 " + e.total.toFixed(1)
         + "　本週 " + (e.last ? e.last.s.avg.toFixed(1) : "0") + " 分"
         + (r ? "｜回報 " + r.report + "/" + e.t.size + "、出席 " + r.attend
              + "、一對一 " + r.o2o + "、內部引薦 " + r.refIn + "、外部引薦 " + r.refOut
