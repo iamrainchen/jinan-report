@@ -102,17 +102,24 @@
 
   /* Group grid */
   .group-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
     padding: 16px;
   }
   .group-btn {
-    padding: 12px 4px; border: 1px solid var(--border);
+    padding: 10px 12px; border: 1px solid var(--border);
     border-radius: 8px; background: #fff;
     cursor: pointer; font-size: 14px; font-weight: 500;
     color: var(--ink-soft); transition: all 0.15s;
     font-family: 'Noto Sans TC', sans-serif;
-    text-align: center;
+    text-align: left; line-height: 1.4;
   }
+  .group-btn b { display: block; font-weight: 700; }
+  .group-btn em {
+    display: block; font-style: normal; font-size: 11px;
+    color: var(--ink-muted); margin-top: 2px;
+    white-space: normal; word-break: break-word;
+  }
+  .group-btn.selected em { color: rgba(255,255,255,.85); }
   .group-btn:hover { border-color: var(--gold); color: var(--gold-dark); background: #FFFBF2; }
   .group-btn.selected { border-color: var(--gold); background: var(--gold); color: #fff; }
 
@@ -487,6 +494,19 @@ const groups = {
   '第8組': ['廖羿為','謝佳恩','殷如蒔','洪梓承','賴佩玲','邱相勳'],
 };
 
+// 各組車隊名稱（與賽道網頁同一套）
+const TEAM_LABEL = {
+  '第1組': '超速！就派波力來扣車',
+  '第2組': '安全駕駛\u{1F698}等別人翻車\u{1F691}',
+  '第3組': '車太炫，快到看不見！',
+  '第4組': '引薦爆單\u{26A1}\u{FE0F}絕不翻車\u{1F3CE}\u{FE0F}',
+  '第5組': '專業賽車，引薦超車\u{1F680}',
+  '第6組': '\u{1F3CE}\u{FE0F} 車速無上限，引薦無極限',
+  '第7組': '車速在飆，引薦在燒',
+  '第8組': '車銀優，引薦我最優',
+};
+const slogan = g => TEAM_LABEL[g] || '';
+
 let selGroup = '', selMember = '', attendStatus = '';
 
 // Auto-compute closest upcoming Friday
@@ -507,7 +527,9 @@ const groupGrid = document.getElementById('groupGrid');
 Object.keys(groups).forEach(g => {
   const btn = document.createElement('button');
   btn.className = 'group-btn';
-  btn.textContent = g;
+  btn.innerHTML = '';
+  const gb = document.createElement('b'); gb.textContent = g; btn.appendChild(gb);
+  if (slogan(g)) { const ge = document.createElement('em'); ge.textContent = slogan(g); btn.appendChild(ge); }
   btn.onclick = () => {
     selGroup = g;
     document.querySelectorAll('.group-btn').forEach(b => b.classList.remove('selected'));
