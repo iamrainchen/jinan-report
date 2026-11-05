@@ -1661,6 +1661,7 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
   function render(data, status){
     var list = build(data);
     var lastWeek = data.weeks.length ? data.weeks[data.weeks.length - 1] : null;
+    window.__list = list; window.__lastWeek = lastWeek;
     renderGrid(list, lastWeek);
     renderTower(list, lastWeek);
     renderTable(list, lastWeek);
@@ -1671,7 +1672,6 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     badge.className = "badge " + status.kind;
     badge.textContent = status.label;
     document.getElementById("srcText").textContent = status.text;
-    window.__list = list; window.__lastWeek = lastWeek;
   }
 
   function loadData(){
