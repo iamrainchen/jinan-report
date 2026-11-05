@@ -575,7 +575,7 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
           <span class="briefnote">給組長的 PNG：誰還沒回報、每位組員本週做了什麼、誰該被關心</span>
         </div>
         <div class="briefgrid" id="briefGrid" hidden></div>
-        <p class="meta">資料來自 BNI PALMS 紅綠燈報表，統計區間 <span id="lightPeriod2">—</span>，與賽道分數分開計算、不互相影響。點上方「計時儀表板」的任一組也可以切換。</p>
+        <p class="meta">資料來自 BNI PALMS 紅綠燈報表，統計區間 <span id="lightPeriod2">—</span>，與賽道分數分開計算、不互相影響。目前組員若沒有該期報表資料，會顯示「尚無資料」。點上方「計時儀表板」的任一組也可以切換。</p>
       </div>
     </div>
 
@@ -1159,7 +1159,12 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
       pick.appendChild(b);
     });
 
-    var list = set.teams[lightTeam].slice().sort(function(a,b){
+    var list = set.teams[lightTeam].slice();
+    // 保留原期別的燈號，並補顯本週名冊新增但尚無 PALMS 資料的組員。
+    competitionRoster(lightTeam, window.__lastWeek).forEach(function(m){
+      if(!list.some(function(p){ return p.n === m.n; })){ list.push(m); }
+    });
+    list.sort(function(a,b){
       return (typeof b.s === "number" ? b.s : -1) - (typeof a.s === "number" ? a.s : -1);
     });
     var cnt = {g:0, y:0, r:0, b:0, n:0};
