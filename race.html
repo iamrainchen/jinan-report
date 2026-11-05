@@ -206,6 +206,7 @@ td.avg{font-family:"Saira Condensed",sans-serif;font-weight:700;font-size:18px;c
 .wtbar b{font-size:15px;color:#8A5B07}
 .wtbar span{font-size:12px;color:#9A6E1C}
 .wtbar .x{font-family:"Saira Condensed",sans-serif;font-weight:700;font-size:17px;color:#8A5B07}
+.wtbar[hidden]{display:none}
 
 /* ---------- read-only table ---------- */
 td.n{font-family:"Saira Condensed",sans-serif;font-weight:600;font-size:15px;font-variant-numeric:tabular-nums}
@@ -628,8 +629,8 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
 
   // 每月加權項：該項點數乘以倍率，沒有就 null
   var MONTHLY = {
-    "2026-10": { key:"o2o", mult:2 },
-    "2026-11": null,
+    "2026-10": null,
+    "2026-11": { keys:["refIn","refOut"], label:"引薦次數（內部＋外部）", mult:2 },
     "2026-12": null,
     "2027-01": null,
     "2027-02": null,
@@ -779,15 +780,32 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
   /* ---------- 計分 ---------- */
   function ym(d){ return String(d).slice(0,7); }
   function weightFor(d){ return MONTHLY[ym(d)] || null; }
+  function isWeighted(w, key){
+    return !!w && (w.key === key || (w.keys || []).indexOf(key) >= 0);
+  }
+  function weightLabel(w){
+    return w.label || FIELDS.filter(function(f){ return isWeighted(w, f.k); })
+      .map(function(f){ return f.label; }).join("＋");
+  }
+  function weightNote(w){
+    var f = FIELDS.filter(function(f){ return isWeighted(w, f.k); })[0];
+    return "內部、外部引薦每次 " + (POINTS[f.k] * w.mult)
+      + " 點（平常 " + POINTS[f.k] + " 點）；一對一與引薦金額維持正常計分";
+  }
+  function monthRule(date){
+    var w = weightFor(date), month = parseD(date).getMonth() + 1;
+    return w ? month + "月加權：" + weightLabel(w) + " ×" + w.mult
+             : month + "月正常計分：一對一每次 " + POINTS.o2o + " 點";
+  }
 
-  function sizeAt(teamId, dateStr, fallback){
-    var o = SIZE_AT[dateStr];
+  function sizeAt(teamId, dateStr, fallback, weekSizes){
+    var o = SIZE_AT[dateStr] || weekSizes;
     return (o && o[teamId]) ? o[teamId] : fallback;
   }
   function scoreRow(row, size, dateStr){
     var w = weightFor(dateStr), raw = 0;
     FIELDS.forEach(function(f){
-      var mult = (w && w.key === f.k) ? w.mult : 1;
+      var mult = isWeighted(w, f.k) ? w.mult : 1;
       raw += (row[f.k] || 0) * POINTS[f.k] * mult;
     });
     var full = size > 0 && (row.report || 0) >= size;
@@ -806,12 +824,13 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
       wk.rows.forEach(function(r){
         var e = byId[r.team];
         if(!e){ return; }
-        var s = scoreRow(r, sizeAt(e.t.id, wk.date, e.t.size), wk.date);
+        var size = sizeAt(e.t.id, wk.date, e.t.size, wk.sizes);
+        var s = scoreRow(r, size, wk.date);
         if(isLast){ e.prevTotal = e.total; }
         e.total = Math.round((e.total + s.avg)*10)/10;
         if(s.avg > e.best){ e.best = s.avg; }
         e.trail.push(e.total);
-        e.last = { row:r, s:s, week:wk };
+        e.last = { row:r, s:s, size:size, week:wk };
       });
     });
     var list = order.map(function(id){ return byId[id]; });
@@ -1025,7 +1044,7 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     }
     addTh("車隊","l"); addTh("組員");
     FIELDS.forEach(function(f){
-      var hit = w && w.key === f.k;
+      var hit = isWeighted(w, f.k);
       addTh(hit ? f.label + " " + (POINTS[f.k] * w.mult) + "點" : f.label, hit ? "wt" : "");
     });
     addTh("全組接龍"); addTh("本週得分");
@@ -1054,19 +1073,19 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
       td0.appendChild(cell); tr.appendChild(td0);
 
       var tds = document.createElement("td");
-      tds.className = "n"; tds.textContent = e.t.size; tr.appendChild(tds);
+      tds.className = "n"; tds.textContent = e.last ? e.last.size : e.t.size; tr.appendChild(tds);
 
       FIELDS.forEach(function(f){
         var td = document.createElement("td");
         var v = e.last ? (e.last.row[f.k] || 0) : 0;
         if(f.k === "biz"){
           var amt = e.last ? (e.last.row.amount || 0) : 0;
-          td.className = "money" + (w && w.key === f.k ? " wt" : "");
+          td.className = "money" + (isWeighted(w, f.k) ? " wt" : "");
           td.innerHTML = (v ? '<b style="font-weight:600;font-size:15px">' + v + '</b>'
                             : '<span style="color:#B6C0C9">0</span>')
             + '<i>' + (amt ? nf(amt) : "—") + '</i>';
         } else {
-          td.className = "n" + (v === 0 ? " zero" : "") + (w && w.key === f.k ? " wt" : "");
+          td.className = "n" + (v === 0 ? " zero" : "") + (isWeighted(w, f.k) ? " wt" : "");
           td.textContent = v;
         }
         tr.appendChild(td);
@@ -1081,7 +1100,7 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
       var tda = document.createElement("td");
       tda.className = "avg";
       tda.textContent = e.last ? e.last.s.avg.toFixed(1) : "—";
-      if(e.last){ tda.title = "原始點數 " + e.last.s.raw + " ÷ 組員 " + e.t.size; }
+      if(e.last){ tda.title = "原始點數 " + e.last.s.raw + " ÷ 組員 " + e.last.size; }
       tr.appendChild(tda);
 
       tb.appendChild(tr);
@@ -1281,6 +1300,16 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     return out;
   }
 
+  // 戰報採用該週競賽名冊；PALMS 資料僅補充燈號，不決定誰應回報。
+  function competitionRoster(teamId, wk){
+    var lights = curSet().teams[teamId] || [];
+    var names = wk && wk.rosters && wk.rosters[teamId];
+    if(!names){ return lights; }
+    return names.map(function(name){
+      return lights.filter(function(m){ return m.n === name; })[0] || { n:name, s:null };
+    });
+  }
+
   function wan(n){
     if(!n){ return "—"; }
     return n >= 10000 ? (Math.round(n/1000)/10) + "萬" : nf(n);
@@ -1303,15 +1332,15 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
   }
 
   function drawBrief(teamId){
-    var set = curSet(), roster = (set.teams[teamId] || []);
     var lastWeek = window.__lastWeek, mem = weekMembers(lastWeek);
+    var roster = competitionRoster(teamId, lastWeek);
     var ent = (window.__list || []).filter(function(e){ return e.t.id === teamId; })[0];
     var color = ent ? COLORS[ent.i % COLORS.length] : "#14181D";
     var miss = roster.filter(function(m){ return !mem[m.n]; });
 
     // 直式、約 1080×1200，LINE 對話框裡看得清楚
     var W = 540, P = 24, S = 2;
-    var headH = 118, bandH = 50, thH = 32, rowH = 54, noteH = 92;
+    var headH = 144, bandH = 50, thH = 32, rowH = 54, noteH = 92;
     var H = headH + bandH + thH + roster.length * rowH + noteH;
 
     var cv = document.createElement("canvas");
@@ -1344,6 +1373,7 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     if(slogan(teamId)){
       txt(slogan(teamId), P + 17, 99, "500 13px " + TC, "#68747F");
     }
+    if(lastWeek){ txt(monthRule(lastWeek.date), P, 123, "12px " + TC, "#68747F"); }
     box(0, headH - 3, W, 3, color);
 
     // 回報狀態
@@ -1568,7 +1598,7 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     ul.textContent = "";
     FIELDS.forEach(function(f){
       var li = document.createElement("li");
-      var hit = w && w.key === f.k;
+      var hit = isWeighted(w, f.k);
       if(hit){ li.className = "hl"; }
       var a = document.createElement("span");
       a.textContent = f.label + (f.k === "attend" ? "（本人或代理）"
@@ -1583,18 +1613,16 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     li2.appendChild(a2); li2.appendChild(b2); ul.appendChild(li2);
 
     document.getElementById("ruleMeta").textContent =
-      "認定方式照 BNI：本人到與代理到都算出席，一張引薦單就是一張。內部與外部引薦同分，引薦金額不分大小、有回報就算一筆。得分取組內人均，所以人數不同的組條件相同。";
+      "10月無加權，一對一每次2點；11月加權引薦次數，內部與外部引薦每次4點（×2），引薦金額維持每筆2點。本人與代理都算出席，得分依各週實際組員人數計算。";
 
     var bar = document.getElementById("wtBar");
     if(w){
-      var label = "";
-      FIELDS.forEach(function(f){ if(f.k === w.key){ label = f.label; } });
+      var label = weightLabel(w);
       var mon = lastWeek ? (parseD(lastWeek.date).getMonth() + 1) : "";
       bar.hidden = false;
       document.getElementById("wtTitle").textContent = mon + "月加權：" + label;
       document.getElementById("wtMult").textContent = "×" + w.mult;
-      document.getElementById("wtNote").textContent =
-        "本月" + label + "每一筆算 " + (POINTS[w.key] * w.mult) + " 點（平常 " + POINTS[w.key] + " 點）";
+      document.getElementById("wtNote").textContent = weightNote(w);
     } else {
       bar.hidden = true;
     }
@@ -1612,7 +1640,7 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     data.weeks.slice().reverse().forEach(function(wk){
       var top = null, bestAvg = -1;
       wk.rows.forEach(function(r){
-        var s = scoreRow(r, sizeAt(r.team, wk.date, sizes[r.team] || 0), wk.date);
+        var s = scoreRow(r, sizeAt(r.team, wk.date, sizes[r.team] || 0, wk.sizes), wk.date);
         if(s.avg > bestAvg){ bestAvg = s.avg; top = names[r.team]; }
       });
       var li = document.createElement("li");
@@ -1672,17 +1700,13 @@ table.dtable tr.ok td.dtip{color:#9AA6B1;font-weight:400}
     var list = window.__list || [], wk = window.__lastWeek;
     var lines = ["【金安小組競賽】第 " + (wk ? wk.week : "-") + " 週戰報　" + (wk ? fmt(parseD(wk.date)) : "")];
     var w = wk ? weightFor(wk.date) : null;
-    if(w){
-      var lb = "";
-      FIELDS.forEach(function(f){ if(f.k === w.key){ lb = f.label; } });
-      lines.push("本月加權：" + lb + " ×" + w.mult);
-    }
+    if(wk){ lines.push(monthRule(wk.date)); }
     list.slice().sort(function(a,b){ return b.total - a.total; }).forEach(function(e, idx){
       var r = e.last ? e.last.row : null;
       lines.push("P" + (idx+1) + " " + e.t.name
         + (slogan(e.t.id) ? "　" + slogan(e.t.id) : "") + "　總分 " + e.total.toFixed(1)
         + "　本週 " + (e.last ? e.last.s.avg.toFixed(1) : "0") + " 分"
-        + (r ? "｜回報 " + r.report + "/" + e.t.size + "、出席 " + r.attend
+        + (r ? "｜回報 " + r.report + "/" + e.last.size + "、出席 " + r.attend
              + "、一對一 " + r.o2o + "、內部引薦 " + r.refIn + "、外部引薦 " + r.refOut
              + "、金額 " + nf(r.amount) + "、培訓 " + r.train + "、來賓 " + r.guest : ""));
     });
