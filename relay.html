@@ -785,12 +785,25 @@ async function submitForm() {
   btn.className = 'submit-btn loading';
 
   try {
+    // Content-Type 一定要用 text/plain：
+    // no-cors 模式下瀏覽器只允許 text/plain、x-www-form-urlencoded、multipart/form-data，
+    // 用 application/json 會被擋掉而且不會有任何錯誤訊息（2026/11 就是這樣整整一週沒人發現）。
+    // Apps Script 讀的是 e.postData.contents，跟 Content-Type 無關，所以改了不影響後端。
     await fetch(SHEET_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     });
+
+    // no-cors 看不到伺服器回應，所以改用「讀回來」確認真的存進去了。
+    btn.textContent = '確認中…';
+    const saved = await verifySaved(payload.week, payload.name);
+    if (!saved) {
+      showToast('⚠ 沒有存進去，請再按一次送出', true);
+      return;
+    }
+
     showToast('✓ 回報成功！', false);
     markRaceEntryDone();
     setTimeout(() => {
@@ -808,6 +821,22 @@ async function submitForm() {
     btn.textContent = '送出回報';
     btn.className = 'submit-btn';
   }
+}
+
+// 送出後回頭查一次，真的在試算表裡才算成功。
+// 試算表寫入有時候會慢一兩秒，所以最多試 5 次、約 8 秒。
+async function verifySaved(week, name) {
+  for (let i = 0; i < 5; i++) {
+    await new Promise(r => setTimeout(r, i === 0 ? 1200 : 1600));
+    try {
+      const url = SHEET_URL + '?action=get&week=' + encodeURIComponent(week)
+                + '&name=' + encodeURIComponent(name) + '&_=' + Date.now();
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data && data.status === 'ok') { return true; }
+    } catch (e) { /* 網路不穩就再試一次 */ }
+  }
+  return false;
 }
 </script>
 </body>
